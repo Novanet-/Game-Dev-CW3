@@ -9,37 +9,45 @@ public class BackgroundRow : MonoBehaviour {
     public GameObject wallTile;
     public GameObject powerup;
 
-    public float floorPercent = 0.8f;
-    public float holePercent = 0.1f;
-    public float wallPercent = 0.1f;
-
     public int numTiles = 11;
 
-    private float tileWidth = 1.25f;
+    public float tileWidth = 0.75f;
+
+    public int maxObsticles = 5;
 
     // Use this for initialization
     void Start () {
+        
+	}
+
+    public void Create(float floorPercent, float holePercent, float wallPercent) {
         float pos = -(tileWidth * Mathf.Floor(numTiles / 2));
+
+        int numObsticles = 0;
 
         for (int i = 0; i < numTiles; i++) {
             float n = Random.Range(0, 1f);
 
-            if (n < floorPercent) {
+            if (n < floorPercent || numObsticles >= maxObsticles) {
                 GameObject tile = GameObject.Instantiate(floorTile, this.transform);
                 tile.transform.position = new Vector3(pos, 0, 0);
             }
             else if (n < floorPercent + holePercent) {
                 GameObject tile = GameObject.Instantiate(holeTile, this.transform);
                 tile.transform.position = new Vector3(pos, 0, 0);
+                numObsticles++;
             }
             else if (n < floorPercent + holePercent + wallPercent) {
                 GameObject tile = GameObject.Instantiate(wallTile, this.transform);
                 tile.transform.position = new Vector3(pos, 0, 0);
+                numObsticles++;
             }
 
             pos += tileWidth;
         }
-	}
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
