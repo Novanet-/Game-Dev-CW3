@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class PlayerFireController : MonoBehaviour
-{
-
+public class EnemyFireController : MonoBehaviour {
     public float LaserSpeed;
     public GameObject LaserType;
     public float FireInterval = 0.5F;
@@ -12,25 +12,16 @@ public class PlayerFireController : MonoBehaviour
     private float CurrentTime { get; set; }
     private float NextFireSlot { get; set; }
 
-
-    private void Start()
-    {
+    private void Start() {
         NextFireSlot = 0.5f;
     }
 
-    private void Update()
-    {
+    private void Update() {
         CurrentTime += Time.deltaTime;
 
-        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        bool mouseFire = Input.GetButton("Fire1");
-        bool controllerFire = Input.GetAxis("RTFire1") > 0;
-
-        bool fireButtonPressed = mouseFire || controllerFire;
-        bool cantFireYet = CurrentTime <= NextFireSlot;
-
-        if (!fireButtonPressed || cantFireYet) return;
+        if (CurrentTime <= NextFireSlot) return;
 
         NextFireSlot = CurrentTime + FireInterval;
         Instantiate(LaserType, transform.position, transform.rotation, transform);

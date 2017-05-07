@@ -1,25 +1,23 @@
-﻿using System;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserController : MonoBehaviour
-{
+public class EnemyLaserController : MonoBehaviour {
+
     public float LaserSpeed;
 
     // Use this for initialization
-    private void Start()
-    {
-        PlayerFireController playerFireController = transform.GetComponentInParent<PlayerFireController>();
-        float laserSpeedParentOverride = playerFireController.LaserSpeed;
-        if (Math.Abs(LaserSpeed - laserSpeedParentOverride) > 0.01f)
-        {
+    private void Start() {
+        EnemyFireController fireController = transform.GetComponentInParent<EnemyFireController>();
+        float laserSpeedParentOverride = fireController.LaserSpeed;
+        if (Mathf.Abs(LaserSpeed - laserSpeedParentOverride) > 0.01f) {
             if (laserSpeedParentOverride > 0) LaserSpeed = laserSpeedParentOverride;
         }
 
-        var aimTargetPosition = new Vector3(playerFireController.AimTarget.transform.position.x, playerFireController.AimTarget.transform.position.y, transform.position.z);
+        var aimTargetPosition = new Vector3(fireController.AimTarget.transform.position.x, fireController.AimTarget.transform.position.y, transform.position.z);
         Vector3 laserDirection = aimTargetPosition - transform.position;
 
         laserDirection.Normalize();
-
 
         var r2d = GetComponent<Rigidbody2D>();
         r2d.velocity = laserDirection * LaserSpeed;
@@ -28,16 +26,14 @@ public class LaserController : MonoBehaviour
         float aimAingle = Mathf.Atan2(laserDirection.y, laserDirection.x) * Mathf.Rad2Deg;
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, aimAingle - 90);
-        transform.parent = playerFireController.LaserContainer.transform;
+        transform.parent = fireController.LaserContainer.transform;
     }
 
     // Update is called once per frame
-    private void Update()
-    {
+    private void Update() {
     }
 
-    private void OnBecameInvisible()
-    {
+    private void OnBecameInvisible() {
         Destroy(gameObject);
     }
 }
