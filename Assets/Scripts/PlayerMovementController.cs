@@ -7,40 +7,36 @@ namespace Assets.Scripts
         public float MoveSpeed = 10f;
         public float TurnSpeed = 10f;
         public float RotationOffset = -90f;
+
+        private float curSpeed;
+        private float maxSpeed;
+
+        private Rigidbody2D rigidbody;
+
         // Use this for initialization
-        private void Start()
-        {
+        private void Start() {
+            rigidbody = GetComponent<Rigidbody2D>();
         }
 
         // Update is called once per frame
-        private void Update()
-        {
+        private void FixedUpdate() {
             Controls();
             HelperFunctions.ClampTransformToCameraView(transform);
         }
 
-        private void Controls()
-        {
-            var horizontal = Input.GetAxis("Horizontal") * MoveSpeed;
-            var vertical = Input.GetAxis("Vertical") * MoveSpeed;
+        private void Controls() {
+            curSpeed = MoveSpeed;
+            maxSpeed = curSpeed;
 
+            // Move senteces
+            rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f),
+                                                 Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f));
 
-            var currentPos = transform.position;
-            var newPos = new Vector3(currentPos.x + horizontal, currentPos.y + vertical, currentPos.z);
-            transform.position = Vector3.Lerp(currentPos, newPos, Time.deltaTime);
-
-            if (Mathf.Abs(horizontal) <= 0 && Mathf.Abs(vertical) <= 0) return;
-
-
-            Vector3 moveDirection = newPos - currentPos;
-            moveDirection.z = 0;
-            moveDirection.Normalize();
-
-            float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            /*float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
 
             Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = Quaternion.Euler(0, 0, targetAngle + RotationOffset);
-            transform.rotation = Quaternion.Slerp(currentRotation, newRotation, Time.deltaTime * TurnSpeed);
+            Quaternion newRotation = Quaternion.Euler(0, 0, targetAngle + RotationOffset);*/
+            transform.up = rigidbody.velocity.normalized;
         }
     }
 }
