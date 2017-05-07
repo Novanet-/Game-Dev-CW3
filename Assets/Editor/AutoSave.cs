@@ -11,7 +11,7 @@ public class AutoSave : EditorWindow
     private int intervalScene;
     private DateTime lastSaveTimeScene = DateTime.Now;
 
-    private string projectPath = Application.dataPath;
+    private string projectPath;
     private string scenePath;
 
     [MenuItem("Window/AutoSave")]
@@ -19,6 +19,11 @@ public class AutoSave : EditorWindow
     {
         AutoSave saveWindow = (AutoSave)EditorWindow.GetWindow(typeof(AutoSave));
         saveWindow.Show();
+    }
+
+    void OnEnable()
+    {
+        projectPath = Application.dataPath;
     }
 
     void OnGUI()
