@@ -16,16 +16,21 @@ namespace Assets.Scripts {
         }
 
         public void OnTriggerEnter2D(Collider2D coll) {
-            print(isPlayer + " " + coll.tag);
             if (coll.tag == "Bullet") {
-                if ((coll.GetComponent<EnemyLaserController>() && isPlayer) || (coll.GetComponent<LaserController>() && !isPlayer))
-                    Die();
+                if ((coll.GetComponent<EnemyLaserController>() && isPlayer) || (coll.GetComponent<LaserController>() && !isPlayer)) {
+                    if (isPlayer)
+                        Die();
+                    else {
+                        Die(GetComponentInParent<EnemyController>().gameObject);
+                    }
+                }
             }
             else if (canFall && coll.tag == "Hole") {
                 Die(GameObject.Find("Player"));
             }
             else if (isPlayer && coll.tag == "Enemy") {
                 Die(GameObject.Find("Player"));
+                Die(coll.GetComponentInParent<EnemyController>().gameObject);
             }
         }
     }
