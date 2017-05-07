@@ -32,10 +32,6 @@ namespace Assets.Scripts
             rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f),
                                                  Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f));
 
-            /*float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-
-            Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = Quaternion.Euler(0, 0, targetAngle + RotationOffset);*/
             transform.up = rigidbody.velocity.normalized;
         }
     }
