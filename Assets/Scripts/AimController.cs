@@ -1,21 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets;
 using UnityEngine;
 
 public class AimController : MonoBehaviour
 {
     public float MoveSpeed = 10f;
-    private readonly HelperFunctions _helperFunctions;
 
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");

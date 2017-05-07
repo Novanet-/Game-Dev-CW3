@@ -1,38 +1,41 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts
+public class PlayerFireController : MonoBehaviour
 {
-    public class PlayerFireController : MonoBehaviour
+
+    public float LaserSpeed;
+    public GameObject LaserType;
+    public float FireInterval = 0.5F;
+    public GameObject AimTarget;
+    public GameObject LaserContainer;
+
+    private float CurrentTime { get; set; }
+    private float NextFireSlot { get; set; }
+
+
+    private void Start()
     {
+        NextFireSlot = 0.5f;
+    }
 
-        public float LaserSpeed;
-        public GameObject LaserType;
-        public float FireInterval = 0.5F;
-        public GameObject AimTarget;
-        public GameObject LaserContainer;
+    private void Update()
+    {
+        CurrentTime += Time.deltaTime;
 
-        private float CurrentTime { get; set; }
-        private float NextFireSlot { get; set; }
+        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        bool mouseFire = Input.GetButton("Fire1");
+        bool controllerFire = Input.GetAxis("RTFire1") > 0;
 
-        private void Start()
-        {
-            NextFireSlot = 0.5f;
-        }
+        bool fireButtonPressed = mouseFire || controllerFire;
+        bool cantFireYet = CurrentTime <= NextFireSlot;
 
-        private void Update()
-        {
-            CurrentTime += Time.deltaTime;
+        if (!fireButtonPressed || cantFireYet) return;
 
-            var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        NextFireSlot = CurrentTime + FireInterval;
+        Instantiate(LaserType, transform.position, transform.rotation, transform);
 
-            if (!Input.GetButton("Fire1") || CurrentTime <= NextFireSlot) return;
-
-            NextFireSlot = CurrentTime + FireInterval;
-            Instantiate(LaserType, transform.position, transform.rotation, transform);
-
-            NextFireSlot -= CurrentTime;
-            CurrentTime = 0.0F;
-        }
+        NextFireSlot -= CurrentTime;
+        CurrentTime = 0.0F;
     }
 }
