@@ -26,8 +26,10 @@ namespace Assets.Scripts
             var r2d = GetComponent<Rigidbody2D>();
             r2d.velocity = laserDirection * LaserSpeed;
 
-            var aimAingle = Vector2.Angle(Vector2.up, new Vector2(laserDirection.x, laserDirection.y)) % 180;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, aimAingle);
+            //            var aimAingle = Vector2.Angle(Vector2.up, new Vector2(laserDirection.x, laserDirection.y)) % 180;
+            float aimAingle = Mathf.Atan2(laserDirection.y, laserDirection.x) * Mathf.Rad2Deg;
+
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, aimAingle - 90);
             transform.parent = playerFireController.LaserContainer.transform;
         }
 
