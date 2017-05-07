@@ -23,6 +23,8 @@ namespace Assets.Scripts {
                     else {
                         Die(GetComponentInParent<EnemyController>().gameObject);
                     }
+
+                    Die(coll.gameObject);
                 }
             }
             else if (canFall && coll.tag == "Hole") {
