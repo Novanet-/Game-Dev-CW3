@@ -35,6 +35,11 @@ namespace Assets.Scripts
 
                 transform.Rotate(new Vector3(0, 0, -90));
             }
+            else
+            {
+                transform.Translate(Vector3.up * speed * Time.deltaTime);}
         }
+
+
     }
 }
