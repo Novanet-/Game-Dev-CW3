@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using com.kleberswf.lib.core;
+using UnityEngine;
 
-public class DifficultyController : MonoBehaviour
+public class DifficultyController : Singleton<DifficultyController>
 {
     #region Public Fields
 

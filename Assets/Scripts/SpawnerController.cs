@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using com.kleberswf.lib.core;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour
+public partial class SpawnerController : Singleton<SpawnerController>
 {
     #region Public Fields
 
@@ -12,6 +12,7 @@ public class SpawnController : MonoBehaviour
 
     #region Private Fields
 
+    private DifficultyController _difficultyController;
     [SerializeField] private List<SpawnerStruct> _spawnerList;
 
     #endregion Private Fields
@@ -30,28 +31,13 @@ public class SpawnController : MonoBehaviour
             if (!positionOverride.Equals(Vector3.zero)) spawnerObject.transform.position = positionOverride;
             SpawnerDict.Add(spawner._spawnerName, spawner);
         }
+
+        _difficultyController = DifficultyController.Instance;
     }
 
     // Update is called once per frame
     private void Update()
     {
-    }
-
-    #endregion Private Methods
-
-    #region Public Structs
-
-    [Serializable]
-    public struct SpawnerStruct
-    {
-        #region Private Fields
-
-        [SerializeField] public string _spawnerName;
-        [SerializeField] public GameObject _spawnerObject;
-        [SerializeField] public Vector3 _spawnerPositionOverride;
-
-
-        #endregion Private Fields
     }
 
     #endregion Public Structs
