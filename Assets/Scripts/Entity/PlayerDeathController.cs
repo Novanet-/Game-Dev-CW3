@@ -21,7 +21,7 @@ namespace Entity
 
         #region Public Methods
 
-        public override void Die(GameObject self)
+        protected override void Die(GameObject self)
         {
             Dead = true;
 

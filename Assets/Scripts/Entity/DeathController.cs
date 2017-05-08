@@ -21,12 +21,12 @@ namespace Entity
 
         #region Public Methods
 
-        public void Die()
+        private void Die()
         {
             Die(gameObject);
         }
 
-        public virtual void Die(GameObject self)
+        protected virtual void Die(GameObject self)
         {
             Dead = true;
 
