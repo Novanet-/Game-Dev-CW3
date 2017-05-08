@@ -1,52 +1,79 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Assets.Scripts {
+    public class DeathController : MonoBehaviour {
+        public bool canFall = false;
+        public bool isPlayer = false;
+
+        public void Die() {
+            Destroy(this.gameObject);
+        }
+
+        public void Die(GameObject self) {
+            Destroy(self);
+        }
+
+        public void OnTriggerEnter2D(Collider2D coll) {
+            if (coll.tag == "Bullet") {
+                if ((coll.GetComponent<EnemyLaserController>() && isPlayer) || (coll.GetComponent<LaserController>() && !isPlayer)) {
+                    if (isPlayer)
+                        Die();
+                    else {
+                        Die(GetComponentInParent<EnemyController>().gameObject);
+                    }
+
+                    Die(coll.gameObject);
+                }
+            }
+            else if (canFall && coll.tag == "Hole") {
+                Die(GameObject.Find("Player"));
+            }
+            else if (isPlayer && coll.tag == "Enemy") {
+                Die(GameObject.Find("Player"));
+                Die(coll.GetComponentInParent<EnemyController>().gameObject);
+            }
+        }
+    }
+}
+
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class DeathController : MonoBehaviour
-{
-    #region Public Fields
+namespace Assets.Scripts {
+    public class DeathController : MonoBehaviour {
+        public bool canFall = false;
+        public bool isPlayer = false;
 
-    public bool CanFall;
-    public bool IsPlayer;
+        public void Die() {
+            Destroy(this.gameObject);
+        }
 
-    #endregion Public Fields
+        public void Die(GameObject self) {
+            Destroy(self);
+        }
 
-    #region Public Methods
+        public void OnTriggerEnter2D(Collider2D coll) {
+            if (coll.tag == "Bullet") {
+                if ((coll.GetComponent<EnemyLaserController>() && isPlayer) || (coll.GetComponent<LaserController>() && !isPlayer)) {
+                    if (isPlayer)
+                        Die();
+                    else {
+                        Die(GetComponentInParent<EnemyController>().gameObject);
+                    }
 
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
-    public void Die(GameObject self)
-    {
-        Destroy(self);
-    }
-
-    public void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.CompareTag("Bullet"))
-        {
-            if (coll.GetComponent<EnemyLaserController>() && IsPlayer || coll.GetComponent<LaserController>() && !IsPlayer)
-            {
-                if (IsPlayer)
-                    Die();
-                else
-                {
-                    Die(GetComponentInParent<EnemyMovementController>().gameObject);
+                    Die(coll.gameObject);
                 }
-
-                Die(coll.gameObject);
+            }
+            else if (canFall && coll.tag == "Hole") {
+                Die(GameObject.Find("Player"));
+            }
+            else if (isPlayer && coll.tag == "Enemy") {
+                Die(GameObject.Find("Player"));
+                Die(coll.GetComponentInParent<EnemyController>().gameObject);
             }
         }
-        else if (CanFall && coll.CompareTag("Hole"))
-        {
-            Die(GameObject.Find("Player"));
-        }
-        else if (IsPlayer && coll.CompareTag("Enemy"))
-        {
-            Die(GameObject.Find("Player"));
-            Die(coll.GetComponentInParent<EnemyMovementController>().gameObject);
-        }
     }
-
-    #endregion Public Methods
-}
+}
