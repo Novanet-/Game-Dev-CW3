@@ -2,24 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts {
-    public class EnemyFireController : MonoBehaviour {
+namespace Assets.Scripts
+{
+    public class EnemyFireController : MonoBehaviour
+    {
         public float LaserSpeed;
         public GameObject LaserType;
         public float FireInterval = 0.5F;
         internal GameObject AimTarget;
         internal GameObject LaserContainer;
+        private SpriteRenderer _spriteRenderer;
 
         private float CurrentTime { get; set; }
         private float NextFireSlot { get; set; }
 
-        private void Start() {
+        private void Start()
+        {
             NextFireSlot = 0.5f;
             LaserContainer = GameObject.Find("LaserContainer");
             AimTarget = GameObject.Find("Player");
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
-        private void Update() {
+        private void Update()
+        {
             CurrentTime += Time.deltaTime;
 
             var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -28,7 +34,7 @@ namespace Assets.Scripts {
 
             NextFireSlot = CurrentTime + FireInterval;
 
-            if (AimTarget != null)
+            if (AimTarget != null && _spriteRenderer.isVisible)
             {
                 GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
 
