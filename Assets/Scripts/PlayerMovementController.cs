@@ -1,35 +1,46 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 
-public class PlayerMovementController : MonoBehaviour
+namespace Assets.Scripts
 {
-    public float MoveSpeed = 10f;
-    public float TurnSpeed = 10f;
-    public float RotationOffset = -90f;
+    public class PlayerMovementController : MonoBehaviour
+    {
+        public float MoveSpeed = 10f;
+        public float TurnSpeed = 10f;
+        public float RotationOffset = -90f;
 
-    private float curSpeed;
-    private float maxSpeed;
+        private float curSpeed;
+        private float maxSpeed;
 
-    private Rigidbody2D rigidBody2d;
+        private Rigidbody2D rigidbody;
 
-    // Use this for initialization
-    private void Start() {
-        rigidBody2d = GetComponent<Rigidbody2D>();
-    }
+        private bool canMove = true;
 
-    // Update is called once per frame
-    private void FixedUpdate() {
-        Controls();
-        HelperFunctions.ClampTransformToCameraView(transform);
-    }
+        public void SetCanMove(bool b) {
+            canMove = b;
+        }
 
-    private void Controls() {
-        curSpeed = MoveSpeed;
-        maxSpeed = curSpeed;
+        // Use this for initialization
+        private void Start() {
+            rigidbody = GetComponent<Rigidbody2D>();
+        }
 
-        // Move senteces
-        rigidBody2d.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f),
-            Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f));
+        // Update is called once per frame
+        private void FixedUpdate() {
+            Controls();
+            HelperFunctions.ClampTransformToCameraView(transform);
+        }
 
-        transform.up = rigidBody2d.velocity.normalized;
+        private void Controls() {
+            if (!canMove) return;
+
+            curSpeed = MoveSpeed;
+            maxSpeed = curSpeed;
+
+            // Move senteces
+            rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f),
+                                                 Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f));
+
+            transform.up = rigidbody.velocity.normalized;
+        }
     }
 }

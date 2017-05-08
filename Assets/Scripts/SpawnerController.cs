@@ -25,11 +25,11 @@ public partial class SpawnerController : Singleton<SpawnerController>
         SpawnerDict = new Dictionary<string, SpawnerStruct>();
         foreach (SpawnerStruct spawner in _spawnerList)
         {
-            GameObject spawnerObject = spawner._spawnerObject;
-            Vector3 positionOverride = spawner._spawnerPositionOverride;
+            GameObject spawnerObject = spawner.SpawnerObject;
+            Vector3 positionOverride = spawner.SpawnerPositionOverride;
 
             if (!positionOverride.Equals(Vector3.zero)) spawnerObject.transform.position = positionOverride;
-            SpawnerDict.Add(spawner._spawnerName, spawner);
+            SpawnerDict.Add(spawner.SpawnerName, spawner);
         }
 
         _difficultyController = DifficultyController.Instance;
