@@ -1,24 +1,32 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Entity {
-    public class PlayerDeathController : DeathController {
+namespace Entity
+{
+    public class PlayerDeathController : DeathController
+    {
+        #region Public Fields
+
         public float respawnDelay = 1;
 
-        private SpriteRenderer sprite;
+        #endregion Public Fields
+
+        #region Private Fields
+
         private Collider2D coll;
         private PlayerMovementController movement;
+        private SpriteRenderer sprite;
 
-        public void Start() {
-            sprite = GetComponent<SpriteRenderer>();
-            coll = GetComponent<Collider2D>();
-            movement = GetComponent<PlayerMovementController>();
-        }
+        #endregion Private Fields
 
-        public override void Die(GameObject self) {
+        #region Public Methods
+
+        public override void Die(GameObject self)
+        {
             dead = true;
 
-            if (self.tag != "Bullet") {
+            if (self.tag != "Bullet")
+            {
                 Animator explosion = Instantiate(deathAnim, self.transform);
                 explosion.transform.localPosition = new Vector3(0, 0, 0);
 
@@ -30,15 +38,32 @@ namespace Entity {
             sprite.enabled = false;
             coll.enabled = false;
 
-            StartCoroutine( Respawn());
+            StartCoroutine(Respawn());
         }
 
-        private IEnumerator Respawn() {
+        public bool isDead()
+        {
+            return dead;
+        }
+
+        public void Start()
+        {
+            sprite = GetComponent<SpriteRenderer>();
+            coll = GetComponent<Collider2D>();
+            movement = GetComponent<PlayerMovementController>();
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private IEnumerator Respawn()
+        {
             yield return new WaitForSeconds(respawnDelay);
 
             transform.position = new Vector3(0, -6, 0);
             transform.localPosition = new Vector3(0, -6, 0);
-            
+
             sprite.enabled = true;
 
             coll.enabled = true;
@@ -48,8 +73,6 @@ namespace Entity {
             dead = false;
         }
 
-        public bool isDead() {
-            return dead;
-        }
+        #endregion Private Methods
     }
 }

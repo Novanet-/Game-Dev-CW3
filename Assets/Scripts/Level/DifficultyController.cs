@@ -13,8 +13,8 @@ namespace Level
 
         #region Private Fields
 
-        [SerializeField] private float _interval;
         private float _difficultyAdjusmentInc;
+        [SerializeField] private float _interval;
         private float _timer;
 
         #endregion Private Fields

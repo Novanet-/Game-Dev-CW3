@@ -5,38 +5,51 @@ namespace Level
 {
     public class BackgroundManager : MonoBehaviour
     {
-        public BackgroundRow row;
-
-        private List<BackgroundRow> rows;
-
-        public float scrollSpeed = 0.05f;
-
-        private float time;
-
-        public float screenBottom = -6;
-
-        private int rowNum = 20, rowCurr = 0;
-
-        public float tileHeight = 0.75f;
-
-        private float top;
-
-        private float floorPercent = 1f;
-        private float holePercent = 0f;
-        private float wallPercent = 0f;
+        #region Public Fields
 
         public float difficultyDelay = 5;
         public float difficultyIncrement = 0.05f;
         public float difficultyMax = 0.6f;
+        public BackgroundRow row;
 
-        // Use this for initialization
-        private void Start()
+        public float screenBottom = -6;
+        public float scrollSpeed = 0.05f;
+        public float tileHeight = 0.75f;
+
+        #endregion Public Fields
+
+        #region Private Fields
+
+        private float floorPercent = 1f;
+        private float holePercent;
+        private int rowNum = 20, rowCurr;
+        private List<BackgroundRow> rows;
+        private float time;
+        private float top;
+        private float wallPercent;
+
+        #endregion Private Fields
+
+        #region Private Methods
+
+        private void addRow()
         {
-            rows = new List<BackgroundRow>();
+            if (rows.Count > 0)
+                top = rows[rows.Count - 1].transform.localPosition.y + tileHeight;
 
-            SetupBackground();
+            BackgroundRow r = Instantiate(row, transform);
+            r.Create(floorPercent, holePercent, wallPercent);
+            r.transform.localPosition = new Vector3(0, top, 0);
+            rows.Add(r);
 
-            time = Time.time + difficultyDelay;
+            rowCurr++;
+        }
+
+        private void incrementDifficulty()
+        {
+            floorPercent -= difficultyIncrement;
+            holePercent += difficultyIncrement / 2;
+            wallPercent += difficultyIncrement / 2;
         }
 
         private void SetupBackground()
@@ -49,23 +62,20 @@ namespace Level
             }
         }
 
-        private void addRow()
+        // Use this for initialization
+        private void Start()
         {
-            if (rows.Count > 0)
-                top = rows[rows.Count - 1].transform.localPosition.y + tileHeight;
+            rows = new List<BackgroundRow>();
 
-            BackgroundRow r = GameObject.Instantiate(row, this.transform);
-            r.Create(floorPercent, holePercent, wallPercent);
-            r.transform.localPosition = new Vector3(0, top, 0);
-            rows.Add(r);
+            SetupBackground();
 
-            rowCurr++;
+            time = Time.time + difficultyDelay;
         }
 
         // Update is called once per frame
         private void Update()
         {
-            for (int i = 0; i < rows.Count; i++)
+            for (var i = 0; i < rows.Count; i++)
             {
                 BackgroundRow r = rows[i];
 
@@ -92,11 +102,6 @@ namespace Level
             }
         }
 
-        private void incrementDifficulty()
-        {
-            floorPercent -= difficultyIncrement;
-            holePercent += difficultyIncrement / 2;
-            wallPercent += difficultyIncrement / 2;
-        }
+        #endregion Private Methods
     }
 }

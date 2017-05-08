@@ -4,16 +4,24 @@ namespace Entity
 {
     public class PlayerFireController : MonoBehaviour
     {
+        #region Public Fields
 
+        public GameObject AimTarget;
+        public float FireInterval = 0.5F;
+        public GameObject LaserContainer;
         public float LaserSpeed;
         public GameObject LaserType;
-        public float FireInterval = 0.5F;
-        public GameObject AimTarget;
-        public GameObject LaserContainer;
+
+        #endregion Public Fields
+
+        #region Private Properties
 
         private float CurrentTime { get; set; }
         private float NextFireSlot { get; set; }
 
+        #endregion Private Properties
+
+        #region Private Methods
 
         private void Start()
         {
@@ -40,5 +48,7 @@ namespace Entity
             NextFireSlot -= CurrentTime;
             CurrentTime = 0.0F;
         }
+
+        #endregion Private Methods
     }
 }

@@ -42,6 +42,6 @@ namespace Level
         {
         }
 
-        #endregion Public Structs
+        #endregion Private Methods
     }
 }

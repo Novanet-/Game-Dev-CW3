@@ -4,17 +4,26 @@ namespace Entity
 {
     public class DeathController : MonoBehaviour
     {
-        public bool canFall = false;
-        public bool isPlayer = false;
+        #region Public Fields
 
+        public bool canFall;
         public Animator deathAnim;
         public float explosionTime = 0.5f;
+        public bool isPlayer;
 
-        protected bool dead = false;
+        #endregion Public Fields
+
+        #region Protected Fields
+
+        protected bool dead;
+
+        #endregion Protected Fields
+
+        #region Public Methods
 
         public void Die()
         {
-            Die(this.gameObject);
+            Die(gameObject);
         }
 
         public virtual void Die(GameObject self)
@@ -38,7 +47,7 @@ namespace Entity
 
             if (coll.tag == "Bullet")
             {
-                if ((coll.GetComponent<EnemyLaserController>() && isPlayer) || (coll.GetComponent<LaserController>() && !isPlayer))
+                if (coll.GetComponent<EnemyLaserController>() && isPlayer || coll.GetComponent<LaserController>() && !isPlayer)
                 {
                     if (isPlayer)
                         Die();
@@ -61,15 +70,13 @@ namespace Entity
             }
         }
 
-        void OnBecameInvisible()
-        {
-//            Debug.Log("I'm invisible");
-            Invoke("KillSelf", 2);
-        }
+        #endregion Public Methods
 
-        void KillSelf()
+        #region Private Methods
+
+        private void KillSelf()
         {
-//            Debug.Log(String.Format("Visible: {0}",GetComponent<SpriteRenderer>().isVisible));
+            //            Debug.Log(String.Format("Visible: {0}",GetComponent<SpriteRenderer>().isVisible));
             var spriteRenderer = GetComponent<SpriteRenderer>();
             if (spriteRenderer != null && !spriteRenderer.isVisible)
             {
@@ -81,5 +88,13 @@ namespace Entity
                 }
             }
         }
+
+        private void OnBecameInvisible()
+        {
+            //            Debug.Log("I'm invisible");
+            Invoke("KillSelf", 2);
+        }
+
+        #endregion Private Methods
     }
 }

@@ -2,16 +2,29 @@
 
 namespace Entity
 {
-    public class EnemyLaserController : MonoBehaviour {
+    public class EnemyLaserController : MonoBehaviour
+    {
+        #region Public Fields
 
         public float LaserSpeed;
 
+        #endregion Public Fields
+
+        #region Private Methods
+
+        private void OnBecameInvisible()
+        {
+            Destroy(gameObject);
+        }
+
         // Use this for initialization
-        private void Start() {
-            EnemyFireController fireController = transform.GetComponentInParent<EnemyFireController>();
+        private void Start()
+        {
+            var fireController = transform.GetComponentInParent<EnemyFireController>();
             float laserSpeedParentOverride = fireController.LaserSpeed;
 
-            if (Mathf.Abs(LaserSpeed - laserSpeedParentOverride) > 0.01f) {
+            if (Mathf.Abs(LaserSpeed - laserSpeedParentOverride) > 0.01f)
+            {
                 if (laserSpeedParentOverride > 0) LaserSpeed = laserSpeedParentOverride;
             }
 
@@ -32,11 +45,10 @@ namespace Entity
         }
 
         // Update is called once per frame
-        private void Update() {
+        private void Update()
+        {
         }
 
-        private void OnBecameInvisible() {
-            Destroy(gameObject);
-        }
+        #endregion Private Methods
     }
 }

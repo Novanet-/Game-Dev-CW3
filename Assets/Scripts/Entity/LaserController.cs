@@ -5,23 +5,34 @@ namespace Entity
 {
     public class LaserController : MonoBehaviour
     {
+        #region Public Fields
+
         public float LaserSpeed;
+
+        #endregion Public Fields
+
+        #region Private Methods
+
+        private void OnBecameInvisible()
+        {
+            Destroy(gameObject);
+        }
 
         // Use this for initialization
         private void Start()
         {
-            PlayerFireController playerFireController = transform.GetComponentInParent<PlayerFireController>();
+            var playerFireController = transform.GetComponentInParent<PlayerFireController>();
             float laserSpeedParentOverride = playerFireController.LaserSpeed;
             if (Math.Abs(LaserSpeed - laserSpeedParentOverride) > 0.01f)
             {
                 if (laserSpeedParentOverride > 0) LaserSpeed = laserSpeedParentOverride;
             }
 
-            var aimTargetPosition = new Vector3(playerFireController.AimTarget.transform.position.x, playerFireController.AimTarget.transform.position.y, transform.position.z);
+            var aimTargetPosition = new Vector3(playerFireController.AimTarget.transform.position.x,
+                playerFireController.AimTarget.transform.position.y, transform.position.z);
             Vector3 laserDirection = aimTargetPosition - transform.position;
 
             laserDirection.Normalize();
-
 
             var r2d = GetComponent<Rigidbody2D>();
             r2d.velocity = laserDirection * LaserSpeed;
@@ -38,9 +49,6 @@ namespace Entity
         {
         }
 
-        private void OnBecameInvisible()
-        {
-            Destroy(gameObject);
-        }
+        #endregion Private Methods
     }
 }

@@ -4,21 +4,19 @@ namespace Level
 {
     public class BackgroundRow : MonoBehaviour
     {
+        #region Public Fields
+
         public GameObject floorTile;
         public GameObject holeTile;
-        public GameObject wallTile;
-        public GameObject powerup;
-
-        public int numTiles = 11;
-
-        public float tileWidth = 0.75f;
-
         public int maxObsticles = 5;
+        public int numTiles = 11;
+        public GameObject powerup;
+        public float tileWidth = 0.75f;
+        public GameObject wallTile;
 
-        // Use this for initialization
-        private void Start()
-        {
-        }
+        #endregion Public Fields
+
+        #region Public Methods
 
         public void Create(float floorPercent, float holePercent, float wallPercent)
         {
@@ -52,9 +50,20 @@ namespace Level
             }
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
+        // Use this for initialization
+        private void Start()
+        {
+        }
+
         // Update is called once per frame
         private void Update()
         {
         }
+
+        #endregion Private Methods
     }
 }

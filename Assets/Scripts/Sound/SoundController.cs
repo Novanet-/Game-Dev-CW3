@@ -4,34 +4,34 @@ namespace Sound
 {
     public class SoundController : MonoBehaviour
     {
-        #region Public Fields
-
-        public static SoundController Instance { get; set; }
-
-        #endregion Public Fields
-
         #region Private Fields
 
         [SerializeField] private float _highPitchRange = 1.05f;
         [SerializeField] private float _lowPitchRange = .95f;
-
         [SerializeField] private AudioSource _musicSource;
         [SerializeField] private AudioSource _soundSource;
 
         #endregion Private Fields
 
+        #region Public Properties
+
+        public static SoundController Instance { get; set; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
-        //Used to play single sound clips.
-        public void PlaySingle(AudioClip clip, float volumeScale)
-        {
-            _soundSource.PlayOneShot(clip, volumeScale);
-        }
         //Used to play single sound clips.
         public void PlayMusic(AudioClip clip)
         {
             _musicSource.clip = clip;
             _musicSource.Play();
+        }
+
+        //Used to play single sound clips.
+        public void PlaySingle(AudioClip clip, float volumeScale)
+        {
+            _soundSource.PlayOneShot(clip, volumeScale);
         }
 
         //RandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
