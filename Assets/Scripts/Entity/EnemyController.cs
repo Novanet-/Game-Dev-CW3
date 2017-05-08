@@ -6,13 +6,13 @@ namespace Entity
     {
         #region Public Fields
 
-        public float speed = 10;
+        public float Speed = 10;
 
         #endregion Public Fields
 
         #region Private Fields
 
-        private GameObject player;
+        private GameObject _player;
 
         #endregion Private Fields
 
@@ -21,20 +21,20 @@ namespace Entity
         // Use this for initialization
         private void Start()
         {
-            player = GameObject.Find("Player");
+            _player = GameObject.Find("Player");
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (player != null && !player.GetComponent<PlayerDeathController>().isDead())
+            if (_player != null && !_player.GetComponent<PlayerDeathController>().IsDead())
             {
                 //rotate to look at player
-                transform.LookAt(player.transform.position);
+                transform.LookAt(_player.transform.position);
                 transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
                 //move towards player
-                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+                transform.Translate(new Vector3(Speed * Time.deltaTime, 0, 0));
 
                 if (transform.eulerAngles.y < 90)
                     transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 0, transform.eulerAngles.z);
@@ -45,7 +45,7 @@ namespace Entity
             }
             else
             {
-                transform.Translate(Vector3.up * speed * Time.deltaTime);
+                transform.Translate(Vector3.up * Speed * Time.deltaTime);
             }
         }
 

@@ -7,15 +7,15 @@ namespace Entity
     {
         #region Public Fields
 
-        public float respawnDelay = 1;
+        public float RespawnDelay = 1;
 
         #endregion Public Fields
 
         #region Private Fields
 
-        private Collider2D coll;
-        private PlayerMovementController movement;
-        private SpriteRenderer sprite;
+        private Collider2D _coll;
+        private PlayerMovementController _movement;
+        private SpriteRenderer _sprite;
 
         #endregion Private Fields
 
@@ -23,34 +23,34 @@ namespace Entity
 
         public override void Die(GameObject self)
         {
-            dead = true;
+            Dead = true;
 
             if (self.tag != "Bullet")
             {
-                Animator explosion = Instantiate(deathAnim, self.transform);
+                Animator explosion = Instantiate(DeathAnim, self.transform);
                 explosion.transform.localPosition = new Vector3(0, 0, 0);
 
-                Destroy(explosion.gameObject, explosionTime);
+                Destroy(explosion.gameObject, ExplosionTime);
             }
 
-            movement.SetCanMove(false);
+            _movement.SetCanMove(false);
 
-            sprite.enabled = false;
-            coll.enabled = false;
+            _sprite.enabled = false;
+            _coll.enabled = false;
 
             StartCoroutine(Respawn());
         }
 
-        public bool isDead()
+        public bool IsDead()
         {
-            return dead;
+            return Dead;
         }
 
         public void Start()
         {
-            sprite = GetComponent<SpriteRenderer>();
-            coll = GetComponent<Collider2D>();
-            movement = GetComponent<PlayerMovementController>();
+            _sprite = GetComponent<SpriteRenderer>();
+            _coll = GetComponent<Collider2D>();
+            _movement = GetComponent<PlayerMovementController>();
         }
 
         #endregion Public Methods
@@ -59,18 +59,18 @@ namespace Entity
 
         private IEnumerator Respawn()
         {
-            yield return new WaitForSeconds(respawnDelay);
+            yield return new WaitForSeconds(RespawnDelay);
 
             transform.position = new Vector3(0, -6, 0);
             transform.localPosition = new Vector3(0, -6, 0);
 
-            sprite.enabled = true;
+            _sprite.enabled = true;
 
-            coll.enabled = true;
+            _coll.enabled = true;
 
-            movement.SetCanMove(true);
+            _movement.SetCanMove(true);
 
-            dead = false;
+            Dead = false;
         }
 
         #endregion Private Methods

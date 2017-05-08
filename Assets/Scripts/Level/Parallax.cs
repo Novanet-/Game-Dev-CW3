@@ -6,8 +6,8 @@ namespace Level
     {
         #region Public Fields
 
-        public Renderer[] backgrounds;
-        public float step = 0.5f;
+        public Renderer[] Backgrounds;
+        public float Step = 0.5f;
 
         #endregion Public Fields
 
@@ -15,12 +15,12 @@ namespace Level
 
         private void Update()
         {
-            foreach (Renderer r in backgrounds)
+            foreach (Renderer r in Backgrounds)
             {
                 if (!r.isVisible && r.transform.position.y > 0)
                     r.transform.position = r.transform.position - Vector3.up * (r.bounds.size.y * 2);
                 else
-                    r.transform.position = r.transform.position + Vector3.up * step;
+                    r.transform.position = r.transform.position + Vector3.up * Step;
             }
         }
 

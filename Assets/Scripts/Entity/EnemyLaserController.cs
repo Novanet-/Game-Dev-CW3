@@ -34,8 +34,8 @@ namespace Entity
 
             laserDirection.Normalize();
 
-            var r2d = GetComponent<Rigidbody2D>();
-            r2d.velocity = laserDirection * LaserSpeed;
+            var r2D = GetComponent<Rigidbody2D>();
+            r2D.velocity = laserDirection * LaserSpeed;
 
             //            var aimAingle = Vector2.Angle(Vector2.up, new Vector2(laserDirection.x, laserDirection.y)) % 180;
             float aimAingle = Mathf.Atan2(laserDirection.y, laserDirection.x) * Mathf.Rad2Deg;

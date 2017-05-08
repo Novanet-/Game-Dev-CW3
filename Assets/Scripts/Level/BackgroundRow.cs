@@ -6,13 +6,13 @@ namespace Level
     {
         #region Public Fields
 
-        public GameObject floorTile;
-        public GameObject holeTile;
-        public int maxObsticles = 5;
-        public int numTiles = 11;
-        public GameObject powerup;
-        public float tileWidth = 0.75f;
-        public GameObject wallTile;
+        public GameObject FloorTile;
+        public GameObject HoleTile;
+        public int MaxObsticles = 5;
+        public int NumTiles = 11;
+        public GameObject Powerup;
+        public float TileWidth = 0.75f;
+        public GameObject WallTile;
 
         #endregion Public Fields
 
@@ -20,33 +20,33 @@ namespace Level
 
         public void Create(float floorPercent, float holePercent, float wallPercent)
         {
-            float pos = -(tileWidth * Mathf.Floor(numTiles / 2));
+            float pos = -(TileWidth * Mathf.Floor(NumTiles / 2));
 
             var numObsticles = 0;
 
-            for (var i = 0; i < numTiles; i++)
+            for (var i = 0; i < NumTiles; i++)
             {
                 float n = Random.Range(0, 1f);
 
-                if (n < floorPercent || numObsticles >= maxObsticles)
+                if (n < floorPercent || numObsticles >= MaxObsticles)
                 {
-                    GameObject tile = Instantiate(floorTile, transform);
+                    GameObject tile = Instantiate(FloorTile, transform);
                     tile.transform.position = new Vector3(pos, 0, 0);
                 }
                 else if (n < floorPercent + holePercent)
                 {
-                    GameObject tile = Instantiate(holeTile, transform);
+                    GameObject tile = Instantiate(HoleTile, transform);
                     tile.transform.position = new Vector3(pos, 0, 0);
                     numObsticles++;
                 }
                 else if (n < floorPercent + holePercent + wallPercent)
                 {
-                    GameObject tile = Instantiate(wallTile, transform);
+                    GameObject tile = Instantiate(WallTile, transform);
                     tile.transform.position = new Vector3(pos, 0, 0);
                     numObsticles++;
                 }
 
-                pos += tileWidth;
+                pos += TileWidth;
             }
         }
 

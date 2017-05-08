@@ -6,16 +6,16 @@ namespace Entity
     {
         #region Public Fields
 
-        public bool canFall;
-        public Animator deathAnim;
-        public float explosionTime = 0.5f;
-        public bool isPlayer;
+        public bool CanFall;
+        public Animator DeathAnim;
+        public float ExplosionTime = 0.5f;
+        public bool IsPlayer;
 
         #endregion Public Fields
 
         #region Protected Fields
 
-        protected bool dead;
+        protected bool Dead;
 
         #endregion Protected Fields
 
@@ -28,28 +28,28 @@ namespace Entity
 
         public virtual void Die(GameObject self)
         {
-            dead = true;
+            Dead = true;
 
-            Destroy(self, explosionTime);
+            Destroy(self, ExplosionTime);
 
-            if (self.tag != "Bullet" && deathAnim != null)
+            if (self.tag != "Bullet" && DeathAnim != null)
             {
-                Animator explosion = Instantiate(deathAnim, self.transform);
+                Animator explosion = Instantiate(DeathAnim, self.transform);
                 explosion.transform.localPosition = new Vector3(0, 0, 0);
 
-                Destroy(explosion, explosionTime);
+                Destroy(explosion, ExplosionTime);
             }
         }
 
         public void OnTriggerEnter2D(Collider2D coll)
         {
-            if (dead) return;
+            if (Dead) return;
 
             if (coll.tag == "Bullet")
             {
-                if (coll.GetComponent<EnemyLaserController>() && isPlayer || coll.GetComponent<LaserController>() && !isPlayer)
+                if (coll.GetComponent<EnemyLaserController>() && IsPlayer || coll.GetComponent<LaserController>() && !IsPlayer)
                 {
-                    if (isPlayer)
+                    if (IsPlayer)
                         Die();
                     else
                     {
@@ -59,11 +59,11 @@ namespace Entity
                     Die(coll.gameObject);
                 }
             }
-            else if (canFall && coll.tag == "Hole")
+            else if (CanFall && coll.tag == "Hole")
             {
                 Die(GameObject.Find("Player"));
             }
-            else if (isPlayer && coll.tag == "Enemy")
+            else if (IsPlayer && coll.tag == "Enemy")
             {
                 Die(GameObject.Find("Player"));
                 Die(coll.GetComponentInParent<EnemyController>().gameObject);
