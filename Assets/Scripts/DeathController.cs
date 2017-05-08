@@ -7,15 +7,31 @@ namespace Assets.Scripts {
         public bool canFall = false;
         public bool isPlayer = false;
 
+        public Animator deathAnim;
+        public float explosionTime = 0.5f;
+
+        protected bool dead = false;
+
         public void Die() {
-            Destroy(this.gameObject);
+            Die(this.gameObject);
         }
 
-        public void Die(GameObject self) {
-            Destroy(self);
+        public virtual void Die(GameObject self) {
+            dead = true;
+
+            Destroy(self, explosionTime);
+
+            if (self.tag != "Bullet" && deathAnim != null) {
+                Animator explosion = Instantiate(deathAnim, self.transform);
+                explosion.transform.localPosition = new Vector3(0, 0, 0);
+
+                Destroy(explosion, explosionTime);
+            }
         }
 
         public void OnTriggerEnter2D(Collider2D coll) {
+            if (dead) return;
+
             if (coll.tag == "Bullet") {
                 if ((coll.GetComponent<EnemyLaserController>() && isPlayer) || (coll.GetComponent<LaserController>() && !isPlayer)) {
                     if (isPlayer)
