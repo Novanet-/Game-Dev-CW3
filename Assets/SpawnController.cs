@@ -25,7 +25,7 @@ public class SpawnController : MonoBehaviour
         foreach (SpawnerStruct spawner in _spawnerList)
         {
             GameObject spawnerObject = spawner._spawnerObject;
-            Vector3 positionOverride = spawner._spawnerPosition;
+            Vector3 positionOverride = spawner._spawnerPositionOverride;
 
             if (!positionOverride.Equals(Vector3.zero)) spawnerObject.transform.position = positionOverride;
             SpawnerDict.Add(spawner._spawnerName, spawner);
@@ -47,8 +47,9 @@ public class SpawnController : MonoBehaviour
         #region Private Fields
 
         [SerializeField] public string _spawnerName;
-        [SerializeField] public Vector3 _spawnerPosition;
         [SerializeField] public GameObject _spawnerObject;
+        [SerializeField] public Vector3 _spawnerPositionOverride;
+
 
         #endregion Private Fields
     }

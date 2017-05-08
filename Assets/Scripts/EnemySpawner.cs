@@ -17,9 +17,9 @@ namespace Assets.Scripts {
         // Update is called once per frame
         void Update() {
             if (time < Time.time) {
-                Instantiate(enemy);
+                Instantiate(enemy, transform);
                 time = Time.time + spawnDelay;
             }
         }
-    } 
+    }
 }

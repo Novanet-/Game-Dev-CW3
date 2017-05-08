@@ -28,10 +28,14 @@ namespace Assets.Scripts {
 
             NextFireSlot = CurrentTime + FireInterval;
 
-            GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
+            if (AimTarget != null)
+            {
+                GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
 
-            if (transform.rotation.eulerAngles.y > 90) {
-                bullet.transform.Rotate(new Vector3(0, 180, 0));
+                if (transform.rotation.eulerAngles.y > 90)
+                {
+                    bullet.transform.Rotate(new Vector3(0, 180, 0));
+                }
             }
 
             NextFireSlot -= CurrentTime;

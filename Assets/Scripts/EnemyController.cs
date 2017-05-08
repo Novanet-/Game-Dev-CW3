@@ -2,32 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts {
-    public class EnemyController : MonoBehaviour {
+namespace Assets.Scripts
+{
+    public class EnemyController : MonoBehaviour
+    {
         private GameObject player;
         public float speed = 10;
 
         // Use this for initialization
-        void Start() {
+        void Start()
+        {
             player = GameObject.Find("Player");
         }
 
         // Update is called once per frame
-        void Update() {
-            //rotate to look at player
-            transform.LookAt(player.transform.position);
-            transform.Rotate(new Vector3(0, -90, 0), Space.Self);
-            
-            //move towards player
-            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        void Update()
+        {
+            if (player != null)
+            {
+                //rotate to look at player
+                transform.LookAt(player.transform.position);
+                transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
-            if (transform.eulerAngles.y < 90)
-                transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 0, transform.eulerAngles.z);
-            else
-                transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 180, transform.eulerAngles.z);
+                //move towards player
+                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+
+                if (transform.eulerAngles.y < 90)
+                    transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+                else
+                    transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 180, transform.eulerAngles.z);
 
 
-            transform.Rotate(new Vector3(0, 0, -90));
+                transform.Rotate(new Vector3(0, 0, -90));
+            }
         }
     }
 }
