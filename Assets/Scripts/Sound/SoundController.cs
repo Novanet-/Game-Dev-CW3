@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using com.kleberswf.lib.core;
+using UnityEngine;
 
 namespace Sound
 {
-    public class SoundController : MonoBehaviour
+    public class SoundController : Singleton<SoundController>
     {
         #region Private Fields
 
@@ -12,12 +13,6 @@ namespace Sound
         [SerializeField] private AudioSource _soundSource;
 
         #endregion Private Fields
-
-        #region Public Properties
-
-        public static SoundController Instance { get; set; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -47,18 +42,5 @@ namespace Sound
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private void Awake()
-        {
-            if (Instance == null)
-                Instance = this;
-            else if (Instance != this)
-                Destroy(gameObject);
-            DontDestroyOnLoad(gameObject);
-        }
-
-        #endregion Private Methods
     }
 }
