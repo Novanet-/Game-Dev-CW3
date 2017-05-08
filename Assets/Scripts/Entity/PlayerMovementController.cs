@@ -1,6 +1,4 @@
-﻿﻿using UnityEngine;
-
-namespace Assets.Scripts
+﻿﻿using Misc; using UnityEngine;namespace Entity
 {
     public class PlayerMovementController : MonoBehaviour
     {

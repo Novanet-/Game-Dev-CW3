@@ -1,0 +1,24 @@
+﻿using Entity;
+using UnityEngine;
+
+namespace Level {
+    public class EnemySpawner : MonoBehaviour {
+        public EnemyController enemy;
+        public float spawnDelay = 1;
+
+        private float time;
+
+        // Use this for initialization
+        void Start() {
+            time = Time.time;
+        }
+
+        // Update is called once per frame
+        void Update() {
+            if (time < Time.time) {
+                Instantiate(enemy, transform.position, transform.rotation, transform);
+                time = Time.time + spawnDelay;
+            }
+        }
+    }
+}
