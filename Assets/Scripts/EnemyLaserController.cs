@@ -10,12 +10,14 @@ public class EnemyLaserController : MonoBehaviour {
     private void Start() {
         EnemyFireController fireController = transform.GetComponentInParent<EnemyFireController>();
         float laserSpeedParentOverride = fireController.LaserSpeed;
+
         if (Mathf.Abs(LaserSpeed - laserSpeedParentOverride) > 0.01f) {
             if (laserSpeedParentOverride > 0) LaserSpeed = laserSpeedParentOverride;
         }
 
-        var aimTargetPosition = new Vector3(fireController.AimTarget.transform.position.x, fireController.AimTarget.transform.position.y, transform.position.z);
-        Vector3 laserDirection = aimTargetPosition - transform.position;
+        Vector3 airTargetPosition = fireController.AimTarget.transform.position;
+        var aimTargetPositionFlattened = new Vector3(airTargetPosition.x, airTargetPosition.y, transform.position.z);
+        Vector3 laserDirection = aimTargetPositionFlattened - transform.position;
 
         laserDirection.Normalize();
 

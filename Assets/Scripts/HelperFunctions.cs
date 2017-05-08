@@ -1,10 +1,8 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-internal static class HelperFunctions
-{
-    public static void ClampTransformToCameraView([NotNull] Transform transform)
-    {
+internal static class HelperFunctions {
+    public static void ClampTransformToCameraView([NotNull] Transform transform) {
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         pos.x = Mathf.Clamp01(pos.x);
         pos.y = Mathf.Clamp01(pos.y);

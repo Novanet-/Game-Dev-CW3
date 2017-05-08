@@ -1,51 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class DeathController : MonoBehaviour {
-    public bool canFall = false;
-
-    public void Die() {
-        Destroy(this.gameObject);
-    }
-
-    public void Die(GameObject self) {
-        Destroy(self);
-    }
-
-    public void OnTriggerEnter2D(Collider2D coll) {
-        print(canFall + " " + coll.tag);
-        if (coll.tag == "Bullet") {
-            Die();
-        }
-
-        public void Die(GameObject self) {
-            Destroy(self);
-        }
-    }
-}
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DeathController : MonoBehaviour {
-    public bool canFall = false;
-    public bool isPlayer = false;
+public class DeathController : MonoBehaviour
+{
+    #region Public Fields
 
-    public void Die() {
-        Destroy(this.gameObject);
+    public bool CanFall;
+    public bool IsPlayer;
+
+    #endregion Public Fields
+
+    #region Public Methods
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 
-    public void Die(GameObject self) {
+    public void Die(GameObject self)
+    {
         Destroy(self);
     }
 
-    public void OnTriggerEnter2D(Collider2D coll) {
-        print(isPlayer + " " + coll.tag);
-        if (coll.tag == "Bullet") {
-            if ((coll.GetComponent<EnemyLaserController>() && isPlayer) || (coll.GetComponent<LaserController>() && !isPlayer))
-                Die();
-        else if (isPlayer && coll.tag == "Enemy") {
+    public void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.CompareTag("Bullet"))
+        {
+            if (coll.GetComponent<EnemyLaserController>() && IsPlayer || coll.GetComponent<LaserController>() && !IsPlayer)
+            {
+                if (IsPlayer)
+                    Die();
+                else
+                {
+                    Die(GetComponentInParent<EnemyMovementController>().gameObject);
+                }
+
+                Die(coll.gameObject);
+            }
+        }
+        else if (CanFall && coll.CompareTag("Hole"))
+        {
             Die(GameObject.Find("Player"));
         }
+        else if (IsPlayer && coll.CompareTag("Enemy"))
+        {
+            Die(GameObject.Find("Player"));
+            Die(coll.GetComponentInParent<EnemyMovementController>().gameObject);
+        }
     }
+
+    #endregion Public Methods
+}

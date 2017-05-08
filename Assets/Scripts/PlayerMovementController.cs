@@ -9,11 +9,11 @@ public class PlayerMovementController : MonoBehaviour
     private float curSpeed;
     private float maxSpeed;
 
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rigidBody2d;
 
     // Use this for initialization
     private void Start() {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidBody2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -27,10 +27,9 @@ public class PlayerMovementController : MonoBehaviour
         maxSpeed = curSpeed;
 
         // Move senteces
-        float horizontalVelocity = Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f);
-        float verticalVelocity = Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f);
-        rigidbody.velocity = new Vector2(horizontalVelocity, verticalVelocity);
+        rigidBody2d.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f),
+            Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f));
 
-        transform.up = rigidbody.velocity.normalized;
+        transform.up = rigidBody2d.velocity.normalized;
     }
 }
