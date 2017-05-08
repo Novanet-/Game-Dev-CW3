@@ -1,37 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
-{
-    #region Public Fields
+namespace Assets.Scripts {
+    public class EnemySpawner : MonoBehaviour {
+        public EnemyController enemy;
+        public float spawnDelay = 1;
 
-    public EnemyMovementController EnemyMovement;
-    public float spawnDelay = 1;
+        private float time;
 
-    #endregion Public Fields
+        // Use this for initialization
+        void Start() {
+            time = Time.time;
+        }
 
-    #region Private Fields
-
-    private float time;
-
-    #endregion Private Fields
-
-    #region Private Methods
-
-    // Use this for initialization
-    private void Start()
-    {
-        time = Time.time;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if (time < Time.time)
-        {
-            Instantiate(EnemyMovement, transform.position, transform.rotation, transform);
-            time = Time.time + spawnDelay;
+        // Update is called once per frame
+        void Update() {
+            if (time < Time.time) {
+                Instantiate(enemy, transform.position, transform.rotation, transform);
+                time = Time.time + spawnDelay;
+            }
         }
     }
-
-    #endregion Private Methods
 }
