@@ -19,6 +19,12 @@ namespace Entity
 
         #endregion Protected Fields
 
+        #region Private Fields
+
+        private ScoreController _scoreController;
+
+        #endregion Private Fields
+
         #region Public Methods
 
         public void Die()
@@ -53,7 +59,9 @@ namespace Entity
                         Die();
                     else
                     {
-                        Die(GetComponentInParent<EnemyController>().gameObject);
+                        var enemyController = GetComponentInParent<EnemyController>();
+                        Die(enemyController.gameObject);
+                        _scoreController.AddKilledEnemy(enemyController);
                     }
 
                     Die(coll.gameObject);
@@ -93,6 +101,11 @@ namespace Entity
         {
             //            Debug.Log("I'm invisible");
             Invoke("KillSelf", 2);
+        }
+
+        private void Start()
+        {
+            _scoreController = ScoreController.Instance;
         }
 
         #endregion Private Methods

@@ -7,6 +7,7 @@ namespace Entity
         #region Public Fields
 
         public float speed = 10;
+        public int ScoreValue = 10;
 
         #endregion Public Fields
 
