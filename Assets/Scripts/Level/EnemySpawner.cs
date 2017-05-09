@@ -14,7 +14,7 @@ namespace Level
 
         #region Private Fields
 
-        private float time;
+        private float _time;
 
         #endregion Private Fields
 
@@ -23,16 +23,16 @@ namespace Level
         // Use this for initialization
         private void Start()
         {
-            time = Time.time;
+            _time = Time.time;
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (time < Time.time)
+            if (_time < Time.time)
             {
                 Instantiate(enemy, transform.position, transform.rotation, transform);
-                time = Time.time + spawnDelay;
+                _time = Time.time + spawnDelay;
             }
         }
 

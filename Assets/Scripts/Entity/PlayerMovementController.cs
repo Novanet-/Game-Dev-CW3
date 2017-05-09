@@ -17,19 +17,19 @@ namespace Entity
 
         #region Private Fields
 
-        private bool canMove = true;
-        private float curSpeed;
-        private float maxSpeed;
+        private bool _canMove = true;
+        private float _curSpeed;
+        private float _maxSpeed;
 
-        private Rigidbody2D rigidbody;
+        private Rigidbody2D _rigidbody;
 
         #endregion Private Fields
 
         #region Public Methods
 
-        public void SetCanMove(bool b)
+        internal void SetCanMove(bool b)
         {
-            canMove = b;
+            _canMove = b;
         }
 
         #endregion Public Methods
@@ -40,15 +40,15 @@ namespace Entity
 
         private void Controls()
         {
-            if (!canMove) return;
+            if (!_canMove) return;
 
-            curSpeed = MoveSpeed;
-            maxSpeed = curSpeed;
+            _curSpeed = MoveSpeed;
+            _maxSpeed = _curSpeed;
             // Move senteces
-            rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f),
-                Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f));
+            _rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * _curSpeed, 0.8f),
+                Mathf.Lerp(0, Input.GetAxis("Vertical") * _curSpeed, 0.8f));
 
-            transform.up = rigidbody.velocity.normalized;
+            transform.up = _rigidbody.velocity.normalized;
         }
 
         private void FixedUpdate()
@@ -60,7 +60,7 @@ namespace Entity
 
         private void Start()
         {
-            rigidbody = GetComponent<Rigidbody2D>();
+            _rigidbody = GetComponent<Rigidbody2D>();
         }
 
         #endregion Private Methods

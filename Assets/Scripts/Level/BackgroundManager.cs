@@ -20,13 +20,13 @@ namespace Level
 
         #region Private Fields
 
-        private float floorPercent = 1f;
-        private float holePercent;
-        private int rowNum = 20, rowCurr;
-        private List<BackgroundRow> rows;
-        private float time;
-        private float top;
-        private float wallPercent;
+        private float _floorPercent = 1f;
+        private float _holePercent;
+        private int _rowNum = 20, _rowCurr;
+        private List<BackgroundRow> _rows;
+        private float _time;
+        private float _top;
+        private float _wallPercent;
 
         #endregion Private Fields
 
@@ -34,29 +34,29 @@ namespace Level
 
         private void addRow()
         {
-            if (rows.Count > 0)
-                top = rows[rows.Count - 1].transform.localPosition.y + tileHeight;
+            if (_rows.Count > 0)
+                _top = _rows[_rows.Count - 1].transform.localPosition.y + tileHeight;
 
             BackgroundRow r = Instantiate(row, transform);
-            r.Create(floorPercent, holePercent, wallPercent);
-            r.transform.localPosition = new Vector3(0, top, 0);
-            rows.Add(r);
+            r.Create(_floorPercent, _holePercent, _wallPercent);
+            r.transform.localPosition = new Vector3(0, _top, 0);
+            _rows.Add(r);
 
-            rowCurr++;
+            _rowCurr++;
         }
 
         private void incrementDifficulty()
         {
-            floorPercent -= difficultyIncrement;
-            holePercent += difficultyIncrement / 2;
-            wallPercent += difficultyIncrement / 2;
+            _floorPercent -= difficultyIncrement;
+            _holePercent += difficultyIncrement / 2;
+            _wallPercent += difficultyIncrement / 2;
         }
 
         private void SetupBackground()
         {
-            top = screenBottom;
+            _top = screenBottom;
 
-            while (rowCurr < rowNum)
+            while (_rowCurr < _rowNum)
             {
                 addRow();
             }
@@ -65,38 +65,38 @@ namespace Level
         // Use this for initialization
         private void Start()
         {
-            rows = new List<BackgroundRow>();
+            _rows = new List<BackgroundRow>();
 
             SetupBackground();
 
-            time = Time.time + difficultyDelay;
+            _time = Time.time + difficultyDelay;
         }
 
         // Update is called once per frame
         private void Update()
         {
-            for (var i = 0; i < rows.Count; i++)
+            for (var i = 0; i < _rows.Count; i++)
             {
-                BackgroundRow r = rows[i];
+                BackgroundRow r = _rows[i];
 
                 r.transform.localPosition = new Vector3(0, r.transform.position.y - scrollSpeed);
 
                 if (r.transform.localPosition.y < screenBottom)
                 {
-                    rows.Remove(r);
+                    _rows.Remove(r);
                     Destroy(r.gameObject);
                     i--;
-                    rowCurr--;
+                    _rowCurr--;
                 }
             }
 
-            if (floorPercent > difficultyMax && time < Time.time)
+            if (_floorPercent > difficultyMax && _time < Time.time)
             {
                 incrementDifficulty();
-                time = Time.time + difficultyDelay;
+                _time = Time.time + difficultyDelay;
             }
 
-            if (rowCurr < rowNum)
+            if (_rowCurr < _rowNum)
             {
                 addRow();
             }
