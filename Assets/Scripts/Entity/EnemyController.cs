@@ -12,7 +12,7 @@ namespace Entity
 
         #region Private Fields
 
-        private GameObject player;
+        private GameObject _player;
 
         #endregion Private Fields
 
@@ -21,16 +21,16 @@ namespace Entity
         // Use this for initialization
         private void Start()
         {
-            player = GameObject.Find("Player");
+            _player = GameObject.Find("Player");
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (player != null && !player.GetComponent<PlayerDeathController>().isDead())
+            if (_player != null && !_player.GetComponent<PlayerDeathController>().isDead())
             {
                 //rotate to look at player
-                transform.LookAt(player.transform.position);
+                transform.LookAt(_player.transform.position);
                 transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
                 //move towards player

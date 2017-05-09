@@ -13,7 +13,7 @@ namespace Level
 
         #region Private Fields
 
-        private float _difficultyAdjusmentInc;
+        private float _difficultyAdjustmentInc;
         [SerializeField] private float _interval;
         private float _timer;
 
@@ -23,7 +23,7 @@ namespace Level
 
         public void UpdateDifficulty(int enemiesKilledSinceLastInc, int secondsSinceLastHit, int gameSecondsElapsed)
         {
-            _difficultyAdjusmentInc = CalculateDifficultyAdjusmentInc(enemiesKilledSinceLastInc, secondsSinceLastHit, gameSecondsElapsed);
+            _difficultyAdjustmentInc = CalculateDifficultyAdjusmentInc(enemiesKilledSinceLastInc, secondsSinceLastHit, gameSecondsElapsed);
         }
 
         #endregion Public Methods
@@ -49,7 +49,7 @@ namespace Level
             if (_timer < _interval) return;
 
             _timer -= _interval;
-            DifficultyLevel += _difficultyAdjusmentInc;
+            DifficultyLevel += _difficultyAdjustmentInc;
             Debug.Log("Memes in the difficulty controller");
         }
 

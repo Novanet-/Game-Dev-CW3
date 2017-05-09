@@ -4,6 +4,7 @@ namespace Level
 {
     public class BackgroundRow : MonoBehaviour
     {
+
         #region Public Fields
 
         public GameObject floorTile;
@@ -16,9 +17,9 @@ namespace Level
 
         #endregion Public Fields
 
-        #region Public Methods
+        #region Internal Methods
 
-        public void Create(float floorPercent, float holePercent, float wallPercent)
+        internal void Create(float floorPercent, float holePercent, float wallPercent)
         {
             float pos = -(tileWidth * Mathf.Floor(numTiles / 2));
 
@@ -50,7 +51,7 @@ namespace Level
             }
         }
 
-        #endregion Public Methods
+        #endregion Internal Methods
 
         #region Private Methods
 
@@ -65,5 +66,6 @@ namespace Level
         }
 
         #endregion Private Methods
+
     }
 }

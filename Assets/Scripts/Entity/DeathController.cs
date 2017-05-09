@@ -15,7 +15,7 @@ namespace Entity
 
         #region Protected Fields
 
-        protected bool dead;
+        protected bool Dead;
 
         #endregion Protected Fields
 
@@ -28,7 +28,7 @@ namespace Entity
 
         public virtual void Die(GameObject self)
         {
-            dead = true;
+            Dead = true;
 
             Destroy(self, explosionTime);
 
@@ -43,7 +43,7 @@ namespace Entity
 
         public void OnTriggerEnter2D(Collider2D coll)
         {
-            if (dead) return;
+            if (Dead) return;
 
             if (coll.tag == "Bullet")
             {
