@@ -19,18 +19,18 @@ namespace Entity
 
         #endregion Internal Fields
 
-        #region Private Fields
+        #region Protected Fields
 
-        private SpriteRenderer _spriteRenderer;
+        protected SpriteRenderer _spriteRenderer;
 
-        #endregion Private Fields
+        #endregion Protected Fields
 
-        #region Private Properties
+        #region Protected Properties
 
-        private float CurrentTime { get; set; }
-        private float NextFireSlot { get; set; }
+        protected float CurrentTime { get; set; }
+        protected float NextFireSlot { get; set; }
 
-        #endregion Private Properties
+        #endregion Protected Properties
 
         #region Private Methods
 

@@ -10,6 +10,7 @@ namespace Entity
         public Animator deathAnim;
         public float explosionTime = 0.5f;
         public bool isPlayer;
+        public int health = 1;
 
         #endregion Public Fields
 
@@ -32,14 +33,11 @@ namespace Entity
             Die(gameObject);
         }
 
-        public virtual void Die(GameObject self)
-        {
-            Dead = true;
-
+        public virtual void Die(GameObject self) {
             Destroy(self, explosionTime);
 
-            if (self.tag != "Bullet" && deathAnim != null)
-            {
+            if (self.tag != "Bullet" && deathAnim != null) {
+                Dead = true;
                 Animator explosion = Instantiate(deathAnim, self.transform);
                 explosion.transform.localPosition = new Vector3(0, 0, 0);
 
@@ -59,9 +57,7 @@ namespace Entity
                         Die();
                     else
                     {
-                        var enemyController = GetComponentInParent<EnemyController>();
-                        Die(enemyController.gameObject);
-                        _scoreController.AddKilledEnemy(enemyController);
+                        Die(GetComponentInParent<EnemyController>().gameObject);
                     }
 
                     Die(coll.gameObject);
@@ -111,3 +107,8 @@ namespace Entity
         #endregion Private Methods
     }
 }
+                    else {
+                        health--;
+
+                        if (health <= 0)
+                            Die(transform.parent.gameObject);
