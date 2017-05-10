@@ -11,13 +11,13 @@ namespace Entity
 
         #endregion Public Fields
 
-        #region Private Fields
+        #region Protected Fields
 
-        private GameObject _player;
+        protected GameObject _player;
 
         #endregion Private Fields
 
-        #region Private Methods
+        #region Protected Methods
 
         // Use this for initialization
         private void Start()
