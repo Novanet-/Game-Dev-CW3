@@ -588,7 +588,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Persistent: 0
   DifficultyLevel: 0
-  _interval: 10
+  ScoreFactorMult: 1
+  TimeFactorMult: 1
+  _interval: 60
+  _averageScoreForInterval: 600
 --- !u!114 &1209986707
 MonoBehaviour:
   m_ObjectHideFlags: 0

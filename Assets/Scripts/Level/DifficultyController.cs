@@ -1,5 +1,6 @@
 ﻿using System;
 using com.kleberswf.lib.core;
+using Misc;
 using UnityEngine;
 
 namespace Level
@@ -10,34 +11,44 @@ namespace Level
 
         public float DifficultyLevel;
 
+        public float ScoreFactorMult;
+        public float TimeFactorMult;
+
         #endregion Public Fields
 
         #region Private Fields
 
         private float _difficultyAdjustmentInc;
         [SerializeField] private float _interval;
-        private float _timer;
-        private ScoreController _scoreController;
         private int _previousScore;
-        private int _previousKills;
+        private ScoreController _scoreController;
+        private float _timer;
+        [SerializeField] private int _averageScoreForInterval;
 
         #endregion Private Fields
 
         #region Public Methods
 
-        public void UpdateDifficulty(int enemiesKilledSinceLastInc, int secondsSinceLastHit, int gameSecondsElapsed)
+        public void UpdateDifficulty(int scoreInInterval, int gameSecondsElapsed)
         {
-            _difficultyAdjustmentInc = CalculateDifficultyAdjustmentInc(enemiesKilledSinceLastInc, secondsSinceLastHit, gameSecondsElapsed);
+            _difficultyAdjustmentInc = CalculateDifficultyAdjustmentInc(scoreInInterval, gameSecondsElapsed);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private float CalculateDifficultyAdjustmentInc(int scoreSinceLastInc, int enemiesKilledSinceLastInc, int gameSecondsElapsed)
+        private float CalculateDifficultyAdjustmentInc(int scoreSinceLastInc, int gameSecondsElapsed)
         {
             //TODO: Replace with an actual heuristic
-            return scoreSinceLastInc + enemiesKilledSinceLastInc + gameSecondsElapsed;
+            float scoreFactor = scoreSinceLastInc * ScoreFactorMult;
+            float timeFactor = gameSecondsElapsed * TimeFactorMult;
+            var rawSkill = scoreFactor;
+            int scoreCeiling = _averageScoreForInterval * 2;
+            var remappedSkill = rawSkill.Remap(0, scoreCeiling, -1, 1);
+            var clampedSkill = Mathf.Clamp(remappedSkill, -1, 1);
+            Debug.Log(String.Format("Skill: {0} , Time: {1}, Combo: {2}",clampedSkill, 0, 0));
+            return clampedSkill;
         }
 
         // Use this for initialization
@@ -45,32 +56,27 @@ namespace Level
         {
             _scoreController = ScoreController.Instance;
             _previousScore = 0;
-            _previousKills = 0;
         }
 
         // Update is called once per frame
         private void Update()
         {
-
             _timer += Time.deltaTime;
 
             if (_timer < _interval) return;
 
             _timer -= _interval;
 
-            var currentScore = _scoreController.CurrentScore;
-            var currentKills = _scoreController.EnemiesKilled;
+            int currentScore = _scoreController.CurrentScore;
 
-            var scoreInInterval = currentScore - _previousScore;
-            var killsInInterval = currentKills - _previousKills;
-            var secondsElapsed = _scoreController.TimeSurvived;
+            int scoreInInterval = currentScore - _previousScore;
+            int secondsElapsed = _scoreController.TimeSurvived;
 
-            UpdateDifficulty(scoreInInterval, killsInInterval, secondsElapsed);
+            UpdateDifficulty(scoreInInterval, secondsElapsed);
 
             DifficultyLevel += _difficultyAdjustmentInc;
 
             _previousScore = currentScore;
-            _previousKills = currentKills;
 
 //            Debug.Log(string.Format("Difficulty Level: {0}", DifficultyLevel));
         }
