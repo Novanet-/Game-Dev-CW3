@@ -24,19 +24,19 @@ namespace UI
         internal void UpdateKills(int kills)
         {
             _txtEnemiesKilled.text = Convert.ToString(kills);
-            Debug.Log(String.Format("Kills: {0}", kills));
+//            Debug.Log(String.Format("Kills: {0}", kills));
         }
 
         internal void UpdateScore(int score)
         {
             _txtScore.text = Convert.ToString(score);
-            Debug.Log(String.Format("Score: {0}", score));
+//            Debug.Log(String.Format("Score: {0}", score));
         }
 
         internal void UpdateTime(int time)
         {
             _txtTime.text = Convert.ToString(time);
-            Debug.Log(String.Format("Time: {0}", time));
+//            Debug.Log(String.Format("Time: {0}", time));
         }
 
         #endregion Public Methods

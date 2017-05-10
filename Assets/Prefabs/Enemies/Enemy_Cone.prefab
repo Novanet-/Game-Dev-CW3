@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  ScoreValue: 10
+  ScoreValue: 30
 --- !u!114 &114937857440126592
 MonoBehaviour:
   m_ObjectHideFlags: 1

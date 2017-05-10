@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
-  ScoreValue: 10
+  ScoreValue: 40
 --- !u!212 &212028207428833328
 SpriteRenderer:
   m_ObjectHideFlags: 1
