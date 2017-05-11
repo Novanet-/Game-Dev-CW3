@@ -11,10 +11,23 @@ namespace Level
 
         #endregion Public Fields
 
+        #region Private Fields
+
+        private GameController _gameController;
+
+        #endregion Private Fields
+
         #region Private Methods
+
+        private void Start()
+        {
+            _gameController = GameController.Instance;
+        }
 
         private void Update()
         {
+            if (_gameController.IsPaused) return;
+
             foreach (Renderer r in backgrounds)
             {
                 if (!r.isVisible && r.transform.position.y > 0)

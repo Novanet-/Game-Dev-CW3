@@ -27,6 +27,7 @@ namespace Level
         private float _time;
         private float _top;
         private float _wallPercent;
+        private GameController _gameController;
 
         #endregion Private Fields
 
@@ -70,11 +71,14 @@ namespace Level
             SetupBackground();
 
             _time = Time.time + difficultyDelay;
+            _gameController = GameController.Instance;
         }
 
         // Update is called once per frame
         private void Update()
         {
+            if (_gameController.IsPaused) return;
+
             for (var i = 0; i < _rows.Count; i++)
             {
                 BackgroundRow r = _rows[i];
