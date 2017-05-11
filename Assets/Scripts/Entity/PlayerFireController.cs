@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Entity
 {
@@ -26,6 +27,14 @@ namespace Entity
 
         public void SetCanShoot(bool b) {
             _canShoot = b;
+        }
+
+        public void BuffFireRate(float newRate, float rofTime) {
+            float originalROF = FireInterval;
+
+            FireInterval = newRate;
+
+            StartCoroutine(SetBack(originalROF, rofTime));
         }
 
         #endregion Public Methods
@@ -58,6 +67,12 @@ namespace Entity
 
             NextFireSlot -= CurrentTime;
             CurrentTime = 0.0F;
+        }
+
+        private IEnumerator SetBack(float val, float rofTime) {
+            yield return new WaitForSeconds(rofTime);
+
+            FireInterval = val;
         }
 
         #endregion Private Methods
