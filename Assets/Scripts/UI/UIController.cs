@@ -1,6 +1,7 @@
 ﻿using System;
 using com.kleberswf.lib.core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI
@@ -58,10 +59,14 @@ namespace UI
         // Use this for initialization
         private void Start()
         {
-            _txtScore = _txtScoreObject.GetComponent<Text>();
-            _txtEnemiesKilled = _txtEnemiesKilledObject.GetComponent<Text>();
-            _txtTime = _txtTimeObject.GetComponent<Text>();
-            _txtPaused = _txtPausedObject.GetComponent<Text>();
+            Scene currentScene = SceneManager.GetActiveScene();
+
+            if (!currentScene.name.Equals("MainScene")) return;
+
+                if (_txtScoreObject != null) _txtScore = _txtScoreObject.GetComponent<Text>();
+            if (_txtEnemiesKilledObject != null) _txtEnemiesKilled = _txtEnemiesKilledObject.GetComponent<Text>();
+            if (_txtTimeObject != null) _txtTime = _txtTimeObject.GetComponent<Text>();
+            if (_txtPausedObject != null) _txtPaused = _txtPausedObject.GetComponent<Text>();
             _pauseImage = GetComponent<Image>();
         }
 
