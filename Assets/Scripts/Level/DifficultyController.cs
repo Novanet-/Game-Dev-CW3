@@ -1,6 +1,7 @@
 ﻿using System;
 using com.kleberswf.lib.core;
 using Misc;
+using UI;
 using UnityEngine;
 
 namespace Level
@@ -22,6 +23,7 @@ namespace Level
         [SerializeField] private float _interval;
         private int _previousScore;
         private ScoreController _scoreController;
+        private UIController _uiController;
         private float _timer;
         [SerializeField] private int _averageScoreForInterval;
 
@@ -55,6 +57,7 @@ namespace Level
         private void Start()
         {
             _scoreController = ScoreController.Instance;
+            _uiController = UIController.Instance;
             _previousScore = 0;
         }
 
@@ -75,6 +78,10 @@ namespace Level
             UpdateDifficulty(scoreInInterval, secondsElapsed);
 
             DifficultyLevel += _difficultyAdjustmentInc;
+
+            var roundedDifficulty = Convert.ToInt32(Mathf.Floor(DifficultyLevel));
+
+            _uiController.UpdateDifficulty(roundedDifficulty);
 
             _previousScore = currentScore;
 
