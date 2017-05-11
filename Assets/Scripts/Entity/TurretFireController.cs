@@ -1,0 +1,68 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Entity {
+    public class TurretFireController : MonoBehaviour {
+        #region Public Fields
+
+        public GameObject AimTarget;
+        public float FireInterval = 0.5F;
+        public GameObject LaserContainer;
+        public float LaserSpeed;
+        public GameObject LaserType;
+
+        #endregion Public Fields
+
+        #region Private Properties
+
+        private float CurrentTime { get; set; }
+        private float NextFireSlot { get; set; }
+        private bool _canShoot = true;
+
+        #endregion Private Properties
+
+        #region Public Methods
+
+        public void SetCanShoot(bool b) {
+            _canShoot = b;
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void Start() {
+            NextFireSlot = 0.5f;
+        }
+
+        private void Update() {
+            if (!_canShoot) return;
+
+            if (AimTarget == null) {
+                GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+
+                if (targets.Length > 0) {
+                    AimTarget = targets[0];
+                }
+                else return;
+            }
+
+            CurrentTime += Time.deltaTime;
+
+            Vector3 position = AimTarget.transform.position;
+            
+            bool cantFireYet = CurrentTime <= NextFireSlot;
+
+            if (cantFireYet) return;
+
+            NextFireSlot = CurrentTime + FireInterval;
+            Instantiate(LaserType, transform.position, transform.rotation, transform);
+
+            NextFireSlot -= CurrentTime;
+            CurrentTime = 0.0F;
+        }
+
+        #endregion Private Methods
+    }
+}

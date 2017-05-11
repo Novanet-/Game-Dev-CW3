@@ -15,6 +15,7 @@ namespace Entity
         public float TurnSpeed = 10f;
         public float JumpTime = 1f;
         public float JumpDelay = 3f;
+        public TurretController turret;
 
         #endregion Public Fields
 
@@ -52,6 +53,11 @@ namespace Entity
 
         internal void SetPowerup(Powerup.Powerup.Activate pow) {
             _currPower = pow;
+        }
+
+        internal void DeployTurret() {
+            TurretController t = Instantiate(turret);
+            t.transform.position = transform.position;
         }
 
         #endregion Public Methods
