@@ -10,7 +10,8 @@ namespace Level
 
         public float difficultyDelay = 5;
         public float difficultyIncrement = 0.05f;
-        public float difficultyMax = 0.6f;
+        public float holePercentMax = 0.2f;
+        public float wallPerceneMax = 0.2f;
         public BackgroundRow row;
 
         public float screenBottom = -6;
@@ -29,8 +30,20 @@ namespace Level
         private float _top;
         private float _wallPercent;
         private GameController _gameController;
+        private float _difficultyMax;
 
         #endregion Private Fields
+
+        #region Public Methods
+
+        public void playerFall() {
+            if (_holePercent - difficultyIncrement >= 0) {
+                _holePercent -= difficultyIncrement;
+                _floorPercent += difficultyIncrement;
+            }
+        }
+
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -49,9 +62,14 @@ namespace Level
 
         private void incrementDifficulty()
         {
-            _floorPercent -= difficultyIncrement;
-            _holePercent += difficultyIncrement / 2;
-            _wallPercent += difficultyIncrement / 2;
+            if (_floorPercent > _difficultyMax)
+                _floorPercent -= difficultyIncrement;
+
+            if (_holePercent < holePercentMax)
+                _holePercent += difficultyIncrement / 2;
+
+            if (_wallPercent < wallPerceneMax)
+                _wallPercent += difficultyIncrement / 2;
         }
 
         private void SetupBackground()
@@ -67,6 +85,8 @@ namespace Level
         // Use this for initialization
         private void Start()
         {
+            _difficultyMax = 1 - (holePercentMax + wallPerceneMax);
+
             Scene currentScene = SceneManager.GetActiveScene();
             _rows = new List<BackgroundRow>();
 
@@ -96,7 +116,7 @@ namespace Level
                 }
             }
 
-            if (_floorPercent > difficultyMax && _time < Time.time)
+            if (_time < Time.time)
             {
                 incrementDifficulty();
                 _time = Time.time + difficultyDelay;
