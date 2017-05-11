@@ -72,7 +72,7 @@ namespace Level
             _previousScore = currentScore;
             _previousKills = currentKills;
 
-            Debug.Log(string.Format("Difficulty Level: {0}", DifficultyLevel));
+//            Debug.Log(string.Format("Difficulty Level: {0}", DifficultyLevel));
         }
 
         #endregion Private Methods
