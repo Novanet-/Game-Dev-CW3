@@ -1,6 +1,7 @@
 ﻿using com.kleberswf.lib.core;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Level
 {
@@ -11,6 +12,7 @@ namespace Level
         private float _lastTimeRecorded;
         private ScoreController _scoreController;
         private UIController _uiController;
+        private Scene _currentScene;
 
         #endregion Private Fields
 
@@ -27,6 +29,9 @@ namespace Level
         // Use this for initialization
         private void Start()
         {
+            _currentScene = SceneManager.GetActiveScene();
+            if (!_currentScene.name.Equals("MainScene")) return;
+
             _scoreController = ScoreController.Instance;
             _uiController = UIController.Instance;
             GameTimeElapsed = 0;
@@ -42,6 +47,8 @@ namespace Level
         // Update is called once per frame
         private void Update()
         {
+            if (!_currentScene.name.Equals("MainScene")) return;
+
             if (Input.GetButtonDown("Pause"))
             {
                 TogglePauseGame();

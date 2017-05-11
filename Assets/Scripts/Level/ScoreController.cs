@@ -3,6 +3,7 @@ using com.kleberswf.lib.core;
 using Entity;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Level
 {
@@ -11,6 +12,7 @@ namespace Level
         #region Private Fields
 
         private UIController _uiController;
+        private Scene _currentScene;
 
         #endregion Private Fields
 
@@ -45,15 +47,18 @@ namespace Level
         // Use this for initialization
         private void Start()
         {
+            _currentScene = SceneManager.GetActiveScene();
+            if (!_currentScene.name.Equals("MainScene")) return;
+
             CurrentScore = 0;
             EnemiesKilled = 0;
             TimeSurvived = 0;
+            _uiController = UIController.Instance;
         }
 
         // Update is called once per frame
         private void Update()
         {
-            _uiController = UIController.Instance;
         }
 
         #endregion Private Methods

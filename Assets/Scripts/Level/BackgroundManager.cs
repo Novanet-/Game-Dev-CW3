@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Level
 {
@@ -66,18 +67,19 @@ namespace Level
         // Use this for initialization
         private void Start()
         {
+            Scene currentScene = SceneManager.GetActiveScene();
             _rows = new List<BackgroundRow>();
 
             SetupBackground();
 
             _time = Time.time + difficultyDelay;
-            _gameController = GameController.Instance;
+            if (currentScene.name.Equals("MainScene")) _gameController = GameController.Instance;
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (_gameController.IsPaused) return;
+            if (_gameController != null && _gameController.IsPaused) return;
 
             for (var i = 0; i < _rows.Count; i++)
             {
