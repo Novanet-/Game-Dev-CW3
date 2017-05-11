@@ -18,8 +18,17 @@ namespace Entity
 
         private float CurrentTime { get; set; }
         private float NextFireSlot { get; set; }
+        private bool _canShoot = true;
 
         #endregion Private Properties
+
+        #region Public Methods
+
+        public void SetCanShoot(bool b) {
+            _canShoot = b;
+        }
+
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -30,6 +39,8 @@ namespace Entity
 
         private void Update()
         {
+            if (!_canShoot) return;
+
             CurrentTime += Time.deltaTime;
 
             Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
