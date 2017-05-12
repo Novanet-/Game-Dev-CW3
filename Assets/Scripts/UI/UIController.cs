@@ -24,6 +24,9 @@ namespace UI
         private Text _txtTime;
         [SerializeField] private GameObject _txtTimeObject;
 
+        private Text _txtDifficulty;
+        [SerializeField] private GameObject _txtDifficultyObject;
+
         #endregion Private Fields
 
         #region Internal Methods
@@ -51,6 +54,10 @@ namespace UI
             _txtTime.text = Convert.ToString(time);
             //            Debug.Log(String.Format("Time: {0}", time));
         }
+        internal void UpdateDifficulty(int difficulty)
+        {
+            _txtDifficulty.text = Convert.ToString(difficulty);
+        }
 
         #endregion Internal Methods
 
@@ -67,6 +74,7 @@ namespace UI
             if (_txtEnemiesKilledObject != null) _txtEnemiesKilled = _txtEnemiesKilledObject.GetComponent<Text>();
             if (_txtTimeObject != null) _txtTime = _txtTimeObject.GetComponent<Text>();
             if (_txtPausedObject != null) _txtPaused = _txtPausedObject.GetComponent<Text>();
+            if (_txtDifficultyObject != null) _txtDifficulty = _txtDifficultyObject.GetComponent<Text>();
             _pauseImage = GetComponent<Image>();
         }
 

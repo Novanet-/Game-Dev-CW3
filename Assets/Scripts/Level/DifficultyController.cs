@@ -1,6 +1,7 @@
 ﻿using System;
 using com.kleberswf.lib.core;
 using Misc;
+using UI;
 using UnityEngine;
 
 namespace Level
@@ -18,12 +19,15 @@ namespace Level
 
         #region Private Fields
 
+        [SerializeField] private float _maxDifficulty = 9f;
+        [SerializeField] private float _minDifficulty = 0f;
+        [SerializeField] private int _averageScoreForInterval;
         private float _difficultyAdjustmentInc;
         [SerializeField] private float _interval;
         private int _previousScore;
         private ScoreController _scoreController;
         private float _timer;
-        [SerializeField] private int _averageScoreForInterval;
+        private UIController _uiController;
 
         #endregion Private Fields
 
@@ -43,11 +47,11 @@ namespace Level
             //TODO: Replace with an actual heuristic
             float scoreFactor = scoreSinceLastInc * ScoreFactorMult;
             float timeFactor = gameSecondsElapsed * TimeFactorMult;
-            var rawSkill = scoreFactor;
+            float rawSkill = scoreFactor;
             int scoreCeiling = _averageScoreForInterval * 2;
-            var remappedSkill = rawSkill.Remap(0, scoreCeiling, -1, 1);
-            var clampedSkill = Mathf.Clamp(remappedSkill, -1, 1);
-            Debug.Log(String.Format("Skill: {0} , Time: {1}, Combo: {2}",clampedSkill, 0, 0));
+            float remappedSkill = rawSkill.Remap(0, scoreCeiling, -1, 1);
+            float clampedSkill = Mathf.Clamp(remappedSkill, -1, 1);
+            Debug.Log(string.Format("Skill: {0}", clampedSkill));
             return clampedSkill;
         }
 
@@ -55,6 +59,7 @@ namespace Level
         private void Start()
         {
             _scoreController = ScoreController.Instance;
+            _uiController = UIController.Instance;
             _previousScore = 0;
         }
 
@@ -74,11 +79,18 @@ namespace Level
 
             UpdateDifficulty(scoreInInterval, secondsElapsed);
 
-            DifficultyLevel += _difficultyAdjustmentInc;
+//            DifficultyLevel = Mathf.Clamp(DifficultyLevel + _difficultyAdjustmentInc, _minDifficulty, _maxDifficulty);
+
+            float newDifficulty = DifficultyLevel + _difficultyAdjustmentInc;
+            DifficultyLevel = newDifficulty.Clamp(_minDifficulty, _maxDifficulty);
+
+            int roundedDifficulty = Convert.ToInt32(Mathf.Floor(DifficultyLevel));
+
+            _uiController.UpdateDifficulty(roundedDifficulty);
 
             _previousScore = currentScore;
 
-//            Debug.Log(string.Format("Difficulty Level: {0}", DifficultyLevel));
+            Debug.Log(string.Format("Difficulty Level: {0}", DifficultyLevel));
         }
 
         #endregion Private Methods
