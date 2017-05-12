@@ -746,8 +746,10 @@ MonoBehaviour:
   DifficultyLevel: 0
   ScoreFactorMult: 1
   TimeFactorMult: 1
+  _maxDifficulty: 9
+  _minDifficulty: 0
+  _averageScoreForInterval: 50
   _interval: 10
-  _averageScoreForInterval: 100
 --- !u!114 &1209986707
 MonoBehaviour:
   m_ObjectHideFlags: 0
