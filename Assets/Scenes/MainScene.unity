@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114869739323382516, guid: a96547d72f649d446892f93c65f10310, type: 2}
   spawnDelay: 30
+  spawnChance: 0.6
 --- !u!1 &197885291 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1333439375086180, guid: 19d0e046e5ae77b45b52e102637affbd,
@@ -265,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114192012400349348, guid: 0db988cf4fdd7e444913904d5ec08809, type: 2}
   spawnDelay: 10
+  spawnChance: 0.8
 --- !u!1001 &654604087
 Prefab:
   m_ObjectHideFlags: 0
@@ -375,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114933895799099622, guid: 950c134ce128e5e48b341ce83630f07f, type: 2}
   spawnDelay: 30
+  spawnChance: 0.6
 --- !u!4 &804139366
 Transform:
   m_ObjectHideFlags: 0
@@ -495,6 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114531127625870712, guid: 08e45a969734a7e45aa2fe4a10527001, type: 2}
   spawnDelay: 120
+  spawnChance: 0.7
 --- !u!4 &843204542
 Transform:
   m_ObjectHideFlags: 0
@@ -1107,6 +1111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114025450160702800, guid: 975a6000e9cf3324a8da401392be4d15, type: 2}
   spawnDelay: 180
+  spawnChance: 0.4
 --- !u!1 &1383199545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,6 +1250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114073879019955440, guid: afd1ac34421b3724aa1c3371ceda0b94, type: 2}
   spawnDelay: 10
+  spawnChance: 0.4
 --- !u!4 &1442337376
 Transform:
   m_ObjectHideFlags: 0
@@ -1345,6 +1351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114073879019955440, guid: afd1ac34421b3724aa1c3371ceda0b94, type: 2}
   spawnDelay: 10
+  spawnChance: 0.6
 --- !u!4 &1545253195
 Transform:
   m_ObjectHideFlags: 0
@@ -1400,6 +1407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114192012400349348, guid: 0db988cf4fdd7e444913904d5ec08809, type: 2}
   spawnDelay: 10
+  spawnChance: 0.8
 --- !u!1 &1562031318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,6 +1437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114073879019955440, guid: afd1ac34421b3724aa1c3371ceda0b94, type: 2}
   spawnDelay: 10
+  spawnChance: 0.8
 --- !u!4 &1562031320
 Transform:
   m_ObjectHideFlags: 0
@@ -1522,6 +1531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114737717086855104, guid: fede3f17d104edf45bd4676f757850d5, type: 2}
   spawnDelay: 20
+  spawnChance: 0.6
 --- !u!4 &1705378113
 Transform:
   m_ObjectHideFlags: 0
@@ -1564,6 +1574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114737717086855104, guid: fede3f17d104edf45bd4676f757850d5, type: 2}
   spawnDelay: 20
+  spawnChance: 0.6
 --- !u!4 &1706959506
 Transform:
   m_ObjectHideFlags: 0
@@ -1619,6 +1630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114869739323382516, guid: a96547d72f649d446892f93c65f10310, type: 2}
   spawnDelay: 30
+  spawnChance: 0.6
 --- !u!1 &1770420039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,6 +1660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114531127625870712, guid: 08e45a969734a7e45aa2fe4a10527001, type: 2}
   spawnDelay: 120
+  spawnChance: 0.7
 --- !u!4 &1770420041
 Transform:
   m_ObjectHideFlags: 0
@@ -1754,6 +1767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114531127625870712, guid: 08e45a969734a7e45aa2fe4a10527001, type: 2}
   spawnDelay: 120
+  spawnChance: 0.7
 --- !u!4 &1813050103
 Transform:
   m_ObjectHideFlags: 0
@@ -4518,6 +4532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114933895799099622, guid: 950c134ce128e5e48b341ce83630f07f, type: 2}
   spawnDelay: 30
+  spawnChance: 0.6
 --- !u!4 &1929607643
 Transform:
   m_ObjectHideFlags: 0
@@ -5301,6 +5316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114073879019955440, guid: afd1ac34421b3724aa1c3371ceda0b94, type: 2}
   spawnDelay: 10
+  spawnChance: 1
 --- !u!4 &2052664435
 Transform:
   m_ObjectHideFlags: 0
@@ -5343,6 +5359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114531127625870712, guid: 08e45a969734a7e45aa2fe4a10527001, type: 2}
   spawnDelay: 120
+  spawnChance: 0.7
 --- !u!4 &2059047710
 Transform:
   m_ObjectHideFlags: 0
