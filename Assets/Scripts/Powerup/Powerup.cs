@@ -7,13 +7,14 @@ namespace Powerup {
         #region Protected Fields
 
         protected Entity.PlayerMovementController _player;
+        protected bool _started = false;
+        protected float t;
 
         #endregion Protected Fields
 
         #region Public Methods
 
         public void OnTriggerEnter2D(Collider2D coll) {
-            print(coll.tag);
             if (coll.tag == "Player") {
                 _player.SetPowerup(Use);
 
@@ -30,12 +31,19 @@ namespace Powerup {
         #region Private Methods
 
         private void OnBecameInvisible() {
-            Destroy(gameObject);
+            if (_started)
+                Destroy(gameObject);
         }
 
         // Use this for initialization
         void Start() {
             _player = GameObject.Find("Player").GetComponent<Entity.PlayerMovementController>();
+            t = Time.time + 5;
+        }
+
+        void Update() {
+            if (t < Time.time)
+                _started = true;
         }
         
         #endregion Private Methods

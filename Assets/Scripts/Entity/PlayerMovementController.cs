@@ -83,7 +83,6 @@ namespace Entity
             }
 
             if (Input.GetMouseButtonDown(1)) {
-                print("Power");
                 UsePowerup();
             }
         }
