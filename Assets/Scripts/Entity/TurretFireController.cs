@@ -1,10 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Entity
-{
-    public class PlayerFireController : MonoBehaviour
-    {
+namespace Entity {
+    public class TurretFireController : MonoBehaviour {
         #region Public Fields
 
         public GameObject AimTarget;
@@ -29,50 +28,39 @@ namespace Entity
             _canShoot = b;
         }
 
-        public void BuffFireRate(float newRate, float rofTime) {
-            float originalROF = FireInterval;
-
-            FireInterval = newRate;
-
-            StartCoroutine(SetBack(originalROF, rofTime));
-        }
-
         #endregion Public Methods
 
         #region Private Methods
 
-        private void Start()
-        {
+        private void Start() {
             NextFireSlot = 0.5f;
         }
 
-        private void Update()
-        {
+        private void Update() {
             if (!_canShoot) return;
+
+            if (AimTarget == null) {
+                GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+
+                if (targets.Length > 0) {
+                    AimTarget = targets[0];
+                }
+                else return;
+            }
 
             CurrentTime += Time.deltaTime;
 
-            Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            bool mouseFire = Input.GetButton("Fire1");
-            bool controllerFire = Input.GetAxis("RTFire1") > 0;
-
-            bool fireButtonPressed = mouseFire || controllerFire;
+            Vector3 position = AimTarget.transform.position;
+            
             bool cantFireYet = CurrentTime <= NextFireSlot;
 
-            if (!fireButtonPressed || cantFireYet) return;
+            if (cantFireYet) return;
 
             NextFireSlot = CurrentTime + FireInterval;
             Instantiate(LaserType, transform.position, transform.rotation, transform);
 
             NextFireSlot -= CurrentTime;
             CurrentTime = 0.0F;
-        }
-
-        private IEnumerator SetBack(float val, float rofTime) {
-            yield return new WaitForSeconds(rofTime);
-
-            FireInterval = val;
         }
 
         #endregion Private Methods

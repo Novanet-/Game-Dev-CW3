@@ -17,6 +17,7 @@ namespace Entity
         private PlayerMovementController _movement;
         private PlayerFireController _firing;
         private SpriteRenderer _sprite;
+        private Level.BackgroundManager _backgroundManager;
 
         #endregion Private Fields
 
@@ -42,6 +43,12 @@ namespace Entity
             StartCoroutine(Respawn());
         }
 
+        public override void Fall(GameObject self) {
+            _backgroundManager.playerFall();
+
+            base.Fall(self);
+        }
+
         internal bool isDead()
         {
             return Dead;
@@ -53,6 +60,7 @@ namespace Entity
             _coll = GetComponent<Collider2D>();
             _movement = GetComponent<PlayerMovementController>();
             _firing = GetComponent<PlayerFireController>();
+            _backgroundManager = GameObject.Find("RowManager").GetComponent<Level.BackgroundManager>();
         }
 
         #endregion Public Methods

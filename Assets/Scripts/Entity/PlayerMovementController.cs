@@ -15,6 +15,7 @@ namespace Entity
         public float TurnSpeed = 10f;
         public float JumpTime = 1f;
         public float JumpDelay = 3f;
+        public TurretController turret;
 
         #endregion Public Fields
 
@@ -27,6 +28,7 @@ namespace Entity
         private bool _isJumping = false;
         private Rigidbody2D _rigidbody;
         public ParticleSystem _particles;
+        private Powerup.Powerup.Activate _currPower;
 
         #endregion Private Fields
 
@@ -38,11 +40,24 @@ namespace Entity
         }
 
         internal void Jump() {
+            Jump(JumpTime);
+        }
+
+        internal void Jump(float time) {
             _deathControl.canFall = false;
             _isJumping = true;
             _particles.gameObject.SetActive(true);
 
-            StartCoroutine(Land());
+            StartCoroutine(Land(time));
+        }
+
+        internal void SetPowerup(Powerup.Powerup.Activate pow) {
+            _currPower = pow;
+        }
+
+        internal void DeployTurret() {
+            TurretController t = Instantiate(turret);
+            t.transform.position = transform.position;
         }
 
         #endregion Public Methods
@@ -66,6 +81,10 @@ namespace Entity
             if (!_isJumping && Input.GetKeyDown(KeyCode.Space)) {
                 Jump();
             }
+
+            if (Input.GetMouseButtonDown(1)) {
+                UsePowerup();
+            }
         }
 
         private void FixedUpdate()
@@ -73,6 +92,13 @@ namespace Entity
             Controls();
 
             HelperFunctions.ClampTransformToCameraView(transform);
+        }
+
+        private void UsePowerup() {
+            if (_currPower != null) {
+                _currPower();
+                _currPower = null;
+            }
         }
 
         private void Start()
@@ -83,8 +109,8 @@ namespace Entity
             _particles.gameObject.SetActive(false);
         }
 
-        private IEnumerator Land() {
-            yield return new WaitForSeconds(JumpTime);
+        private IEnumerator Land(float time) {
+            yield return new WaitForSeconds(time);
 
             _deathControl.canFall = true;
             _particles.gameObject.SetActive(false);

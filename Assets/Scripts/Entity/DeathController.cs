@@ -48,6 +48,10 @@ namespace Entity
             }
         }
 
+        public virtual void Fall(GameObject self) {
+            Die(self);
+        }
+
         public void OnTriggerEnter2D(Collider2D coll)
         {
             if (Dead) return;
@@ -75,7 +79,7 @@ namespace Entity
             }
             else if (canFall && coll.tag == "Hole")
             {
-                Die(GameObject.Find("Player"));
+                Fall(GameObject.Find("Player"));
             }
             else if (isPlayer && coll.tag == "Enemy")
             {
