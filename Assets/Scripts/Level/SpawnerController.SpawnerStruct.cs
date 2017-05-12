@@ -15,6 +15,7 @@ namespace Level
 
             [SerializeField] public string SpawnerName;
             [SerializeField] public GameObject SpawnerObject;
+            [SerializeField] public float SpawnerDifficultyThreshold;
             [SerializeField] public Vector3 SpawnerPositionOverride;
 
             #endregion Public Fields

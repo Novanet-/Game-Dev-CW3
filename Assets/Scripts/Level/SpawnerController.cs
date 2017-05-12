@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using com.kleberswf.lib.core;
+using Misc;
 using UnityEngine;
 
 namespace Level
@@ -15,6 +17,7 @@ namespace Level
         #region Private Fields
 
         private DifficultyController _difficultyController;
+        private int _previousDifficulty = -1;
         [SerializeField] private List<SpawnerStruct> _spawnerList;
 
         #endregion Private Fields
@@ -40,6 +43,22 @@ namespace Level
         // Update is called once per frame
         private void Update()
         {
+            var currentDifficulty = Convert.ToInt32(Mathf.Floor(_difficultyController.DifficultyLevel));
+            if (currentDifficulty == _previousDifficulty) return;
+
+            IEnumerable<SpawnerStruct> spawnersToBeEnabled;
+            IEnumerable<SpawnerStruct> spawnersToBeDisabled;
+            _spawnerList.Fork(spawner => spawner.SpawnerDifficultyThreshold <= currentDifficulty, out spawnersToBeEnabled, out spawnersToBeDisabled );
+            foreach (SpawnerStruct spawnerStruct in spawnersToBeEnabled)
+            {
+                spawnerStruct.SpawnerObject.GetComponent<EnemySpawner>().enabled = true;
+            }
+            foreach (SpawnerStruct spawnerStruct in spawnersToBeDisabled)
+            {
+                spawnerStruct.SpawnerObject.GetComponent<EnemySpawner>().enabled = false;
+            }
+
+            _previousDifficulty = Convert.ToInt32(Mathf.Floor(currentDifficulty));
         }
 
         #endregion Private Methods

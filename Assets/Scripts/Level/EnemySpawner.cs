@@ -9,6 +9,7 @@ namespace Level
 
         public EnemyController enemy;
         public float spawnDelay = 1;
+        public float spawnChance = 1.0f;
 
         #endregion Public Fields
 
@@ -31,7 +32,11 @@ namespace Level
         {
             if (_time < Time.time)
             {
-                Instantiate(enemy, transform.position, transform.rotation, transform);
+                float rand = Random.value;
+                if (rand < spawnChance)
+                {
+                    Instantiate(enemy, transform.position, transform.rotation, transform);
+                }
                 _time = Time.time + spawnDelay;
             }
         }
