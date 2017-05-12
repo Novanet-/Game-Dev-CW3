@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -26,6 +28,17 @@ namespace Misc
             if (val.CompareTo(min) < 0) return min;
             else if (val.CompareTo(max) > 0) return max;
             else return val;
+        }
+
+        public static void Fork<T>(
+            this IEnumerable<T> source,
+            Func<T, bool> pred,
+            out IEnumerable<T> matches,
+            out IEnumerable<T> nonMatches)
+        {
+            var groupedByMatching = source.ToLookup(pred);
+            matches = groupedByMatching[true];
+            nonMatches = groupedByMatching[false];
         }
 
         #endregion Public Methods
