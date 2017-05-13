@@ -200,6 +200,7 @@ MonoBehaviour:
   FireInterval: 1
   LaserSpeed: 7.5
   LaserType: {fileID: 1856975527288012, guid: 380784841a6a85341a9c7cfc1c786a5d, type: 2}
+  _fireSound: {fileID: 8300000, guid: f972bdd9ab0688a4a9762e52c457b0b8, type: 3}
 --- !u!212 &212161308227922470
 SpriteRenderer:
   m_ObjectHideFlags: 1

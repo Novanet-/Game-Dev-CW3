@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sound;
 using UnityEngine;
 
-namespace Entity {
-    public class TurretFireController : MonoBehaviour {
+namespace Entity
+{
+    public class TurretFireController : MonoBehaviour
+    {
         #region Public Fields
 
         public GameObject AimTarget;
@@ -14,35 +15,56 @@ namespace Entity {
 
         #endregion Public Fields
 
+        #region Private Fields
+
+        private bool _canShoot = true;
+        [SerializeField] private AudioClip _fireSound;
+        private SoundController _soundController;
+
+        #endregion Private Fields
+
         #region Private Properties
 
         private float CurrentTime { get; set; }
         private float NextFireSlot { get; set; }
-        private bool _canShoot = true;
 
         #endregion Private Properties
 
         #region Public Methods
 
-        public void SetCanShoot(bool b) {
+        public void SetCanShoot(bool b)
+        {
             _canShoot = b;
         }
 
         #endregion Public Methods
 
+        #region Protected Methods
+
+        protected void PlayFireSound()
+        {
+            _soundController.PlaySingle(_fireSound, 0.05f);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
 
-        private void Start() {
+        private void Start()
+        {
             NextFireSlot = 0.5f;
         }
 
-        private void Update() {
+        private void Update()
+        {
             if (!_canShoot) return;
 
-            if (AimTarget == null) {
+            if (AimTarget == null)
+            {
                 GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
 
-                if (targets.Length > 0) {
+                if (targets.Length > 0)
+                {
                     AimTarget = targets[0];
                 }
                 else return;
@@ -51,10 +73,12 @@ namespace Entity {
             CurrentTime += Time.deltaTime;
 
             Vector3 position = AimTarget.transform.position;
-            
+
             bool cantFireYet = CurrentTime <= NextFireSlot;
 
             if (cantFireYet) return;
+
+            PlayFireSound();
 
             NextFireSlot = CurrentTime + FireInterval;
             Instantiate(LaserType, transform.position, transform.rotation, transform);

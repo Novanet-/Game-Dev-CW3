@@ -183,6 +183,7 @@ MonoBehaviour:
   FireInterval: 0.1
   LaserSpeed: 5
   LaserType: {fileID: 1531058454758716, guid: 9959c21bb9eeac94c98356b3abc44022, type: 2}
+  _fireSound: {fileID: 8300000, guid: 3e0345abb9ae01e4fa3394cb8e3dec78, type: 3}
 --- !u!114 &114531127625870712
 MonoBehaviour:
   m_ObjectHideFlags: 1
