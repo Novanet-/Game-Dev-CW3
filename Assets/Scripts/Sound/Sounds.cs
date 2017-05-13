@@ -7,9 +7,9 @@ namespace Sound
     {
         #region Public Fields
 
-        [SerializeField] public AudioClip ExampleSoundClip;
-        [SerializeField] public AudioClip FollowingDrumHitClip;
-        [SerializeField] public AudioClip GoatSwitchSwooshClip;
+        [SerializeField] public AudioClip PlayerDeath;
+        [SerializeField] public AudioClip PlayerFall;
+        [SerializeField] public AudioClip PickUpPowerup;
 
         #endregion Public Fields
     }

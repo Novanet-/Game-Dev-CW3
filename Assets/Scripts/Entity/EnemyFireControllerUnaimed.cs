@@ -17,7 +17,7 @@
             NextFireSlot = CurrentTime + FireInterval;
 
             if (AimTarget != null && _spriteRenderer.isVisible)
-            {                SoundController.PlayFireSound(this, 0.005f);
+            {                SoundController.PlayFireSound(this, 0.15f);
                 GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
 
                 if (transform.rotation.eulerAngles.y > 90)

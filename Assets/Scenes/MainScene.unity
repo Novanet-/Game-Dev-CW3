@@ -792,11 +792,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ab67876259bef3d49b69b1545f188003, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5466,9 +5466,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persistent: 0
-  ExampleSoundClip: {fileID: 0}
-  FollowingDrumHitClip: {fileID: 0}
-  GoatSwitchSwooshClip: {fileID: 0}
+  PlayerDeath: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  PlayerFall: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
+  PickUpPowerup: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
 --- !u!114 &2039860840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5481,7 +5481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persistent: 0
-  ExampleMusicClip: {fileID: 0}
+  ExampleMusicClip: {fileID: 8300000, guid: d7125a7b32fe69645a09e0f91a0eef3a, type: 3}
 --- !u!114 &2039860841
 MonoBehaviour:
   m_ObjectHideFlags: 0

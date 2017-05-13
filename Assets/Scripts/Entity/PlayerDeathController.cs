@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Sound;
 using UnityEngine;
 
 namespace Entity
@@ -29,6 +30,7 @@ namespace Entity
 
             if (self.tag != "Bullet")
             {
+                SoundController.Instance.PlaySingle(Sounds.Instance.PlayerDeath, 0.5f);
                 Animator explosion = Instantiate(deathAnim, self.transform);
                 explosion.transform.localPosition = new Vector3(0, 0, 0);
 
@@ -43,8 +45,10 @@ namespace Entity
             StartCoroutine(Respawn());
         }
 
-        public override void Fall(GameObject self) {
+        public override void Fall(GameObject self)
+        {
             _backgroundManager.playerFall();
+            SoundController.Instance.PlaySingle(Sounds.Instance.PlayerFall, 0.15f);
 
             base.Fall(self);
         }
@@ -77,11 +81,12 @@ namespace Entity
             _movement.SetCanMove(true);
             _firing.SetCanShoot(true);
 
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 6; i++)
+            {
                 _sprite.enabled = true;
                 yield return new WaitForSeconds(0.1f);
                 _sprite.enabled = false;
-                yield return new WaitForSeconds(0.1f);                
+                yield return new WaitForSeconds(0.1f);
             }
 
             _sprite.enabled = true;

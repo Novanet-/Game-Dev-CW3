@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sound;
 using UnityEngine;
 
 namespace Powerup {
@@ -17,6 +18,8 @@ namespace Powerup {
         public void OnTriggerEnter2D(Collider2D coll) {
             if (coll.tag == "Player") {
                 _player.SetPowerup(Use);
+
+                SoundController.Instance.PlaySingle(Sounds.Instance.PickUpPowerup, 0.9f);
 
                 Destroy(this.gameObject);
             }
@@ -45,7 +48,7 @@ namespace Powerup {
             if (t < Time.time)
                 _started = true;
         }
-        
+
         #endregion Private Methods
     }
 }
