@@ -393,6 +393,7 @@ MonoBehaviour:
   FireInterval: 2.5
   LaserSpeed: 3
   LaserType: {fileID: 1027264241853726, guid: 2954e2eb75b4bc84f9cc4a1aa59b6268, type: 2}
+  _fireSound: {fileID: 8300000, guid: e830629169af4ad498b9e6378b7be29b, type: 3}
 --- !u!114 &114865141871552010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,6 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114192012400349348, guid: 0db988cf4fdd7e444913904d5ec08809, type: 2}
   spawnDelay: 1
+  spawnChance: 1
 --- !u!114 &114945304925170964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -435,6 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114073879019955440, guid: afd1ac34421b3724aa1c3371ceda0b94, type: 2}
   spawnDelay: 2.5
+  spawnChance: 1
 --- !u!114 &114964679436887682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,6 +452,7 @@ MonoBehaviour:
   FireInterval: 1.5
   LaserSpeed: 2
   LaserType: {fileID: 1923763534585380, guid: 4a5ea240fd3ee164ab7045e6947ddb66, type: 2}
+  _fireSound: {fileID: 8300000, guid: 2eaf105f0eff8c749a7f42c6143a1ef3, type: 3}
 --- !u!212 &212611802824330872
 SpriteRenderer:
   m_ObjectHideFlags: 1

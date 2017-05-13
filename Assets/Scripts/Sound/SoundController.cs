@@ -1,4 +1,5 @@
 ﻿using com.kleberswf.lib.core;
+using Entity;
 using UnityEngine;
 
 namespace Sound
@@ -29,18 +30,31 @@ namespace Sound
             _soundSource.PlayOneShot(clip, volumeScale);
         }
 
-        //RandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
-        public void RandomizeSfx(params AudioClip[] clips)
+        //PlayRandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
+        public void PlayRandomizeSfx(float volume, params AudioClip[] clips)
         {
             int randomIndex = Random.Range(0, clips.Length);
-            float randomPitch = Random.Range(_lowPitchRange, _highPitchRange);
-
-            _soundSource.pitch = randomPitch;
+            _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
             _soundSource.clip = clips[randomIndex];
+            _soundSource.volume = volume;
 
             _soundSource.Play();
         }
 
         #endregion Public Methods
+
+        public void PlayFireSound(EnemyFireController enemyFireController)
+        {
+            _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
+            PlaySingle(enemyFireController.FireSound, 0.05f);
+//            PlayRandomizeSfx(0.05f, enemyFireController.FireSound);
+        }
+
+        public void PlayFireSound(EnemyFireController enemyFireController, float volumeOverride)
+        {
+            _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
+            PlaySingle(enemyFireController.FireSound, volumeOverride);
+//            PlayRandomizeSfx(volumeOverride, enemyFireController.FireSound);
+        }
     }
 }

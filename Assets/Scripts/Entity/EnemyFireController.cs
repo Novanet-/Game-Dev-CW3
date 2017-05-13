@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sound;
+using UnityEngine;
 
 namespace Entity
 {
@@ -25,10 +26,27 @@ namespace Entity
 
         #endregion Protected Fields
 
+        #region Private Fields
+
+        [SerializeField] private AudioClip _fireSound;
+
+        #endregion Private Fields
+
+        #region Public Properties
+
+        public AudioClip FireSound
+        {
+            get { return _fireSound; }
+            set { _fireSound = value; }
+        }
+
+        #endregion Public Properties
+
         #region Protected Properties
 
         protected float CurrentTime { get; set; }
         protected float NextFireSlot { get; set; }
+        protected SoundController SoundController { get; private set; }
 
         #endregion Protected Properties
 
@@ -40,6 +58,7 @@ namespace Entity
             LaserContainer = GameObject.Find("LaserContainer");
             AimTarget = GameObject.Find("Player");
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            SoundController = SoundController.Instance;
         }
 
         private void Update()
@@ -54,6 +73,7 @@ namespace Entity
 
             if (AimTarget != null && _spriteRenderer.isVisible)
             {
+                SoundController.PlayFireSound(this);
                 GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
 
                 if (transform.rotation.eulerAngles.y > 90)
