@@ -1,5 +1,6 @@
 ﻿using System;
 using com.kleberswf.lib.core;
+using Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,9 +9,10 @@ namespace UI
 {
     public class StartUIController : Singleton<StartUIController>
     {
-        public void PlayGame()
+        public void PlayGame(bool isTimeAttack)
         {
             Debug.Log("Play");
+            StateProperties.Instance.isTimeAttack = isTimeAttack;
             SceneManager.LoadSceneAsync("MainScene");
         }
 
