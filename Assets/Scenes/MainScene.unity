@@ -792,11 +792,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ab67876259bef3d49b69b1545f188003, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4886,12 +4886,12 @@ Prefab:
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 404.5
+      value: 369
       objectReference: {fileID: 0}
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 227.5
+      value: 207.5
       objectReference: {fileID: 0}
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -4901,7 +4901,7 @@ Prefab:
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 1079.8517
+      value: 1079.6748
       objectReference: {fileID: 0}
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -5416,17 +5416,17 @@ Prefab:
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.42135417
+      value: 0.384375
       objectReference: {fileID: 0}
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.42135417
+      value: 0.384375
       objectReference: {fileID: 0}
     - target: {fileID: 224122142952314018, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.42135417
+      value: 0.384375
       objectReference: {fileID: 0}
     - target: {fileID: 114522902307887372, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -5466,9 +5466,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persistent: 0
-  ExampleSoundClip: {fileID: 0}
-  FollowingDrumHitClip: {fileID: 0}
-  GoatSwitchSwooshClip: {fileID: 0}
+  PlayerDeath: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  PlayerFall: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
+  PickUpPowerup: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
+  UIHover: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
 --- !u!114 &2039860840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5481,7 +5482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persistent: 0
-  ExampleMusicClip: {fileID: 0}
+  ExampleMusicClip: {fileID: 8300000, guid: ab67876259bef3d49b69b1545f188003, type: 3}
 --- !u!114 &2039860841
 MonoBehaviour:
   m_ObjectHideFlags: 0

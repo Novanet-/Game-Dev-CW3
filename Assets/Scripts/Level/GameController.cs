@@ -1,4 +1,6 @@
 ﻿using com.kleberswf.lib.core;
+using Misc;
+using Sound;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,7 +14,9 @@ namespace Level
         private float _lastTimeRecorded;
         private ScoreController _scoreController;
         private UIController _uiController;
+        private StateProperties _stateProperties;
         private Scene _currentScene;
+        [SerializeField] private float _timeAttackLimit;
 
         #endregion Private Fields
 
@@ -34,7 +38,10 @@ namespace Level
 
             _scoreController = ScoreController.Instance;
             _uiController = UIController.Instance;
+            _stateProperties = StateProperties.Instance;
             GameTimeElapsed = 0;
+
+            SoundController.Instance.PlayMusic(Music.Instance.ExampleMusicClip);
         }
 
         private void TogglePauseGame()
@@ -55,7 +62,15 @@ namespace Level
 //                Debug.Log("Press");
             }
             GameTimeElapsed = Time.time;
+            bool timeAttackElapsed = GameTimeElapsed > _timeAttackLimit * 60;
+            if (_stateProperties.isTimeAttack && timeAttackElapsed) EndGame();
             if (Mathf.Floor(GameTimeElapsed) > Mathf.Floor(_scoreController.TimeSurvived)) _scoreController.UpdateTimeSurvived(GameTimeElapsed);
+        }
+
+        private void EndGame()
+        {
+            Debug.Log("Game ended lol");
+            Application.Quit();
         }
 
         #endregion Private Methods
