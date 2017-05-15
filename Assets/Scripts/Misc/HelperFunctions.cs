@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Misc
 {
@@ -39,6 +40,16 @@ namespace Misc
             var groupedByMatching = source.ToLookup(pred);
             matches = groupedByMatching[true];
             nonMatches = groupedByMatching[false];
+        }
+
+        public static Vector3 RandomPointInBox(Vector3 center, Vector3 size)
+        {
+
+            return center + new Vector3(
+                       (Random.value - 0.5f) * size.x,
+                       (Random.value - 0.5f) * size.y,
+                       (Random.value - 0.5f) * size.z
+                   );
         }
 
         #endregion Public Methods

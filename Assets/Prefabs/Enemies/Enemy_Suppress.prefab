@@ -195,8 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80eefe210cf3e4419d8f873a5289dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 1
   ScoreValue: 30
+  _leftBalcony: {fileID: 1699431708784210, guid: 338853db18028984294033b90ad81ae9,
+    type: 2}
+  _rightBalcony: {fileID: 1781116936727666, guid: e44eabb6d4c4d6843bf72d05cbc47242,
+    type: 2}
 --- !u!212 &212336416361532554
 SpriteRenderer:
   m_ObjectHideFlags: 1
