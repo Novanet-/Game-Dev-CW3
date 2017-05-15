@@ -43,7 +43,7 @@ namespace Entity
 
         protected void PlayFireSound()
         {
-            _soundController.PlaySingle(_fireSound, 0.05f);
+            _soundController.PlaySingle(_fireSound, 0.5f);
         }
 
         #endregion Protected Methods

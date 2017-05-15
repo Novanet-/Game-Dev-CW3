@@ -21,6 +21,7 @@ namespace Sound
         public void PlayMusic(AudioClip clip)
         {
             _musicSource.clip = clip;
+            _musicSource.loop = true;
             _musicSource.Play();
         }
 
@@ -55,6 +56,11 @@ namespace Sound
             _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
             PlaySingle(enemyFireController.FireSound, volumeOverride);
 //            PlayRandomizeSfx(volumeOverride, enemyFireController.FireSound);
+        }
+
+        public void PlayUIHoverSound()
+        {
+            PlaySingle(Sounds.Instance.UIHover, 0.8f);
         }
     }
 }

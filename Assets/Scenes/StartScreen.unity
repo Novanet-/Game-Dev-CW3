@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 77403005}
   - component: {fileID: 77403004}
   - component: {fileID: 77403003}
+  - component: {fileID: 77403006}
   m_Layer: 5
   m_Name: btnQuitGame
   m_TagString: Untagged
@@ -214,6 +215,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 77403001}
+--- !u!114 &77403006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 77403001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2039860841}
+          m_MethodName: PlayUIHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &514838082
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +902,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1754,7 +1785,7 @@ RectTransform:
   m_GameObject: {fileID: 1857097756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.42135417, y: 0.42135417, z: 0.42135417}
+  m_LocalScale: {x: 0.384375, y: 0.384375, z: 0.384375}
   m_Children:
   - {fileID: 724228345}
   - {fileID: 1289480988}
@@ -1770,7 +1801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 404.5, y: 227.5}
+  m_AnchoredPosition: {x: 369, y: 207.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1963621381
@@ -1920,6 +1951,7 @@ GameObject:
   - component: {fileID: 1981377303}
   - component: {fileID: 1981377302}
   - component: {fileID: 1981377301}
+  - component: {fileID: 1981377304}
   m_Layer: 5
   m_Name: btnPlayGame
   m_TagString: Untagged
@@ -2031,6 +2063,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1981377299}
+--- !u!114 &1981377304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1981377299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2039860841}
+          m_MethodName: PlayUIHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &2021137531
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,10 +2194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f214dc3bef1d6a4b8939440e71b26ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Persistent: 0
-  ExampleSoundClip: {fileID: 0}
-  FollowingDrumHitClip: {fileID: 0}
-  GoatSwitchSwooshClip: {fileID: 0}
+  Persistent: 1
+  PlayerDeath: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  PlayerFall: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
+  PickUpPowerup: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
+  UIHover: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
 --- !u!114 &2039860840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2147,8 +2210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ef6e40dbd143a9b5674b282ce0b42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Persistent: 0
-  ExampleMusicClip: {fileID: 0}
+  Persistent: 1
+  ExampleMusicClip: {fileID: 8300000, guid: ab67876259bef3d49b69b1545f188003, type: 3}
 --- !u!114 &2039860841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,7 +2223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26992c33f6106c2418e16b66e24289d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Persistent: 0
+  Persistent: 1
   _highPitchRange: 1.05
   _lowPitchRange: 0.95
   _musicSource: {fileID: 963713920}

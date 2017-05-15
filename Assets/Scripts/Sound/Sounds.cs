@@ -10,6 +10,7 @@ namespace Sound
         [SerializeField] public AudioClip PlayerDeath;
         [SerializeField] public AudioClip PlayerFall;
         [SerializeField] public AudioClip PickUpPowerup;
+        [SerializeField] public AudioClip UIHover;
 
         #endregion Public Fields
     }

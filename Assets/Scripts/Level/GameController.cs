@@ -1,4 +1,5 @@
 ﻿using com.kleberswf.lib.core;
+using Sound;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,8 @@ namespace Level
             _scoreController = ScoreController.Instance;
             _uiController = UIController.Instance;
             GameTimeElapsed = 0;
+
+            SoundController.Instance.PlayMusic(Music.Instance.ExampleMusicClip);
         }
 
         private void TogglePauseGame()
