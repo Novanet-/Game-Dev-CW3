@@ -53,9 +53,10 @@ namespace Entity
             float rightDistance = Vector3.Distance(transform.position, _rightBalconyTransform.position);
             _targetBalcony = leftDistance < rightDistance ? _leftBalconyTransform : _rightBalconyTransform;
 
-            var meshFilter = _targetBalcony.GetComponent<MeshFilter>();
-            Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
-            _targetPosition = GetARandomTreePos(mesh, gameObject.transform);
+//            var mesh = _targetBalcony.GetComponent<MeshFilter>().mesh;
+//            _targetPosition = GetARandomTreePos(mesh, _targetBalcony.transform);
+            var collider = _targetBalcony.GetComponent<BoxCollider>();
+            _targetPosition = collider.GetPointInCollider();
         }
 
         // Update is called once per frame
@@ -63,12 +64,12 @@ namespace Entity
         {
             if (!isDeployed)
             {
-                Debug.Log("MovingShip");
-                Debug.Log(string.Format("Target position  = {0}", _targetPosition));
+//                Debug.Log("MovingShip");
+//                Debug.Log(string.Format("Target position  = {0}", _targetPosition));
 
                 ShipMovement();
-                float distanceTillDeploy = (_targetPosition - transform.position).sqrMagnitude;
-                if (distanceTillDeploy < 1)
+                float distanceTillDeploy = (_targetPosition - transform.position).magnitude;
+                if (distanceTillDeploy < 0.1)
                 {
                     isDeployed = true;
                     Debug.Log("Ship deployed");

@@ -12,7 +12,9 @@
 
         #region Private Methods
 
-        private void Start()        {
+        private void Start()
+        {
+            base.Start();
             _enemyController = GetComponent<EnemyControllerSuppress>();
         }
 
@@ -20,6 +22,8 @@
         {
             if (_enemyController.isDeployed)
             {
+//                Debug.Log("Fire Ship deployed");
+
                 CurrentTime += Time.deltaTime;
 
                 Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -28,9 +32,9 @@
 
                 NextFireSlot = CurrentTime + FireInterval;
 
-                if (AimTarget != null && _spriteRenderer.isVisible)
+//                if (AimTarget != null && _spriteRenderer.isVisible)
                 {
-                    SoundController.PlayFireSound(this, 0.15f);
+                    Sound.SoundController.Instance.PlayFireSound(this, 0.15f);
                     GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
 
                     if (transform.rotation.eulerAngles.y > 90)
