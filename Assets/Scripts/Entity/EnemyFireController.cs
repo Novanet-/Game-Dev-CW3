@@ -52,7 +52,7 @@ namespace Entity
 
         #region Private Methods
 
-        private void Start()
+        protected void Start()
         {
             NextFireSlot = 0.5f;
             LaserContainer = GameObject.Find("LaserContainer");

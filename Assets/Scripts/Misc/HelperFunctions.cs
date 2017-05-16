@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Misc
 {
@@ -40,6 +41,31 @@ namespace Misc
             matches = groupedByMatching[true];
             nonMatches = groupedByMatching[false];
         }
+
+        public static Vector3 RandomPointInBox(Vector3 center, Vector3 size)
+        {
+
+            return center + new Vector3(
+                       (Random.value - 0.5f) * size.x,
+                       (Random.value - 0.5f) * size.y,
+                       (Random.value - 0.5f) * size.z
+                   );
+        }
+
+        /// <summary>
+        /// Returns a random world point inside the given BoxCollider
+        /// </summary>
+        public static Vector3 GetPointInCollider(this BoxCollider area)
+        {
+            var bounds = area.bounds;
+            var center = bounds.center;
+
+            var x = UnityEngine.Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+            var y = UnityEngine.Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+
+            return new Vector3(x, y, 0);
+        }
+
 
         #endregion Public Methods
     }

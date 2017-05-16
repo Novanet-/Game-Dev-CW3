@@ -4,30 +4,48 @@
 {
     public class EnemyFireControllerUnaimed : EnemyFireController
     {
+        #region Private Fields
+
+        private EnemyControllerSuppress _enemyController;
+
+        #endregion Private Fields
+
         #region Private Methods
+
+        private void Start()
+        {
+            base.Start();
+            _enemyController = GetComponent<EnemyControllerSuppress>();
+        }
 
         private void Update()
         {
-            CurrentTime += Time.deltaTime;
+            if (_enemyController.isDeployed)
+            {
+//                Debug.Log("Fire Ship deployed");
 
-            Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                CurrentTime += Time.deltaTime;
 
-            if (CurrentTime <= NextFireSlot) return;
+                Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            NextFireSlot = CurrentTime + FireInterval;
+                if (CurrentTime <= NextFireSlot) return;
 
-            if (AimTarget != null && _spriteRenderer.isVisible)
-            {                SoundController.PlayFireSound(this, 0.15f);
-                GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
+                NextFireSlot = CurrentTime + FireInterval;
 
-                if (transform.rotation.eulerAngles.y > 90)
+//                if (AimTarget != null && _spriteRenderer.isVisible)
                 {
-                    bullet.transform.Rotate(new Vector3(0, 180, 0));
-                }
-            }
+                    Sound.SoundController.Instance.PlayFireSound(this, 0.15f);
+                    GameObject bullet = Instantiate(LaserType, transform.position, transform.rotation, transform);
 
-            NextFireSlot -= CurrentTime;
-            CurrentTime = 0.0F;
+                    if (transform.rotation.eulerAngles.y > 90)
+                    {
+                        bullet.transform.Rotate(new Vector3(0, 180, 0));
+                    }
+                }
+
+                NextFireSlot -= CurrentTime;
+                CurrentTime = 0.0F;
+            }
         }
 
         #endregion Private Methods

@@ -66,7 +66,7 @@ namespace Level
         // Update is called once per frame
         private void Update()
         {
-//            DifficultyLevel = 10;
+            DifficultyLevel = 10;
             _timer += Time.deltaTime;
 
             if (_timer < _interval) return;
