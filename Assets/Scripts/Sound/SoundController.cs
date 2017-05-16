@@ -20,15 +20,18 @@ namespace Sound
         //Used to play single sound clips.
         public void PlayMusic(AudioClip clip)
         {
-            _musicSource.clip = clip;
-            _musicSource.loop = true;
-            _musicSource.Play();
+            if (_musicSource != null)
+            {
+                _musicSource.clip = clip;
+                _musicSource.loop = true;
+                _musicSource.Play();
+            }
         }
 
         //Used to play single sound clips.
         public void PlaySingle(AudioClip clip, float volumeScale)
         {
-            _soundSource.PlayOneShot(clip, volumeScale / 10f);
+            if (_soundSource != null) _soundSource.PlayOneShot(clip, volumeScale / 10f);
         }
 
         //PlayRandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
@@ -46,14 +49,14 @@ namespace Sound
 
         public void PlayFireSound(EnemyFireController enemyFireController)
         {
-            _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
+            if (_soundSource != null) _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
             PlaySingle(enemyFireController.FireSound, 0.5f);
 //            PlayRandomizeSfx(0.05f, enemyFireController.FireSound);
         }
 
         public void PlayFireSound(EnemyFireController enemyFireController, float volumeOverride)
         {
-            _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
+            if (_soundSource != null) _soundSource.pitch = Random.Range(_lowPitchRange, _highPitchRange);
             PlaySingle(enemyFireController.FireSound, volumeOverride);
 //            PlayRandomizeSfx(volumeOverride, enemyFireController.FireSound);
         }
