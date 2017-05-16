@@ -240,6 +240,10 @@ MonoBehaviour:
   MoveSpeed: 10
   RotationOffset: -90
   TurnSpeed: 10
+  JumpTime: 1
+  JumpDelay: 3
+  turret: {fileID: 0}
+  _particles: {fileID: 0}
 --- !u!114 &114335430514377540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,10 +256,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AimTarget: {fileID: 0}
-  FireInterval: 0.1
+  FireInterval: 1
   LaserContainer: {fileID: 0}
-  LaserSpeed: 10
+  LaserSpeed: 12
   LaserType: {fileID: 1761153014128660, guid: 149bdc52858c8cc42b37e04f969f3c0f, type: 2}
+  _fireSound: {fileID: 0}
 --- !u!212 &212814598413441812
 SpriteRenderer:
   m_ObjectHideFlags: 1

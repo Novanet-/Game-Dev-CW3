@@ -58,6 +58,7 @@ MonoBehaviour:
   LaserContainer: {fileID: 1429861567072906}
   LaserSpeed: 7.5
   LaserType: {fileID: 1690347054372752, guid: e088cfdaac5a2f1418d0306e72d7c9ae, type: 2}
+  _fireSound: {fileID: 8300000, guid: fad9a0cf573d9d2498a6af1ec0f4fe10, type: 3}
 --- !u!114 &114549159190219650
 MonoBehaviour:
   m_ObjectHideFlags: 1

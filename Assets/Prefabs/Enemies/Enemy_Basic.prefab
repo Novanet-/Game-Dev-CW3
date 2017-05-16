@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972ba6314d12ede449e931a6b113fe84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 1.25
   ScoreValue: 20
 --- !u!114 &114374179676280662
 MonoBehaviour:
@@ -185,7 +185,7 @@ MonoBehaviour:
   deathAnim: {fileID: 95416830839964734, guid: bd9fc70ba10bcc142b1dc6434954f943, type: 2}
   explosionTime: 0.5
   isPlayer: 0
-  health: 1
+  healthStart: 1
 --- !u!114 &114726791076631338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ca083d68ca16543bb112cb17772f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireInterval: 1
-  LaserSpeed: 7.5
+  FireInterval: 1.5
+  LaserSpeed: 2
   LaserType: {fileID: 1856975527288012, guid: 380784841a6a85341a9c7cfc1c786a5d, type: 2}
   _fireSound: {fileID: 8300000, guid: f972bdd9ab0688a4a9762e52c457b0b8, type: 3}
 --- !u!212 &212161308227922470

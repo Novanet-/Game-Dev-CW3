@@ -39,6 +39,7 @@ namespace UI
         public Image _iconRof;
         public Image _iconTurret;
         private Stack<GameObject> _powerupIcons;
+        [SerializeField] private GameObject _powerupImage;
 
         #endregion Private Fields
 
@@ -116,16 +117,17 @@ namespace UI
         public void AddPowerup(Image powerupIcon)
         {
             Debug.Log("Add powerup");
-            var powerupIconObject = Instantiate(powerupIcon, _powerupPanel.transform);
-//            Invoke("RemovePowerup", displayTime);
-            _powerupIcons.Push(powerupIconObject.gameObject);
-//            StartCoroutine(RemovePowerup(powerupIconObject.gameObject, displayTime));
+            var image = _powerupImage.GetComponent<Image>();
+            image.enabled = true;
+            image.sprite = powerupIcon.sprite;
         }
 
         public void RemovePowerup()
         {
             Debug.Log("Remove powerup");
-            if (_powerupIcons.Any()) Destroy(_powerupIcons.Pop());
+            var image = _powerupImage.GetComponent<Image>();
+            image.enabled = false;
+            image.sprite = null;
         }
 
 //            public IEnumerator RemovePowerup(GameObject powerupIconObject, float delayTime)
