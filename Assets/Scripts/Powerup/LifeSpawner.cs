@@ -14,6 +14,7 @@ namespace Powerup {
         #region Private Fields
 
         private float time;
+        private bool _isTimeAttack;
 
         #endregion Private Fields
 
@@ -22,11 +23,12 @@ namespace Powerup {
         // Use this for initialization
         void Start() {
             time = Time.time + timeDelay + 5;
+            _isTimeAttack = GameObject.Find("StateProperties").GetComponent<Misc.StateProperties>().isTimeAttack;
         }
 
         // Update is called once per frame
         void Update() {
-            if (time < Time.time) {
+            if (!_isTimeAttack && time < Time.time) {
                 time += timeDelay;
 
                 Instantiate(powerup);
