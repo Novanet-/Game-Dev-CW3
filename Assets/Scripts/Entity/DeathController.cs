@@ -11,13 +11,14 @@ namespace Entity
         public Animator deathAnim;
         public float explosionTime = 0.5f;
         public bool isPlayer;
-        public int health = 1;
+        public int healthStart = 1;
 
         #endregion Public Fields
 
         #region Protected Fields
 
         protected bool Dead;
+        protected int health;
 
         #endregion Protected Fields
 
@@ -60,18 +61,15 @@ namespace Entity
             {
                 if (coll.GetComponent<EnemyLaserController>() && isPlayer || coll.GetComponent<LaserController>() && !isPlayer)
                 {
-                    if (isPlayer)
-                        Die();
-                    else
-                    {
-                        health--;
-
-                        if (health <= 0)
-                        {
-                            Die(transform.parent.gameObject);
+                    if (isPlayer) {
+                        Hit();
+                    }
+                    else {
+                        if (health <= 1) {
                             var enemyController = GetComponentInParent<EnemyController>();
                             _scoreController.AddKilledEnemy(enemyController);
                         }
+                        Hit();
                     }
 
                     Die(coll.gameObject);
@@ -85,6 +83,14 @@ namespace Entity
             {
                 Die(GameObject.Find("Player"));
                 Die(coll.GetComponentInParent<EnemyController>().gameObject);
+            }
+        }
+
+        public virtual void Hit() {
+            health--;
+
+            if (health <= 0) {
+                Die();
             }
         }
 
@@ -116,6 +122,7 @@ namespace Entity
         private void Start()
         {
             _scoreController = ScoreController.Instance;
+            health = healthStart;
         }
 
         #endregion Private Methods

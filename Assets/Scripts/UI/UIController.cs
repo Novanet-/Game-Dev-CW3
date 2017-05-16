@@ -30,6 +30,9 @@ namespace UI
         private Text _txtDifficulty;
         [SerializeField] private GameObject _txtDifficultyObject;
 
+        private Text _txtLives;
+        [SerializeField] private GameObject _txtLivesObject;
+
         [SerializeField] private GameObject _powerupPanel;
 
         public Image _iconFlight;
@@ -70,6 +73,11 @@ namespace UI
             _txtDifficulty.text = Convert.ToString(difficulty);
         }
 
+        internal void UpdateLives(int lives) {
+            print(lives);
+            _txtLives.text = Convert.ToString(lives);
+        }
+
         #endregion Internal Methods
 
         #region Private Methods
@@ -86,6 +94,8 @@ namespace UI
             if (_txtTimeObject != null) _txtTime = _txtTimeObject.GetComponent<Text>();
             if (_txtPausedObject != null) _txtPaused = _txtPausedObject.GetComponent<Text>();
             if (_txtDifficultyObject != null) _txtDifficulty = _txtDifficultyObject.GetComponent<Text>();
+            if (_txtLivesObject != null) _txtLives = _txtLivesObject.GetComponent<Text>();
+
             _pauseImage = GetComponent<Image>();
             _powerupIcons = new Stack<GameObject>();
         }

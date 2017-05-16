@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114201525843769050}
   m_Layer: 0
   m_Name: stealthBomber
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   deathAnim: {fileID: 95416830839964734, guid: bd9fc70ba10bcc142b1dc6434954f943, type: 2}
   explosionTime: 0.5
   isPlayer: 0
-  health: 5
+  healthStart: 3
 --- !u!114 &114552003686393484
 MonoBehaviour:
   m_ObjectHideFlags: 1

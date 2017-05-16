@@ -9,6 +9,7 @@ namespace Entity
         #region Public Fields
 
         public float respawnDelay = 1;
+        public int lives = 3;
 
         #endregion Public Fields
 
@@ -19,6 +20,7 @@ namespace Entity
         private PlayerFireController _firing;
         private SpriteRenderer _sprite;
         private Level.BackgroundManager _backgroundManager;
+        private UI.UIController _uiController;
 
         #endregion Private Fields
 
@@ -26,17 +28,22 @@ namespace Entity
 
         public override void Die(GameObject self)
         {
-            Dead = true;
+            if (Dead) return;
 
-            if (self.tag != "Bullet")
-            {
-                SoundController.Instance.PlaySingle(Sounds.Instance.PlayerDeath, 0.5f);
-                Animator explosion = Instantiate(deathAnim, self.transform);
-                explosion.transform.localPosition = new Vector3(0, 0, 0);
-
-                Destroy(explosion.gameObject, explosionTime);
+            if (self.tag == "Bullet") {
+                Destroy(self.gameObject);
+                return;
             }
 
+            Dead = true;
+            RemoveLife();
+
+            SoundController.Instance.PlaySingle(Sounds.Instance.PlayerDeath, 0.5f);
+            Animator explosion = Instantiate(deathAnim, self.transform);
+            explosion.transform.localPosition = new Vector3(0, 0, 0);
+
+            Destroy(explosion.gameObject, explosionTime);
+            
             _movement.SetCanMove(false);
             _firing.SetCanShoot(false);
             _sprite.enabled = false;
@@ -65,6 +72,28 @@ namespace Entity
             _movement = GetComponent<PlayerMovementController>();
             _firing = GetComponent<PlayerFireController>();
             _backgroundManager = GameObject.Find("RowManager").GetComponent<Level.BackgroundManager>();
+            _uiController = GameObject.Find("UICanvas").GetComponent<UI.UIController>();
+
+            health = healthStart;
+
+            _uiController.UpdateLives(lives);
+        }
+
+        public override void Hit() {
+            base.Hit();
+
+        }
+
+        public void AddLife() {
+            lives++;
+
+            _uiController.UpdateLives(lives);
+        }
+
+        public void RemoveLife() {
+            lives--;
+
+            _uiController.UpdateLives(lives);
         }
 
         #endregion Public Methods
@@ -91,6 +120,8 @@ namespace Entity
 
             _sprite.enabled = true;
             _coll.enabled = true;
+
+            health = healthStart;
 
             Dead = false;
         }
