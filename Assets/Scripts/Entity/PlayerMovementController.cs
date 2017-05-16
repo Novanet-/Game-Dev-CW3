@@ -1,5 +1,7 @@
 ﻿using Misc;
 using System.Collections;
+using Powerup;
+using UI;
 using UnityEngine;
 
 namespace Entity
@@ -29,6 +31,7 @@ namespace Entity
         private Rigidbody2D _rigidbody;
         public ParticleSystem _particles;
         private Powerup.Powerup.Activate _currPower;
+        private GameObject _powerupInstance;
 
         #endregion Private Fields
 
@@ -39,11 +42,13 @@ namespace Entity
             _canMove = b;
         }
 
-        internal void Jump() {
+        internal void Jump()
+        {
             Jump(JumpTime);
         }
 
-        internal void Jump(float time) {
+        internal void Jump(float time)
+        {
             _deathControl.canFall = false;
             _isJumping = true;
             _particles.gameObject.SetActive(true);
@@ -51,11 +56,13 @@ namespace Entity
             StartCoroutine(Land(time));
         }
 
-        internal void SetPowerup(Powerup.Powerup.Activate pow) {
+        internal void SetPowerup(Powerup.Powerup.Activate pow)
+        {
             _currPower = pow;
         }
 
-        internal void DeployTurret() {
+        internal void DeployTurret()
+        {
             TurretController t = Instantiate(turret);
             t.transform.position = transform.position;
         }
@@ -78,11 +85,13 @@ namespace Entity
 
             transform.up = _rigidbody.velocity.normalized;
 
-            if (!_isJumping && Input.GetKeyDown(KeyCode.Space)) {
+            if (!_isJumping && Input.GetKeyDown(KeyCode.Space))
+            {
                 Jump();
             }
 
-            if (Input.GetMouseButtonDown(1)) {
+            if (Input.GetButtonDown("Fire2"))
+            {
                 UsePowerup();
             }
         }
@@ -94,8 +103,11 @@ namespace Entity
             HelperFunctions.ClampTransformToCameraView(transform);
         }
 
-        private void UsePowerup() {
-            if (_currPower != null) {
+        private void UsePowerup()
+        {
+            if (_currPower != null)
+            {
+                UIController.Instance.RemovePowerup();
                 _currPower();
                 _currPower = null;
             }
@@ -109,7 +121,8 @@ namespace Entity
             _particles.gameObject.SetActive(false);
         }
 
-        private IEnumerator Land(float time) {
+        private IEnumerator Land(float time)
+        {
             yield return new WaitForSeconds(time);
 
             _deathControl.canFall = true;

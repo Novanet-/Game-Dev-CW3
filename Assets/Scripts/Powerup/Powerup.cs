@@ -10,6 +10,7 @@ namespace Powerup {
         protected Entity.PlayerMovementController _player;
         protected bool _started = false;
         protected float t;
+        protected GameObject _powerupInstance;
 
         #endregion Protected Fields
 
@@ -35,7 +36,9 @@ namespace Powerup {
 
         private void OnBecameInvisible() {
             if (_started)
+            {
                 Destroy(gameObject);
+            }
         }
 
         // Use this for initialization

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using com.kleberswf.lib.core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +30,13 @@ namespace UI
         private Text _txtDifficulty;
         [SerializeField] private GameObject _txtDifficultyObject;
 
+        [SerializeField] private GameObject _powerupPanel;
+
+        public Image _iconFlight;
+        public Image _iconRof;
+        public Image _iconTurret;
+        private Stack<GameObject> _powerupIcons;
+
         #endregion Private Fields
 
         #region Internal Methods
@@ -54,6 +64,7 @@ namespace UI
             _txtTime.text = Convert.ToString(time);
             //            Debug.Log(String.Format("Time: {0}", time));
         }
+
         internal void UpdateDifficulty(int difficulty)
         {
             _txtDifficulty.text = Convert.ToString(difficulty);
@@ -70,12 +81,13 @@ namespace UI
 
             if (!currentScene.name.Equals("MainScene")) return;
 
-                if (_txtScoreObject != null) _txtScore = _txtScoreObject.GetComponent<Text>();
+            if (_txtScoreObject != null) _txtScore = _txtScoreObject.GetComponent<Text>();
             if (_txtEnemiesKilledObject != null) _txtEnemiesKilled = _txtEnemiesKilledObject.GetComponent<Text>();
             if (_txtTimeObject != null) _txtTime = _txtTimeObject.GetComponent<Text>();
             if (_txtPausedObject != null) _txtPaused = _txtPausedObject.GetComponent<Text>();
             if (_txtDifficultyObject != null) _txtDifficulty = _txtDifficultyObject.GetComponent<Text>();
             _pauseImage = GetComponent<Image>();
+            _powerupIcons = new Stack<GameObject>();
         }
 
         // Update is called once per frame
@@ -84,5 +96,27 @@ namespace UI
         }
 
         #endregion Private Methods
+
+        public void AddPowerup(Image powerupIcon)
+        {
+            Debug.Log("Add powerup");
+            var powerupIconObject = Instantiate(powerupIcon, _powerupPanel.transform);
+//            Invoke("RemovePowerup", displayTime);
+            _powerupIcons.Push(powerupIconObject.gameObject);
+//            StartCoroutine(RemovePowerup(powerupIconObject.gameObject, displayTime));
+        }
+
+        public void RemovePowerup()
+        {
+            Debug.Log("Remove powerup");
+            if (_powerupIcons.Any()) Destroy(_powerupIcons.Pop());
+        }
+
+//            public IEnumerator RemovePowerup(GameObject powerupIconObject, float delayTime)
+//        {
+//            yield return new WaitForSeconds(delayTime);
+//            Debug.Log("Remove powerup");
+//            Destroy(powerupIconObject);
+//        }
     }
 }

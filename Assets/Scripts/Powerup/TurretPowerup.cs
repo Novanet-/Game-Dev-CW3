@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 namespace Powerup {
@@ -14,6 +15,12 @@ namespace Powerup {
 
         public override void Use() {
             _player.DeployTurret();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+            UIController.Instance.AddPowerup(UIController.Instance._iconTurret);
         }
 
         #endregion Public Methods

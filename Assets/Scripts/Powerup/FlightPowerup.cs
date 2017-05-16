@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
-namespace Powerup {
-    public class FlightPowerup : Powerup {
+namespace Powerup
+{
+    public class FlightPowerup : Powerup
+    {
         #region Public Fields
 
         public float flyTime = 10;
@@ -12,10 +15,18 @@ namespace Powerup {
 
         #region Public Methods
 
-        public override void Use() {
+        public override void Use()
+        {
             Entity.PlayerMovementController player = _player.GetComponent<Entity.PlayerMovementController>();
 
             player.Jump(flyTime);
+
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+            UIController.Instance.AddPowerup(UIController.Instance._iconFlight);
         }
 
         #endregion Public Methods
