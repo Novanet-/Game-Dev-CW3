@@ -67,7 +67,7 @@ namespace Entity
 
             Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (CurrentTime <= NextFireSlot) return;
+            if (CurrentTime <= NextFireSlot || _spriteRenderer == null) return;
 
             NextFireSlot = CurrentTime + FireInterval;
 

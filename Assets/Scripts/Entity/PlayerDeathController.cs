@@ -9,6 +9,7 @@ namespace Entity
         #region Public Fields
 
         public float respawnDelay = 1;
+        public int lives = 3;
 
         #endregion Public Fields
 
@@ -19,6 +20,9 @@ namespace Entity
         private PlayerFireController _firing;
         private SpriteRenderer _sprite;
         private Level.BackgroundManager _backgroundManager;
+        private UI.UIController _uiController;
+        private GameOverUI _gameOverUI;
+        private bool _gameOver = false;
 
         #endregion Private Fields
 
@@ -26,17 +30,22 @@ namespace Entity
 
         public override void Die(GameObject self)
         {
-            Dead = true;
+            if (Dead) return;
 
-            if (self.tag != "Bullet")
-            {
-                SoundController.Instance.PlaySingle(Sounds.Instance.PlayerDeath, 0.5f);
-                Animator explosion = Instantiate(deathAnim, self.transform);
-                explosion.transform.localPosition = new Vector3(0, 0, 0);
-
-                Destroy(explosion.gameObject, explosionTime);
+            if (self.tag == "Bullet") {
+                Destroy(self.gameObject);
+                return;
             }
 
+            Dead = true;
+            RemoveLife();
+
+            SoundController.Instance.PlaySingle(Sounds.Instance.PlayerDeath, 0.5f);
+            Animator explosion = Instantiate(deathAnim, self.transform);
+            explosion.transform.localPosition = new Vector3(0, 0, 0);
+
+            Destroy(explosion.gameObject, explosionTime);
+            
             _movement.SetCanMove(false);
             _firing.SetCanShoot(false);
             _sprite.enabled = false;
@@ -65,6 +74,33 @@ namespace Entity
             _movement = GetComponent<PlayerMovementController>();
             _firing = GetComponent<PlayerFireController>();
             _backgroundManager = GameObject.Find("RowManager").GetComponent<Level.BackgroundManager>();
+            _uiController = GameObject.Find("UICanvas").GetComponent<UI.UIController>();
+            _gameOverUI = GameObject.Find("GameOverCanvas").GetComponent<GameOverUI>();
+
+            health = healthStart;
+
+            _uiController.UpdateLives(lives);
+        }
+
+        public override void Hit() {
+            base.Hit();
+
+        }
+
+        public void AddLife() {
+            lives++;
+
+            _uiController.UpdateLives(lives);
+        }
+
+        public void RemoveLife() {
+            lives--;
+
+            _uiController.UpdateLives(lives);
+
+            if (lives <= 0) {
+                GameOver();
+            }
         }
 
         #endregion Public Methods
@@ -75,24 +111,41 @@ namespace Entity
         {
             yield return new WaitForSeconds(respawnDelay);
 
-            transform.position = new Vector3(0, -6, 0);
-            transform.localPosition = new Vector3(0, -6, 0);
+            if (!_gameOver) {
 
-            _movement.SetCanMove(true);
-            _firing.SetCanShoot(true);
+                transform.position = new Vector3(0, -6, 0);
+                transform.localPosition = new Vector3(0, -6, 0);
 
-            for (int i = 0; i < 6; i++)
-            {
+                _movement.SetCanMove(true);
+                _firing.SetCanShoot(true);
+
+                for (int i = 0; i < 6; i++) {
+                    _sprite.enabled = true;
+                    yield return new WaitForSeconds(0.1f);
+                    _sprite.enabled = false;
+                    yield return new WaitForSeconds(0.1f);
+                }
+
                 _sprite.enabled = true;
-                yield return new WaitForSeconds(0.1f);
-                _sprite.enabled = false;
-                yield return new WaitForSeconds(0.1f);
+                _coll.enabled = true;
+
+                health = healthStart;
+
+                Dead = false;
             }
+        }
 
-            _sprite.enabled = true;
-            _coll.enabled = true;
+        private void GameOver() {
+            _gameOver = true;
 
-            Dead = false;
+            _movement.SetCanMove(false);
+            _firing.SetCanShoot(false);
+            _sprite.enabled = false;
+            _coll.enabled = false;
+
+            Dead = true;
+
+            _gameOverUI.Show();
         }
 
         #endregion Private Methods
