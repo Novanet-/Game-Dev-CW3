@@ -52,34 +52,36 @@ namespace UI
 
         internal void UpdateKills(int kills)
         {
-            _txtEnemiesKilled.text = Convert.ToString(kills);
+            if (_txtEnemiesKilled != null) _txtEnemiesKilled.text = Convert.ToString(kills);
             //            Debug.Log(String.Format("Kills: {0}", kills));
         }
 
         internal void UpdateScore(int score)
         {
-            _txtScore.text = Convert.ToString(score);
+            if (_txtScore != null) _txtScore.text = Convert.ToString(score);
             //            Debug.Log(String.Format("Score: {0}", score));
         }
 
         internal void UpdateTime(int time)
         {
-            _txtTime.text = Convert.ToString(time);
+            if (_txtTime != null) _txtTime.text = Convert.ToString(time);
             //            Debug.Log(String.Format("Time: {0}", time));
         }
 
         internal void UpdateDifficulty(int difficulty)
         {
-            _txtDifficulty.text = Convert.ToString(difficulty);
+            if (_txtDifficulty != null) _txtDifficulty.text = Convert.ToString(difficulty);
         }
 
-        internal void UpdateLives(int lives) {
+        internal void UpdateLives(int lives)
+        {
             print(lives);
-            _txtLives.text = Convert.ToString(lives);
+            if (_txtLives != null) _txtLives.text = Convert.ToString(lives);
         }
 
-        internal string GetScore() {
-            return _txtScore.text;
+        internal string GetScore()
+        {
+            return _txtScore != null ? _txtScore.text : "-1";
         }
 
         #endregion Internal Methods
