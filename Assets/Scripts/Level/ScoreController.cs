@@ -40,6 +40,11 @@ namespace Level
             _uiController.UpdateTime(TimeSurvived);
         }
 
+        internal void UpdateTimeAttack(float timeElapsed, float timeMax) {
+            TimeSurvived = Convert.ToInt32(Mathf.Floor(timeElapsed));
+            _uiController.UpdateTime((int)timeMax - TimeSurvived);
+        }
+
         #endregion Internal Methods
 
         #region Private Methods

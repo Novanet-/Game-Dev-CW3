@@ -79,6 +79,9 @@ namespace Entity
 
             health = healthStart;
 
+            if (GameObject.Find("StateProperties").GetComponent<Misc.StateProperties>().isTimeAttack) {
+                lives = -1;
+            }
             _uiController.UpdateLives(lives);
         }
 
@@ -98,9 +101,22 @@ namespace Entity
 
             _uiController.UpdateLives(lives);
 
-            if (lives <= 0) {
+            if (lives == 0) {
                 GameOver();
             }
+        }
+
+        public void GameOver() {
+            _gameOver = true;
+
+            _movement.SetCanMove(false);
+            _firing.SetCanShoot(false);
+            _sprite.enabled = false;
+            _coll.enabled = false;
+
+            Dead = true;
+
+            _gameOverUI.Show();
         }
 
         #endregion Public Methods
@@ -133,19 +149,6 @@ namespace Entity
 
                 Dead = false;
             }
-        }
-
-        private void GameOver() {
-            _gameOver = true;
-
-            _movement.SetCanMove(false);
-            _firing.SetCanShoot(false);
-            _sprite.enabled = false;
-            _coll.enabled = false;
-
-            Dead = true;
-
-            _gameOverUI.Show();
         }
 
         #endregion Private Methods

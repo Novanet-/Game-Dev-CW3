@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persistent: 0
-  _timeAttackLimit: 0
+  _timeAttackLimit: 10
 --- !u!1 &1238272505
 GameObject:
   m_ObjectHideFlags: 0
@@ -5908,12 +5908,12 @@ Prefab:
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 460.5
+      value: 458.5
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 331
+      value: 320.5
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -5923,7 +5923,7 @@ Prefab:
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 1380.0651
+      value: 1342.1156
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -5958,17 +5958,17 @@ Prefab:
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.4796875
+      value: 0.47760418
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.4796875
+      value: 0.47760418
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.4796875
+      value: 0.47760418
       objectReference: {fileID: 0}
     - target: {fileID: 224870380460109378, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
