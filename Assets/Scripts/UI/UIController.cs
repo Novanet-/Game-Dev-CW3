@@ -78,6 +78,10 @@ namespace UI
             _txtLives.text = Convert.ToString(lives);
         }
 
+        internal string GetScore() {
+            return _txtScore.text;
+        }
+
         #endregion Internal Methods
 
         #region Private Methods
