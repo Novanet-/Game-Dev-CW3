@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 namespace Powerup {
@@ -30,6 +31,12 @@ namespace Powerup {
         void Start() {
             _player = GameObject.Find("Player").GetComponent<Entity.PlayerMovementController>();
             _fireController = GameObject.Find("Player").GetComponent<Entity.PlayerFireController>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+            UIController.Instance.AddPowerup(UIController.Instance._iconRof);
         }
 
         #endregion Private Methods
