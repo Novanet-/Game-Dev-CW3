@@ -33,10 +33,11 @@ namespace Powerup {
             _fireController = GameObject.Find("Player").GetComponent<Entity.PlayerFireController>();
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
+        private void OnTriggerEnter2D(Collider2D other) {
             base.OnTriggerEnter2D(other);
-            UIController.Instance.AddPowerup(UIController.Instance._iconRof);
+            if (other.tag == "Player") {
+                UIController.Instance.AddPowerup(UIController.Instance._iconRof);
+            }
         }
 
         #endregion Private Methods

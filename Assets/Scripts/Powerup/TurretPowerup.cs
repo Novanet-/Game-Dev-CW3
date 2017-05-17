@@ -17,10 +17,11 @@ namespace Powerup {
             _player.DeployTurret();
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
+        private void OnTriggerEnter2D(Collider2D other) {
             base.OnTriggerEnter2D(other);
-            UIController.Instance.AddPowerup(UIController.Instance._iconTurret);
+            if (other.tag == "Player") {
+                UIController.Instance.AddPowerup(UIController.Instance._iconTurret);
+            }
         }
 
         #endregion Public Methods
