@@ -54,6 +54,8 @@ namespace Entity
         {
             NextFireSlot = 0.5f;
             _soundController = SoundController.Instance;
+
+            LaserContainer = GameObject.Find("LaserContainer");
         }
 
         private void Update()

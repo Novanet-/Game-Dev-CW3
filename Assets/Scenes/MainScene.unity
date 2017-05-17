@@ -708,7 +708,7 @@ Prefab:
         type: 2}
       propertyPath: turret
       value: 
-      objectReference: {fileID: 114549159190219650, guid: 38de8339fe1cc1a4ca9c02bfa0513f4f,
+      objectReference: {fileID: 114692743714130908, guid: 38de8339fe1cc1a4ca9c02bfa0513f4f,
         type: 2}
     - target: {fileID: 114090019218246924, guid: 7d1a4cd738149b8498e4fa477f455a96,
         type: 2}
