@@ -126,7 +126,7 @@ namespace Entity
 
         private void Start()
         {
-            _scoreController = ScoreController.Instance;
+            _scoreController = GameObject.Find("ScoreController").GetComponent<Level.ScoreController>();
             health = healthStart;
         }
 

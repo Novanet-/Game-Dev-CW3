@@ -58,8 +58,8 @@ namespace Level
         // Use this for initialization
         private void Start()
         {
-            _scoreController = ScoreController.Instance;
-            _uiController = UIController.Instance;
+            _scoreController = GameObject.Find("ScoreController").GetComponent<Level.ScoreController>();
+            _uiController = GameObject.Find("UICanvas").GetComponent<UI.UIController>();
             _previousScore = 0;
         }
 

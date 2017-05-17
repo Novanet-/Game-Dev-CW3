@@ -110,7 +110,7 @@ namespace Entity
         {
             if (_currPower != null)
             {
-                UIController.Instance.RemovePowerup();
+                GameObject.Find("UICanvas").GetComponent<UI.UIController>().RemovePowerup();
                 _currPower();
                 _currPower = null;
             }

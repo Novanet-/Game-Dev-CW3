@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Level
 {
-    public class ScoreController : Singleton<ScoreController>
+    public class ScoreController : MonoBehaviour
     {
         #region Private Fields
 
@@ -58,7 +58,7 @@ namespace Level
             CurrentScore = 0;
             EnemiesKilled = 0;
             TimeSurvived = 0;
-            _uiController = UIController.Instance;
+            _uiController = GameObject.Find("UICanvas").GetComponent<UI.UIController>();
         }
 
         // Update is called once per frame

@@ -93,7 +93,7 @@ namespace Level
             SetupBackground();
 
             _time = Time.time + difficultyDelay;
-            if (currentScene.name.Equals("MainScene")) _gameController = GameController.Instance;
+            if (currentScene.name.Equals("MainScene")) _gameController = GameObject.Find("GameController").GetComponent<Level.GameController>();
         }
 
         // Update is called once per frame
