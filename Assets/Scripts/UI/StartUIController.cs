@@ -9,6 +9,9 @@ namespace UI
 {
     public class StartUIController : Singleton<StartUIController>
     {
+        [SerializeField] GameObject _startScreenCanvas;
+        [SerializeField] GameObject _controlsCanvas;
+
         public void PlayGame(bool isTimeAttack)
         {
             Debug.Log("Play");
@@ -19,11 +22,23 @@ namespace UI
         public void QuitGame()
         {
             Debug.Log("Quit");
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #else
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
                 Application.Quit();
             #endif
+        }
+
+        public void ShowControls()
+        {
+            _startScreenCanvas.SetActive(false);
+            _controlsCanvas.SetActive(true);
+        }
+
+        public void HideControls()
+        {
+            _controlsCanvas.SetActive(false);
+            _startScreenCanvas.SetActive(true);
         }
     }
 }

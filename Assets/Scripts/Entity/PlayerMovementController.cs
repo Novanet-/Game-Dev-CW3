@@ -88,7 +88,7 @@ namespace Entity
 
             transform.up = _rigidbody.velocity.normalized;
 
-            if (!_isJumping && Input.GetKeyDown(KeyCode.Space))
+            if (!_isJumping && Input.GetButtonDown("Jump"))
             {
                 Jump();
             }
