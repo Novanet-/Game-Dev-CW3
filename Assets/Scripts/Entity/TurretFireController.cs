@@ -53,6 +53,7 @@ namespace Entity
         private void Start()
         {
             NextFireSlot = 0.5f;
+            _soundController = SoundController.Instance;
         }
 
         private void Update()
