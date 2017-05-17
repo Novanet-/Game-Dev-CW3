@@ -66,7 +66,7 @@ namespace Entity
                     }
                     else {
                         if (health <= 1) {
-                            var enemyController = GetComponentInParent<EnemyController>();
+                            EnemyController enemyController = GetComponentInParent<EnemyController>();
                             _scoreController.AddKilledEnemy(enemyController);
                         }
                         Hit();
