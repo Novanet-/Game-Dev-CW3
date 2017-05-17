@@ -49,7 +49,8 @@ namespace Entity
             }
         }
 
-        public virtual void Fall(GameObject self) {
+        public virtual void Fall(GameObject self)
+        {
             Die(self);
         }
 
@@ -61,11 +62,14 @@ namespace Entity
             {
                 if (coll.GetComponent<EnemyLaserController>() && isPlayer || coll.GetComponent<LaserController>() && !isPlayer)
                 {
-                    if (isPlayer) {
+                    if (isPlayer)
+                    {
                         Hit();
                     }
-                    else {
-                        if (health <= 1) {
+                    else
+                    {
+                        if (health <= 1)
+                        {
                             var enemyController = GetComponentInParent<EnemyController>();
                             _scoreController.AddKilledEnemy(enemyController);
                         }
@@ -86,10 +90,12 @@ namespace Entity
             }
         }
 
-        public virtual void Hit() {
+        public virtual void Hit()
+        {
             health--;
 
-            if (health <= 0) {
+            if (health <= 0)
+            {
                 Die();
             }
         }

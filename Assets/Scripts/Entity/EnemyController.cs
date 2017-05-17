@@ -28,6 +28,10 @@ namespace Entity
         // Update is called once per frame
         private void Update()
         {
+            if (GetComponentInChildren<SpriteRenderer>() == null)
+            {
+                Destroy(gameObject);
+            }
             if (_player != null && !_player.GetComponent<PlayerDeathController>().isDead())
             {
                 //rotate to look at player
