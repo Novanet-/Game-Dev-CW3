@@ -105,6 +105,10 @@ namespace UI
 
             _pauseImage = GetComponent<Image>();
             _powerupIcons = new Stack<GameObject>();
+
+            if(GameObject.Find("StateProperties").GetComponent<Misc.StateProperties>().isTimeAttack) {
+                GameObject.Find("lblTime").GetComponent<Text>().text = "Time Remaining:";
+            }
         }
 
         // Update is called once per frame
