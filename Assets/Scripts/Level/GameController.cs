@@ -17,6 +17,7 @@ namespace Level
         private StateProperties _stateProperties;
         private Scene _currentScene;
         [SerializeField] private float _timeAttackLimit;
+        private bool _gameFinished = false;
 
         #endregion Private Fields
 
@@ -54,7 +55,7 @@ namespace Level
         // Update is called once per frame
         private void Update()
         {
-            if (!_currentScene.name.Equals("MainScene")) return;
+            if (!_currentScene.name.Equals("MainScene") || _gameFinished) return;
 
             if (Input.GetButtonDown("Pause"))
             {
@@ -64,13 +65,19 @@ namespace Level
             GameTimeElapsed = Time.time;
             bool timeAttackElapsed = GameTimeElapsed > _timeAttackLimit * 60;
             if (_stateProperties.isTimeAttack && timeAttackElapsed) EndGame();
-            if (Mathf.Floor(GameTimeElapsed) > Mathf.Floor(_scoreController.TimeSurvived)) _scoreController.UpdateTimeSurvived(GameTimeElapsed);
+            if (Mathf.Floor(GameTimeElapsed) > Mathf.Floor(_scoreController.TimeSurvived)) {
+                if (_stateProperties.isTimeAttack)
+                    _scoreController.UpdateTimeAttack(GameTimeElapsed, (_timeAttackLimit*60));
+                else
+                    _scoreController.UpdateTimeSurvived(GameTimeElapsed);
+            }
         }
 
         private void EndGame()
         {
-            Debug.Log("Game ended lol");
-            Application.Quit();
+            _gameFinished = true;
+            //Debug.Log("Game ended lol");
+            GameObject.Find("Player").GetComponent<Entity.PlayerDeathController>().GameOver();
         }
 
         #endregion Private Methods
