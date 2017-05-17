@@ -9,19 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1429861567072906}
+  m_RootGameObject: {fileID: 1889063285799052}
   m_IsPrefabParent: 1
---- !u!1 &1429861567072906
+--- !u!1 &1889063285799052
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4612432469837704}
-  - component: {fileID: 212277183599688800}
-  - component: {fileID: 114054148107172990}
-  - component: {fileID: 114549159190219650}
+  - component: {fileID: 4483386077391000}
+  - component: {fileID: 212568175184270250}
+  - component: {fileID: 114398718835993666}
+  - component: {fileID: 114692743714130908}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -29,12 +29,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4612432469837704
+--- !u!4 &4483386077391000
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1429861567072906}
+  m_GameObject: {fileID: 1889063285799052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -42,42 +42,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114054148107172990
+--- !u!114 &114398718835993666
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1429861567072906}
+  m_GameObject: {fileID: 1889063285799052}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55a8aa1a51c503f46ab73a6c3db66897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AimTarget: {fileID: 0}
-  FireInterval: 0.5
-  LaserContainer: {fileID: 1429861567072906}
+  FireInterval: 0.4
+  LaserContainer: {fileID: 0}
   LaserSpeed: 7.5
   LaserType: {fileID: 1690347054372752, guid: e088cfdaac5a2f1418d0306e72d7c9ae, type: 2}
   _fireSound: {fileID: 8300000, guid: fad9a0cf573d9d2498a6af1ec0f4fe10, type: 3}
---- !u!114 &114549159190219650
+--- !u!114 &114692743714130908
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1429861567072906}
+  m_GameObject: {fileID: 1889063285799052}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f7f202e8926fae47b599503300199d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 1
-  lifetime: 10
---- !u!212 &212277183599688800
+  rotSpeed: 6
+  lifetime: 12
+--- !u!212 &212568175184270250
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1429861567072906}
+  m_GameObject: {fileID: 1889063285799052}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Level
 {
-    public class GameController : Singleton<GameController>
+    public class GameController : MonoBehaviour
     {
         #region Private Fields
 
@@ -37,10 +37,11 @@ namespace Level
             _currentScene = SceneManager.GetActiveScene();
             if (!_currentScene.name.Equals("MainScene")) return;
 
-            _scoreController = ScoreController.Instance;
-            _uiController = UIController.Instance;
+            _scoreController = GameObject.Find("ScoreController").GetComponent<Level.ScoreController>();
+            _uiController = GameObject.Find("UICanvas").GetComponent<UI.UIController>();
             _stateProperties = StateProperties.Instance;
             GameTimeElapsed = 0;
+            print("SFDA " + GameTimeElapsed);
 
             SoundController.Instance.PlayMusic(Music.Instance.ExampleMusicClip);
         }
@@ -62,10 +63,11 @@ namespace Level
                 TogglePauseGame();
 //                Debug.Log("Press");
             }
-            GameTimeElapsed = Time.time;
+            GameTimeElapsed = Time.timeSinceLevelLoad;
             bool timeAttackElapsed = GameTimeElapsed > _timeAttackLimit * 60;
             if (_stateProperties.isTimeAttack && timeAttackElapsed) EndGame();
             if (Mathf.Floor(GameTimeElapsed) > Mathf.Floor(_scoreController.TimeSurvived)) {
+                print("A " + GameTimeElapsed);
                 if (_stateProperties.isTimeAttack)
                     _scoreController.UpdateTimeAttack(GameTimeElapsed, (_timeAttackLimit*60));
                 else

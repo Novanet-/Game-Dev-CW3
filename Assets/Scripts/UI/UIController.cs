@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class UIController : Singleton<UIController>
+    public class UIController : MonoBehaviour
     {
         #region Private Fields
 

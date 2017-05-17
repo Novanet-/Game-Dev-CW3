@@ -8,6 +8,7 @@ namespace Level
 
         public Renderer[] backgrounds;
         public float step = 0.5f;
+        public bool isMenu = false;
 
         #endregion Public Fields
 
@@ -21,12 +22,13 @@ namespace Level
 
         private void Start()
         {
-            _gameController = GameController.Instance;
+            if (!isMenu)
+                _gameController = GameObject.Find("GameController").GetComponent<Level.GameController>();
         }
 
         private void Update()
         {
-            if (_gameController.IsPaused) return;
+            if (!isMenu && _gameController.IsPaused) return;
 
             foreach (Renderer r in backgrounds)
             {

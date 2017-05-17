@@ -66,12 +66,11 @@ namespace Entity
                     {
                         Hit();
                     }
-                    else
-                    {
-                        if (health <= 1)
-                        {
-                            var enemyController = GetComponentInParent<EnemyController>();
+                    else {
+                        if (health <= 1) {
+                            EnemyController enemyController = GetComponentInParent<EnemyController>();
                             _scoreController.AddKilledEnemy(enemyController);
+
                         }
                         Hit();
                     }
@@ -127,7 +126,7 @@ namespace Entity
 
         private void Start()
         {
-            _scoreController = ScoreController.Instance;
+            _scoreController = GameObject.Find("ScoreController").GetComponent<Level.ScoreController>();
             health = healthStart;
         }
 

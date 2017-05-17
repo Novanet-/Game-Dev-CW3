@@ -36,7 +36,7 @@ namespace Powerup {
         private void OnTriggerEnter2D(Collider2D other) {
             base.OnTriggerEnter2D(other);
             if (other.tag == "Player") {
-                UIController.Instance.AddPowerup(UIController.Instance._iconRof);
+                GameObject.Find("UICanvas").GetComponent<UI.UIController>().AddPowerup(GameObject.Find("UICanvas").GetComponent<UI.UIController>()._iconRof);
             }
         }
 
