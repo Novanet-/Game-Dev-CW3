@@ -17,7 +17,7 @@ namespace Entity
 
             NextFireSlot = CurrentTime + FireInterval;
 
-            if (AimTarget != null && _spriteRenderer != null && _spriteRenderer.isVisible)
+            if (AimTarget != null && _spriteRenderer.isVisible)
             {
                 SoundController.PlayFireSound(this);
                 for (int i = -20; i <= 20; i += 20)
