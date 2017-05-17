@@ -23,10 +23,11 @@ namespace Powerup
 
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
+        private void OnTriggerEnter2D(Collider2D other) {
             base.OnTriggerEnter2D(other);
-            UIController.Instance.AddPowerup(UIController.Instance._iconFlight);
+            if (other.tag == "Player") {
+                UIController.Instance.AddPowerup(UIController.Instance._iconFlight);
+            }
         }
 
         #endregion Public Methods
