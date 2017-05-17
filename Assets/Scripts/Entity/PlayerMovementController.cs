@@ -18,6 +18,7 @@ namespace Entity
         public float JumpTime = 1f;
         public float JumpDelay = 3f;
         public TurretController turret;
+        public ParticleSystem jumpJet;
 
         #endregion Public Fields
 
@@ -29,9 +30,9 @@ namespace Entity
         private PlayerDeathController _deathControl;
         private bool _isJumping = false;
         private Rigidbody2D _rigidbody;
-        public ParticleSystem _particles;
         private Powerup.Powerup.Activate _currPower;
         private GameObject _powerupInstance;
+        private ParticleSystem _currJumpJet;
 
         #endregion Private Fields
 
@@ -51,7 +52,9 @@ namespace Entity
         {
             _deathControl.canFall = false;
             _isJumping = true;
-            _particles.gameObject.SetActive(true);
+
+            _currJumpJet = Instantiate(jumpJet, this.transform);
+            _currJumpJet.transform.localPosition = new Vector3(0, 0, -1);
 
             StartCoroutine(Land(time));
         }
@@ -117,8 +120,6 @@ namespace Entity
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _deathControl = GetComponent<PlayerDeathController>();
-            _particles = GetComponentInChildren<ParticleSystem>();
-            _particles.gameObject.SetActive(false);
         }
 
         private IEnumerator Land(float time)
@@ -126,7 +127,7 @@ namespace Entity
             yield return new WaitForSeconds(time);
 
             _deathControl.canFall = true;
-            _particles.gameObject.SetActive(false);
+            Destroy(_currJumpJet.gameObject);
 
             yield return new WaitForSeconds(JumpDelay);
 
