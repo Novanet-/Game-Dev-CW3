@@ -32,13 +32,19 @@ namespace UI
         public void ShowControls()
         {
             _startScreenCanvas.SetActive(false);
+
             _controlsCanvas.SetActive(true);
+            var backButton = GameObject.Find("btnBack").GetComponent<Button>();
+            backButton.Select();
         }
 
         public void HideControls()
         {
             _controlsCanvas.SetActive(false);
+
             _startScreenCanvas.SetActive(true);
+            var playGameButton = GameObject.Find("btnPlayGame").GetComponent<Button>();
+            playGameButton.Select();
         }
     }
 }
