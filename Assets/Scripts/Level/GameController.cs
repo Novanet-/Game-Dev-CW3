@@ -41,7 +41,6 @@ namespace Level
             _uiController = GameObject.Find("UICanvas").GetComponent<UI.UIController>();
             _stateProperties = StateProperties.Instance;
             GameTimeElapsed = 0;
-            print("SFDA " + GameTimeElapsed);
 
             SoundController.Instance.PlayMusic(Music.Instance.ExampleMusicClip);
         }
@@ -67,7 +66,6 @@ namespace Level
             bool timeAttackElapsed = GameTimeElapsed > _timeAttackLimit * 60;
             if (_stateProperties.isTimeAttack && timeAttackElapsed) EndGame();
             if (Mathf.Floor(GameTimeElapsed) > Mathf.Floor(_scoreController.TimeSurvived)) {
-                print("A " + GameTimeElapsed);
                 if (_stateProperties.isTimeAttack)
                     _scoreController.UpdateTimeAttack(GameTimeElapsed, (_timeAttackLimit*60));
                 else
