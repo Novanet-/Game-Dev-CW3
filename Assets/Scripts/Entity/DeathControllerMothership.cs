@@ -19,7 +19,7 @@ namespace Entity {
                             Die(transform.parent.parent.gameObject);
                     }
 
-                    Die(coll.gameObject);
+                    Destroy(coll.gameObject);
                 }
             }
             else if (canFall && coll.tag == "Hole") {
