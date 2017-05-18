@@ -473,6 +473,7 @@ GameObject:
   - component: {fileID: 425288056}
   - component: {fileID: 425288060}
   - component: {fileID: 425288061}
+  - component: {fileID: 425288062}
   m_Layer: 5
   m_Name: GameOverCanvas
   m_TagString: Untagged
@@ -577,6 +578,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5027ec783c42eeb48bf3c96884fc5d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &425288062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 425288055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 1
+  m_AspectRatio: 1.7783133
 --- !u!1001 &564847474
 Prefab:
   m_ObjectHideFlags: 0
@@ -2589,7 +2603,7 @@ Prefab:
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 1960
       objectReference: {fileID: 0}
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -3897,31 +3911,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a8344b4f0bb7b45ab6df95bcc541c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canFall: 1
-  deathAnim: {fileID: 95416830839964734, guid: bd9fc70ba10bcc142b1dc6434954f943, type: 2}
-  explosionTime: 0.5
-  isPlayer: 1
-  healthStart: 3
-  respawnDelay: 1
-  lives: 3
---- !u!60 &2067330658
-PolygonCollider2D:
+  m_Padding:
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 10
+  m_ChildAlignment: 4
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+--- !u!1 &2112660992 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1036163517800770, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
+    type: 2}
+  m_PrefabInternal: {fileID: 2112660987}
+--- !u!114 &2112660993
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2067330650}
+  m_GameObject: {fileID: 2112660992}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: -0.24, y: 0.31}
-      - {x: -0.24, y: -0.31}
-      - {x: 0.24, y: -0.31}
-      - {x: 0.24, y: 0.31}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 1
+  m_AspectRatio: 1.75
 --- !u!1001 &2145106607
 Prefab:
   m_ObjectHideFlags: 0

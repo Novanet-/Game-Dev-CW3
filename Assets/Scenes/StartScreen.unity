@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 186030924}
   - component: {fileID: 186030923}
   - component: {fileID: 186030922}
+  - component: {fileID: 186030932}
   m_Layer: 5
   m_Name: ControlsCanvas
   m_TagString: Untagged
@@ -673,6 +674,19 @@ RectTransform:
   m_AnchoredPosition: {x: 195, y: 473.5}
   m_SizeDelta: {x: 390, y: 947}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &186030932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186030921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 1
+  m_AspectRatio: 1
 --- !u!1 &333116594
 GameObject:
   m_ObjectHideFlags: 0
@@ -4260,6 +4274,7 @@ GameObject:
   - component: {fileID: 1857097758}
   - component: {fileID: 1857097757}
   - component: {fileID: 1857097759}
+  - component: {fileID: 1857097767}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -4453,6 +4468,19 @@ RectTransform:
   m_AnchoredPosition: {x: 460.5, y: 331}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1857097767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1857097756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 1
+  m_AspectRatio: 1.75
 --- !u!1 &1908137940
 GameObject:
   m_ObjectHideFlags: 0
