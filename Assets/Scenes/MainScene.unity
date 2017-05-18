@@ -545,7 +545,7 @@ RectTransform:
   m_GameObject: {fileID: 425288055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1628704853}
   m_Father: {fileID: 0}
@@ -553,9 +553,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 460.5, y: 331}
+  m_SizeDelta: {x: 921, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &425288060
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1531,7 +1531,7 @@ MonoBehaviour:
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Basic2
     SpawnerObject: {fileID: 1562031318}
-    SpawnerDifficultyThreshold: 1
+    SpawnerDifficultyThreshold: 0
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Basic3
     SpawnerObject: {fileID: 1545253193}
@@ -1543,14 +1543,10 @@ MonoBehaviour:
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Cone1
     SpawnerObject: {fileID: 1705378111}
-    SpawnerDifficultyThreshold: 2
+    SpawnerDifficultyThreshold: 1
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Cone2
     SpawnerObject: {fileID: 1706959504}
-    SpawnerDifficultyThreshold: 5
-    SpawnerPositionOverride: {x: 0, y: 0, z: 0}
-  - SpawnerName: Enemy_Suppressor2
-    SpawnerObject: {fileID: 1770420039}
     SpawnerDifficultyThreshold: 5
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Suppressor4
@@ -1559,7 +1555,7 @@ MonoBehaviour:
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Radial1
     SpawnerObject: {fileID: 1929607641}
-    SpawnerDifficultyThreshold: 4
+    SpawnerDifficultyThreshold: 3
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Radial2
     SpawnerObject: {fileID: 804139364}
@@ -1575,7 +1571,7 @@ MonoBehaviour:
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Artillery1
     SpawnerObject: {fileID: 1732995634}
-    SpawnerDifficultyThreshold: 3
+    SpawnerDifficultyThreshold: 2
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Artillery2
     SpawnerObject: {fileID: 54281708}
@@ -2593,12 +2589,12 @@ Prefab:
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 369
+      value: 460.5
       objectReference: {fileID: 0}
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 207.5
+      value: 331
       objectReference: {fileID: 0}
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -2643,17 +2639,17 @@ Prefab:
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.384375
+      value: 0.4796875
       objectReference: {fileID: 0}
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.384375
+      value: 0.4796875
       objectReference: {fileID: 0}
     - target: {fileID: 224042079275375366, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.384375
+      value: 0.4796875
       objectReference: {fileID: 0}
     - target: {fileID: 224721440000953028, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -3411,7 +3407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1770420040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3898,6 +3894,20 @@ GameObject:
   m_PrefabParentObject: {fileID: 1984923673466052, guid: 7d1a4cd738149b8498e4fa477f455a96,
     type: 2}
   m_PrefabInternal: {fileID: 654604087}
+--- !u!61 &2067330651
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067330650}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.47999996, y: 0.61999995}
 --- !u!50 &2067330653
 Rigidbody2D:
   serializedVersion: 4
@@ -3929,11 +3939,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a8344b4f0bb7b45ab6df95bcc541c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canFall: 0
-  deathAnim: {fileID: 0}
+  canFall: 1
+  deathAnim: {fileID: 95416830839964734, guid: bd9fc70ba10bcc142b1dc6434954f943, type: 2}
   explosionTime: 0.5
-  isPlayer: 0
-  healthStart: 1
+  isPlayer: 1
+  healthStart: 3
   respawnDelay: 1
   lives: 3
 --- !u!1001 &2145106607
