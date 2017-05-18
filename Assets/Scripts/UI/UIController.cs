@@ -31,7 +31,8 @@ namespace UI
         [SerializeField] private GameObject _txtDifficultyObject;
         private Text _txtEnemiesKilled;
         [SerializeField] private GameObject _txtEnemiesKilledObject;
-
+        private Text _txtHealth;
+        [SerializeField] private GameObject _txtHealthObject;
         private Text _txtLives;
         [SerializeField] private GameObject _txtLivesObject;
         private Text _txtPaused;
@@ -110,6 +111,10 @@ namespace UI
             //            Debug.Log(String.Format("Time: {0}", time));
         }
 
+        internal void UpdateHealth(int health) {
+            _txtHealth.text = Convert.ToString(health);
+        }
+
         #endregion Internal Methods
 
         #region Private Methods
@@ -149,6 +154,7 @@ namespace UI
             if (_txtPausedObject != null) _txtPaused = _txtPausedObject.GetComponent<Text>();
             if (_txtDifficultyObject != null) _txtDifficulty = _txtDifficultyObject.GetComponent<Text>();
             if (_txtLivesObject != null) _txtLives = _txtLivesObject.GetComponent<Text>();
+            if (_txtHealthObject != null) _txtHealth = _txtHealthObject.GetComponent<Text>();
 
             _pauseImage = GetComponent<Image>();
             _powerupIcons = new Stack<GameObject>();
