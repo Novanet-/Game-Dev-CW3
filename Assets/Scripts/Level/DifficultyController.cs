@@ -48,7 +48,10 @@ namespace Level
             float scoreFactor = scoreSinceLastInc * ScoreFactorMult;
             float timeFactor = gameSecondsElapsed * TimeFactorMult;
             float rawSkill = scoreFactor;
-            int scoreCeiling = _averageScoreForInterval * 2;
+
+            float difficultyMod = 1 + (Mathf.Floor(DifficultyLevel) * 0.25f);
+
+            var scoreCeiling = _averageScoreForInterval * difficultyMod * 2;
             float remappedSkill = rawSkill.Remap(0, scoreCeiling, -1, 1);
             float clampedSkill = Mathf.Clamp(remappedSkill, -1, 1);
             Debug.Log(string.Format("Skill: {0}", clampedSkill));
@@ -66,7 +69,6 @@ namespace Level
         // Update is called once per frame
         private void Update()
         {
-            DifficultyLevel = 2;
             _timer += Time.deltaTime;
 
             if (_timer < _interval) return;

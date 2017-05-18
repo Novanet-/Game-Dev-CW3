@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTile: {fileID: 1247781838985812, guid: cb346af8873cc0846a11cb9ca110d1e0, type: 2}
   holeTile: {fileID: 1099028748200714, guid: 971d466a8f10bc6448904b3c4a826175, type: 2}
-  maxObsticles: 5
+  maxObsticles: 4
   numTiles: 13
   powerup: {fileID: 0}
   tileWidth: 1.25

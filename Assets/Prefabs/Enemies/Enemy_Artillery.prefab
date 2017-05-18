@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireInterval: 2
-  LaserSpeed: 7.5
+  LaserSpeed: 5
   LaserType: {fileID: 1100604149744546, guid: 6deda9b8b287e4f458e1fe3cae37bec9, type: 2}
   _fireSound: {fileID: 8300000, guid: ed3fcba3dc362ad47a89349ece9d7d42, type: 3}
 --- !u!114 &114869739323382516
