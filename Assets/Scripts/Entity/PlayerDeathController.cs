@@ -78,6 +78,7 @@ namespace Entity
             _gameOverUI = GameObject.Find("GameOverCanvas").GetComponent<GameOverUI>();
 
             health = healthStart;
+            _uiController.UpdateHealth(health);
 
             if (GameObject.Find("StateProperties").GetComponent<Misc.StateProperties>().isTimeAttack) {
                 lives = -1;
@@ -88,6 +89,7 @@ namespace Entity
         public override void Hit() {
             base.Hit();
 
+            _uiController.UpdateHealth(health);
         }
 
         public void AddLife() {
@@ -133,6 +135,9 @@ namespace Entity
                 transform.position = new Vector3(0, -6, 0);
                 transform.localPosition = new Vector3(0, -6, 0);
 
+                health = healthStart;
+                _uiController.UpdateHealth(health);
+
                 _movement.SetCanMove(true);
                 _firing.SetCanShoot(true);
 
@@ -145,8 +150,6 @@ namespace Entity
 
                 _sprite.enabled = true;
                 _coll.enabled = true;
-
-                health = healthStart;
 
                 Dead = false;
             }
