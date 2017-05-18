@@ -20,6 +20,8 @@ public class GameOverUI : MonoBehaviour {
 
         _GameOverCanvas.alpha = 1;
         _GameOverCanvas.blocksRaycasts = true;
+        var retryButton = GameObject.Find("btnRetry").GetComponent<Button>();
+        retryButton.Select();
     }
 
     public void Restart() {
