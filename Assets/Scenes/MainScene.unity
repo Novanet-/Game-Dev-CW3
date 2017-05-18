@@ -1509,6 +1509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persistent: 0
+  BossTime: 180
   _spawnerList:
   - SpawnerName: Enemy_Basic1
     SpawnerObject: {fileID: 2052664433}
@@ -1566,10 +1567,7 @@ MonoBehaviour:
     SpawnerObject: {fileID: 54281708}
     SpawnerDifficultyThreshold: 7
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
-  - SpawnerName: Enemy_Mothership
-    SpawnerObject: {fileID: 1379900208}
-    SpawnerDifficultyThreshold: 9
-    SpawnerPositionOverride: {x: 0, y: 0, z: 0}
+  _bossSpawner: {fileID: 1379900210}
 --- !u!4 &1209986705
 Transform:
   m_ObjectHideFlags: 0
@@ -1788,7 +1786,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1379900208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 0.11, z: 0}
+  m_LocalPosition: {x: 0.01, y: 1.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1209986705}
@@ -1802,12 +1800,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1379900208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6bdec8ab594cb942a38c4b3f241620f, type: 3}
+  m_Script: {fileID: 11500000, guid: 04b70ef92fd2e184995bad84282724b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 114338873480757572, guid: 975a6000e9cf3324a8da401392be4d15, type: 2}
-  spawnDelay: 180
-  spawnChance: 0.4
+  enemy: {fileID: 1350560353078922, guid: 975a6000e9cf3324a8da401392be4d15, type: 2}
 --- !u!1 &1383199545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3348,12 +3344,12 @@ Prefab:
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 604.5
+      value: 460.5
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 340
+      value: 331
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -3363,7 +3359,7 @@ Prefab:
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 1079.9008
+      value: 1380.0651
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
@@ -3398,17 +3394,17 @@ Prefab:
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.6296875
+      value: 0.4796875
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.6296875
+      value: 0.4796875
       objectReference: {fileID: 0}
     - target: {fileID: 224988507895170156, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.6296875
+      value: 0.4796875
       objectReference: {fileID: 0}
     - target: {fileID: 224870380460109378, guid: 9ca95268ab47db341a1dfdead0b2e0d6,
         type: 2}

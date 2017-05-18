@@ -19,6 +19,14 @@ namespace Level
 
         #endregion Private Fields
 
+        #region Public Methods
+
+        public void Spawn() {
+            Instantiate(enemy, transform.position, transform.rotation, transform);
+        }
+
+        #endregion Public Methods
+
         #region Private Methods
 
         // Use this for initialization
