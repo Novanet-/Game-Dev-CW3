@@ -45,7 +45,7 @@ namespace Entity
             explosion.transform.localPosition = new Vector3(0, 0, 0);
 
             Destroy(explosion.gameObject, explosionTime);
-            
+
             _movement.SetCanMove(false);
             _firing.SetCanShoot(false);
             _sprite.enabled = false;
@@ -93,6 +93,7 @@ namespace Entity
         public void AddLife() {
             lives++;
 
+            StartCoroutine(_uiController.DisplayTextForTime("Life gained", _uiController._lblPowerupGained, _uiController._powerupGainDisplayTime));
             _uiController.UpdateLives(lives);
         }
 

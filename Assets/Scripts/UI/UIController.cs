@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using com.kleberswf.lib.core;
+using Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,13 +10,30 @@ namespace UI
 {
     public class UIController : MonoBehaviour
     {
+        #region Public Fields
+
+        public Image _iconFlight;
+        public Image _iconRof;
+        public Image _iconTurret;
+
+        #endregion Public Fields
+
         #region Private Fields
 
+        [SerializeField] public Text _lblPowerupGained;
         private Image _pauseImage;
 
+        [SerializeField] public float _powerupGainDisplayTime;
+        private Stack<GameObject> _powerupIcons;
+        [SerializeField] private GameObject _powerupImage;
+        [SerializeField] private GameObject _powerupPanel;
+        private Text _txtDifficulty;
+        [SerializeField] private GameObject _txtDifficultyObject;
         private Text _txtEnemiesKilled;
         [SerializeField] private GameObject _txtEnemiesKilledObject;
 
+        private Text _txtLives;
+        [SerializeField] private GameObject _txtLivesObject;
         private Text _txtPaused;
         [SerializeField] private GameObject _txtPausedObject;
 
@@ -27,23 +43,35 @@ namespace UI
         private Text _txtTime;
         [SerializeField] private GameObject _txtTimeObject;
 
-        private Text _txtDifficulty;
-        [SerializeField] private GameObject _txtDifficultyObject;
-
-        private Text _txtLives;
-        [SerializeField] private GameObject _txtLivesObject;
-
-        [SerializeField] private GameObject _powerupPanel;
-
-        public Image _iconFlight;
-        public Image _iconRof;
-        public Image _iconTurret;
-        private Stack<GameObject> _powerupIcons;
-        [SerializeField] private GameObject _powerupImage;
-
         #endregion Private Fields
 
+        #region Public Methods
+
+        public void AddPowerup(Image powerupIcon)
+        {
+            Debug.Log("Add powerup");
+            var image = _powerupImage.GetComponent<Image>();
+            image.enabled = true;
+            image.sprite = powerupIcon.sprite;
+            DisplayPowerupGainedText(powerupIcon.gameObject);
+        }
+
+        public void RemovePowerup()
+        {
+            Debug.Log("Remove powerup");
+            var image = _powerupImage.GetComponent<Image>();
+            image.enabled = false;
+            image.sprite = null;
+        }
+
+        #endregion Public Methods
+
         #region Internal Methods
+
+        internal string GetScore()
+        {
+            return _txtScore.text;
+        }
 
         internal void TogglePauseUI()
         {
@@ -51,10 +79,23 @@ namespace UI
             _txtPaused.enabled = !_txtPaused.enabled;
         }
 
+        internal void UpdateDifficulty(int difficulty)
+        {
+            _txtDifficulty.text = Convert.ToString(difficulty);
+        }
+
         internal void UpdateKills(int kills)
         {
             _txtEnemiesKilled.text = Convert.ToString(kills);
             //            Debug.Log(String.Format("Kills: {0}", kills));
+        }
+
+        internal void UpdateLives(int lives)
+        {
+            if (lives <= -1)
+                _txtLives.text = "∞";
+            else
+                _txtLives.text = Convert.ToString(lives);
         }
 
         internal void UpdateScore(int score)
@@ -69,25 +110,31 @@ namespace UI
             //            Debug.Log(String.Format("Time: {0}", time));
         }
 
-        internal void UpdateDifficulty(int difficulty)
-        {
-            _txtDifficulty.text = Convert.ToString(difficulty);
-        }
-
-        internal void UpdateLives(int lives) {
-            if (lives <= -1)
-                _txtLives.text = "∞";
-            else
-                _txtLives.text = Convert.ToString(lives);
-        }
-
-        internal string GetScore() {
-            return _txtScore.text;
-        }
-
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void DisplayPowerupGainedText(GameObject powerupImage)
+        {
+            var powerupDictionary = new Dictionary<string, string>
+            {
+                {"iconFlight", "Flight"},
+                {"iconRof", "Rate of Fire"},
+                {"iconTurret", "Turret"}
+            };
+            string targetString = String.Empty;
+            powerupDictionary.TryGetValue(powerupImage.name, out targetString);
+            targetString = string.Format("{0} powerup gained", targetString);
+            StartCoroutine(DisplayTextForTime(targetString, _lblPowerupGained, _powerupGainDisplayTime));
+        }
+
+        public IEnumerator<WaitForSeconds> DisplayTextForTime(string targetstring, Text textcontainer, float displayTime)
+        {
+            textcontainer.text = targetstring;
+            yield return new WaitForSeconds(displayTime);
+
+            textcontainer.text = string.Empty;
+        }
 
         // Use this for initialization
         private void Start()
@@ -106,7 +153,8 @@ namespace UI
             _pauseImage = GetComponent<Image>();
             _powerupIcons = new Stack<GameObject>();
 
-            if(GameObject.Find("StateProperties").GetComponent<Misc.StateProperties>().isTimeAttack) {
+            if (GameObject.Find("StateProperties").GetComponent<StateProperties>().isTimeAttack)
+            {
                 GameObject.Find("lblTime").GetComponent<Text>().text = "Time Remaining:";
             }
         }
@@ -118,27 +166,11 @@ namespace UI
 
         #endregion Private Methods
 
-        public void AddPowerup(Image powerupIcon)
-        {
-            Debug.Log("Add powerup");
-            var image = _powerupImage.GetComponent<Image>();
-            image.enabled = true;
-            image.sprite = powerupIcon.sprite;
-        }
-
-        public void RemovePowerup()
-        {
-            Debug.Log("Remove powerup");
-            var image = _powerupImage.GetComponent<Image>();
-            image.enabled = false;
-            image.sprite = null;
-        }
-
-//            public IEnumerator RemovePowerup(GameObject powerupIconObject, float delayTime)
-//        {
-//            yield return new WaitForSeconds(delayTime);
-//            Debug.Log("Remove powerup");
-//            Destroy(powerupIconObject);
-//        }
+        //            public IEnumerator RemovePowerup(GameObject powerupIconObject, float delayTime)
+        //        {
+        //            yield return new WaitForSeconds(delayTime);
+        //            Debug.Log("Remove powerup");
+        //            Destroy(powerupIconObject);
+        //        }
     }
 }
