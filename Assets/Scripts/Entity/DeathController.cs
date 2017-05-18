@@ -75,7 +75,7 @@ namespace Entity
                         Hit();
                     }
 
-                    Die(coll.gameObject);
+                    Destroy(coll.gameObject);
                 }
             }
             else if (canFall && coll.tag == "Hole")
