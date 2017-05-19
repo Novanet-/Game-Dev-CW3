@@ -1549,10 +1549,6 @@ MonoBehaviour:
     SpawnerObject: {fileID: 1706959504}
     SpawnerDifficultyThreshold: 5
     SpawnerPositionOverride: {x: 0, y: 0, z: 0}
-  - SpawnerName: Enemy_Suppressor4
-    SpawnerObject: {fileID: 1813050101}
-    SpawnerDifficultyThreshold: 9
-    SpawnerPositionOverride: {x: 0, y: 0, z: 0}
   - SpawnerName: Enemy_Radial1
     SpawnerObject: {fileID: 1929607641}
     SpawnerDifficultyThreshold: 3
@@ -3514,7 +3510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1813050102
 MonoBehaviour:
   m_ObjectHideFlags: 0
