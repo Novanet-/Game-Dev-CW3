@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: c20e02f0dbbff6f4392bdbc15e8202d7
+labels:
+- Spawner
+- EnemySpawn
+- Example
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

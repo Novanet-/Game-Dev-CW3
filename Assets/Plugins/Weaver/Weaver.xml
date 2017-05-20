@@ -1,0 +1,745 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weaver</name>
+    </assembly>
+    <members>
+        <member name="T:Weaver.AssetGenerator`1">
+            <summary>
+            Manages several parts of procedural asset generation which are unique to certain asset types: determining the
+            asset path, finding and invoking the generator method, and saving the generated asset.
+            </summary>
+        </member>
+        <member name="F:Weaver.AssetGenerator`1.Instance">
+            <summary>
+            This field contains the most appropriate type of asset generator for type T.<para></para>
+            For example, a <see cref="T:UnityEngine.TextAsset"/> will use <see cref="T:Weaver.TextGenerator"/> while a
+            <see cref="T:UnityEditor.MonoScript"/> will use <see cref="T:Weaver.ScriptGenerator"/>
+            </summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.#ctor">
+            <summary>You should never need to construct your own <see cref="T:Weaver.AssetGenerator`1"/>.</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.IsResource(System.String)">
+            <summary>Checks if 'path' represents a resource for this type of <see cref="T:Weaver.AssetGenerator`1"/>.</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.DetermineAssetPath(System.Reflection.MemberInfo,System.String,System.Boolean@)">
+            <summary>Use the provided field to determine the file path at which to save this asset.</summary>
+        </member>
+        <member name="P:Weaver.AssetGenerator`1.DefaultFileExtension">
+            <summary>.asset</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.FindGeneratorMethod(System.Reflection.FieldInfo)">
+            <summary>Attempts to find the generator method assofiated with 'assetField'.</summary>
+        </member>
+        <member name="P:Weaver.AssetGenerator`1.GeneratorMethodReturnType">
+            <summary>The return type of a generator method for this asset type.</summary>
+        </member>
+        <member name="P:Weaver.AssetGenerator`1.GeneratorMethodParameterTypes">
+            <summary>
+            The parameter types of a generator method for this asset type. When overriding this property, consider
+            using <see cref="M:Kybernetik.Reflection.OneType(System.Type)"/> or <see cref="M:Kybernetik.Reflection.TwoTypes(System.Type,System.Type)"/>.
+            </summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.AppendGeneratorMethodSignature(System.Text.StringBuilder,System.String)">
+            <summary>Appends the signature required for a generator method for this <see cref="T:Weaver.AssetGenerator`1"/>.</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.InvokeGeneratorMethod(Weaver.Asset{`0})">
+            <summary>Invokes 'asset.GeneratorMethod' with the correct parameters for this <see cref="T:Weaver.AssetGenerator`1"/>.</summary>
+        </member>
+        <member name="P:Weaver.AssetGenerator`1.AllowSubAssets">
+            <summary>Unity doesn't allow sub assets inside certain kinds of assets (such as text and image files).</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.SaveDefaultAsset(System.String)">
+            <summary>Creates and saves an empty default asset to save sub assets inside while the asset is still generating.</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.Save(UnityEngine.Object,System.String)">
+            <summary>Saves 'asset' as an asset file at 'assetPath'.</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.Save(Weaver.Asset{`0})">
+            <summary>Saves 'asset.Target' as an asset file at 'asset.AssetPath'.</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.AppendFullDescription(System.Text.StringBuilder)">
+            <summary>Appends the full description of this <see cref="T:Weaver.AssetGenerator`1"/> and how it is to be used.</summary>
+        </member>
+        <member name="P:Weaver.AssetGenerator`1.HowToCancel">
+            <summary>Explains how to cancel the generation of an asset (for <see cref="M:Weaver.AssetGenerator`1.AppendFullDescription(System.Text.StringBuilder)"/>).</summary>
+        </member>
+        <member name="M:Weaver.AssetGenerator`1.AddItemsToMenu(UnityEditor.GenericMenu,Weaver.Asset{`0})">
+            <summary>Populates 'menu' with various items for the context menu of 'asset'.</summary>
+        </member>
+        <member name="T:Weaver.PrefabGenerator">
+            <summary>Saves <see cref="T:UnityEngine.GameObject"/>s as prefabs.</summary>
+        </member>
+        <member name="P:Weaver.PrefabGenerator.DefaultFileExtension">
+            <summary>.prefab</summary>
+        </member>
+        <member name="M:Weaver.PrefabGenerator.InvokeGeneratorMethod(Weaver.Asset{UnityEngine.GameObject})">
+            <summary>Invokes 'asset.GeneratorMethod' with the correct parameters for this <see cref="T:Weaver.AssetGenerator`1"/>.</summary>
+        </member>
+        <member name="M:Weaver.PrefabGenerator.SaveDefaultAsset(System.String)">
+            <summary>Creates and saves an empty prefab to save sub assets inside while the asset is still generating.</summary>
+        </member>
+        <member name="M:Weaver.PrefabGenerator.Save(UnityEngine.Object,System.String)">
+            <summary>Saves 'asset' as a prefab at 'assetPath'.</summary>
+        </member>
+        <member name="T:Weaver.ScriptGenerator">
+            <summary>Saves <see cref="T:UnityEditor.MonoScript"/>s as ".cs" text files.</summary>
+        </member>
+        <member name="F:Weaver.ScriptGenerator.DefaultDirectory">
+            <summary>The default directory in which Weaver will save procedural scripts.</summary>
+        </member>
+        <member name="P:Weaver.ScriptGenerator.SaveMessage">
+            <summary>The contents of this <see cref="T:System.Text.StringBuilder"/> will be logged and cleared once the current script finishes generating.</summary>
+        </member>
+        <member name="M:Weaver.ScriptGenerator.IsResource(System.String)">
+            <summary>A script is never a runtime resource.</summary>
+        </member>
+        <member name="M:Weaver.ScriptGenerator.DetermineAssetPath(System.Reflection.MemberInfo,System.String,System.Boolean@)">
+            <summary>
+            If 'path' starts with "Assets/", it is used raw.
+            Otherwise it is used as a sub path inside the script directory set in the Weaver Settings.
+            </summary>
+        </member>
+        <member name="P:Weaver.ScriptGenerator.DefaultFileExtension">
+            <summary>.cs</summary>
+        </member>
+        <member name="M:Weaver.ScriptGenerator.InvokeGeneratorMethod(Weaver.Asset{UnityEditor.MonoScript})">
+            <summary>Invokes 'asset.GeneratorMethod' with the correct parameters for this <see cref="T:Weaver.AssetGenerator`1"/>.</summary>
+        </member>
+        <member name="M:Weaver.ScriptGenerator.AppendHeader(System.Text.StringBuilder,Weaver.Asset{UnityEditor.MonoScript})">
+            <summary>Appends "// This file was procedurally generated by ...".</summary>
+        </member>
+        <member name="M:Weaver.ScriptGenerator.OnSaveText(Weaver.Asset{UnityEditor.MonoScript})">
+            <summary>Logs the <see cref="P:Weaver.ScriptGenerator.SaveMessage"/>.</summary>
+        </member>
+        <member name="M:Weaver.ScriptGenerator.BrowseForScriptDirectory">
+            <summary>
+            Opens a window to choose where you want procedural scripts to be saved.
+            Returns true if the path was changed.
+            </summary>
+        </member>
+        <member name="T:Weaver.ScriptGenerator.AssetAliasAttribute">
+            <summary>
+            Replaces the method name used in the "This file was procedurally generated by ..." comment at the top of a procedural script.
+            </summary>
+        </member>
+        <member name="F:Weaver.ScriptGenerator.AssetAliasAttribute.GeneratedBy">
+            <summary>The name to use.</summary>
+        </member>
+        <member name="M:Weaver.ScriptGenerator.AssetAliasAttribute.#ctor(System.String)">
+            <summary>Constructs a new <see cref="T:Weaver.ScriptGenerator.AssetAliasAttribute"/> and sets the <see cref="F:Weaver.ScriptGenerator.AssetAliasAttribute.GeneratedBy"/> field.</summary>
+        </member>
+        <member name="T:Weaver.TextGenerator">
+            <summary>Saves <see cref="T:UnityEngine.TextAsset"/>s as ".txt" text files.</summary>
+        </member>
+        <member name="T:Weaver.TextGenerator`1">
+            <summary>Saves <see cref="T:UnityEngine.TextAsset"/>s as ".txt" text files.</summary>
+        </member>
+        <member name="P:Weaver.TextGenerator`1.DefaultFileExtension">
+            <summary>.txt</summary>
+        </member>
+        <member name="P:Weaver.TextGenerator`1.GeneratorMethodReturnType">
+            <summary>void.</summary>
+        </member>
+        <member name="P:Weaver.TextGenerator`1.GeneratorMethodParameterTypes">
+            <summary>
+            The parameter types of a generator method for this asset type. When overriding this property, consider
+            using <see cref="M:Kybernetik.Reflection.OneType(System.Type)"/> or <see cref="M:Kybernetik.Reflection.TwoTypes(System.Type,System.Type)"/>.
+            </summary>
+        </member>
+        <member name="M:Weaver.TextGenerator`1.InvokeGeneratorMethod(Weaver.Asset{`0})">
+            <summary>Invokes 'asset.GeneratorMethod' with the correct parameters for this <see cref="T:Weaver.AssetGenerator`1"/>.</summary>
+        </member>
+        <member name="M:Weaver.TextGenerator`1.AppendHeader(System.Text.StringBuilder,Weaver.Asset{`0})">
+            <summary>Override to append any default text at the top of every file.</summary>
+        </member>
+        <member name="M:Weaver.TextGenerator`1.OnSaveText(Weaver.Asset{`0})">
+            <summary>Called after the asset is saved.</summary>
+        </member>
+        <member name="P:Weaver.TextGenerator`1.AllowSubAssets">
+            <summary>Unity doesn't allow sub assets inside text assets.</summary>
+        </member>
+        <member name="M:Weaver.TextGenerator`1.Save(UnityEngine.Object,System.String)">
+            <summary>Does nothing because <see cref="T:UnityEngine.TextAsset"/>s are saved inside <see cref="M:Weaver.TextGenerator`1.InvokeGeneratorMethod(Weaver.Asset{`0})"/>.</summary>
+        </member>
+        <member name="P:Weaver.TextGenerator`1.HowToCancel">
+            <summary>Explains how to cancel the generation of an asset.</summary>
+        </member>
+        <member name="T:Weaver.TextureGenerator">
+            <summary>Saves <see cref="T:UnityEngine.Texture2D"/>s as ".png" image files.</summary>
+        </member>
+        <member name="P:Weaver.TextureGenerator.DefaultFileExtension">
+            <summary>.png</summary>
+        </member>
+        <member name="P:Weaver.TextureGenerator.AllowSubAssets">
+            <summary>Unity doesn't allow sub assets inside textures.</summary>
+        </member>
+        <member name="M:Weaver.TextureGenerator.Save(UnityEngine.Texture2D,System.String)">
+            <summary>Saves 'texture' as a PNG at 'assetPath'.</summary>
+        </member>
+        <member name="M:Weaver.TextureGenerator.Save(UnityEngine.Object,System.String)">
+            <summary>Saves 'asset' as a texture at 'assetPath'.</summary>
+        </member>
+        <member name="M:Weaver.TextureGenerator.Save(Weaver.Asset{UnityEngine.Texture2D})">
+            <summary>Saves the generated texture into the project.</summary>
+        </member>
+        <member name="T:Weaver.Asset`1">
+            <summary>
+            A wrapper for Unity resources (and other assets) which simplifies the process of loading and caching.
+            <para></para>
+            To make a procedural asset, simply declare a static readonly <see cref="T:Weaver.Asset`1"/> field in any non-generic
+            class along with a generator method: static T Generate[FieldName]. Some asset types require a different method
+            signature, in which case a console message will let you know.
+            </summary>
+        </member>
+        <member name="P:Weaver.Asset`1.Path">
+            <summary>The target path of this asset or resource.
+            <para></para>If it starts with "Assets/", it is an editor-only asset and the path is used directly as its file path.
+            <para></para>Otherwise it is saved at "Assets/Resources/Path.asset", and is a runtime resource.
+            This can be modified using a <see cref="T:Weaver.AssetModifierAttribute"/>.</summary>
+        </member>
+        <member name="P:Weaver.Asset`1.AssetPath">
+            <summary>[Editor-Only] The path of this asset inside the project for
+            <see cref="M:UnityEditor.AssetDatabase.LoadAssetAtPath``1(System.String)"/>.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.#ctor(System.String)">
+            <summary>Creates an <see cref="T:Weaver.Asset`1"/> targeting the specified asset or resource path.</summary>
+            <param name="path">The path of the target asset.
+            <para></para>If it starts with "Assets/", it is an editor-only asset and the given path is used as its file path (including its file extension).
+            <para></para>Otherwise it is saved at "Assets/Resources/Path.asset", and is a runtime resource.
+            This can be modified using a <see cref="T:Weaver.AssetModifierAttribute"/>.</param>
+        </member>
+        <member name="M:Weaver.Asset`1.op_Implicit(System.String)~Weaver.Asset{`0}">
+            <summary>Creates an <see cref="T:Weaver.Asset`1"/> targeting the specified asset or resource path.</summary>
+        </member>
+        <member name="P:Weaver.Asset`1.Target">
+            <summary>Loads, caches, and returns the encapsulated asset.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.Load">
+            <summary>If the encapsulated asset isn't loaded, this method loads it.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.Unload">
+            <summary>Unloads this asset from memory using <see cref="M:UnityEngine.Resources.UnloadAsset(UnityEngine.Object)"/>.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.ForceReload">
+            <summary>[Editor-Only] Reloads the encapsulated asset, even if it was already loaded.</summary>
+        </member>
+        <member name="P:Weaver.Asset`1.Name">
+            <summary>The file name of this asset (without the file extension).</summary>
+        </member>
+        <member name="P:Weaver.Asset`1.IsLoaded">
+            <summary>Checks if the target asset is currently loaded.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.op_Implicit(Weaver.Asset{`0})~`0">
+            <summary>Returns the <see cref="P:Weaver.Asset`1.Target"/> asset.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.Instantiate">
+            <summary>
+            Clones the encapsulated asset and returns the clone.
+            <para></para>
+            Uses <see cref="M:UnityEngine.Object.Instantiate``1(``0)"/>.
+            In the Unity Editor, it uses PrefabUtility.InstantiatePrefab instead.
+            <para></para>
+            Other overloads of Instantiate are available as extension methods located in the <see cref="T:Weaver.WeaverUtils"/>
+            class. To use them as extension methods you must put "using Weaver;" at the top of your script.
+            </summary>
+        </member>
+        <member name="M:Weaver.Asset`1.ToString">
+            <summary>Returns a description of this <see cref="T:Weaver.Asset`1"/>.</summary>
+        </member>
+        <member name="P:Weaver.Asset`1.Weaver#IAssetInternal#CanAutoGenerateOnBuild">
+            <summary>[Weaver Internal, Editor-Only] True if this asset's type supports Auto-Generate on Build.</summary>
+        </member>
+        <member name="P:Weaver.Asset`1.Details">
+            <summary>
+            [Weaver Internal, Editor Only] The serialized details of this asset from the last time it was generated
+            (or null if this isn't a procedural asset).
+            </summary>
+        </member>
+        <member name="P:Weaver.Asset`1.GeneratorMethod">
+            <summary>[Editor-Only] The method used to generate this asset.</summary>
+        </member>
+        <member name="F:Weaver.Asset`1._CanGenerateInPlayMode">
+            <summary>
+            [Editor-Only] If true, using the asset at runtime will run the generator method instead of loading the
+            previously generated asset. This allows you to test modifications in the editor without needing to manually
+            regenerate the assets you're working on every time.
+            </summary>
+        </member>
+        <member name="E:Weaver.Asset`1.onImportAsset">
+            <summary>
+            [Editor-Only] This callback is cleared before generation begins and triggered after the asset generates
+            and is saved.
+            </summary>
+        </member>
+        <member name="M:Weaver.Asset`1.Weaver#IAssetInternal#Initialise(System.Reflection.FieldInfo)">
+            <summary>
+            [Weaver Internal, Editor Only] Attempts to initialise this <see cref="T:Weaver.Asset`1"/> as a procedural asset
+            associated with the specified field by finding an associated generator method. Returns true if successful.
+            </summary>
+        </member>
+        <member name="M:Weaver.Asset`1.Weaver#IAssetInternal#GenerateAndSave">
+            <summary>[Weaver Internal, Editor Only] Generates this asset and saves it in the project. Called by the <see cref="T:Weaver.AssetGeneratorWindow"/>.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.DebugLogShouldRegenerate(System.String)">
+            <summary>#if DEBUG -> Log the reason that this asset is regenerating.</summary>
+        </member>
+        <member name="M:Weaver.Asset`1.AddSubAsset(UnityEngine.Object)">
+            <summary>
+            Adds the specified <see cref="T:UnityEngine.Object"/> to this asset.
+            Must be called while this asset is generating.
+            <para></para>This method is safe to call outside the Unity Editor but it will do nothing.
+            </summary>
+        </member>
+        <member name="M:Weaver.Asset`1.AddDependency(Weaver.IAsset)">
+            <summary>
+            Mark this asset as being dependant on the specified asset so that whenever either is generated, the
+            dependency is generated first.
+            </summary>
+        </member>
+        <member name="M:Weaver.Asset`1.ClearIcon">
+            <summary>Clears the asset icon so it can be generated again when needed.</summary>
+        </member>
+        <member name="M:Weaver.AssetGeneratorWindow.VerifyAssetDependency(Weaver.IAssetInternal)">
+            <summary>Verifies that the currently generating asset has a dependency on the specified asset.</summary>
+        </member>
+        <member name="T:Weaver.AssetModifierAttribute">
+            <summary>Place on the generator method of a procedural asset to modify its behaviour.</summary>
+        </member>
+        <member name="F:Weaver.AssetModifierAttribute.AutoGenerate.Unspecified">
+            <summary>Use the global setting for all assets.</summary>
+        </member>
+        <member name="F:Weaver.AssetModifierAttribute.AutoGenerate.Yes">
+            <summary>Generate, regardless of the global setting.</summary>
+        </member>
+        <member name="F:Weaver.AssetModifierAttribute.AutoGenerate.No">
+            <summary>Don't generate, regardless of the global setting.</summary>
+        </member>
+        <member name="P:Weaver.AssetModifierAttribute.BaseResourcesPath">
+            <summary>
+            The path to the Resources folder in which the asset should be saved.
+            Defaults to Assets/Resources/.
+            Must end with "/Resources/".
+            </summary>
+        </member>
+        <member name="P:Weaver.AssetModifierAttribute.FileExtension">
+            <summary>
+            The file extension of the asset file.
+            Must begin with a period.
+            If not specified, the file extension will be chosen by the AssetGenerator.
+            </summary>
+        </member>
+        <member name="P:Weaver.AssetModifierAttribute.AutoGenerateInPlayMode">
+            <summary>
+            Determines when the target asset should be automatically generated whenever it is used in Play Mode in the Editor.
+            If not set, the global setting will be used.
+            </summary>
+        </member>
+        <member name="P:Weaver.AssetModifierAttribute.AutoGenerateOnBuild">
+            <summary>
+            Determines when the target asset should be automatically generated when compiling a build.
+            If not set, the global setting will be used. 
+            </summary>
+        </member>
+        <member name="M:Weaver.AssetModifierAttribute.ModifyPath(Weaver.AssetModifierAttribute,System.String,System.String)">
+            <summary>Returns a modified version of 'path' according to the 'attribute' (if any).</summary>
+        </member>
+        <member name="T:Weaver.ProceduralAssetCollection">
+            <summary>[Pro-Only]
+            Marks a static method as one that returns a collection of objects which can be saved as assets. This allows the
+            method to be shown in and invoked by the <see cref="T:Weaver.ProceduralAssetManager"/>.
+            <para></para>
+            The Weaver Asset Linker system will automatically include the generated assets as a collection using the
+            parameters specified in the constructor of this attribute.
+            </summary>
+        </member>
+        <member name="F:Weaver.ProceduralAssetCollection.CollectionDetails.assetDetails">
+            <summary>Asset names mapped to a value indicating if they have any sub-assets.</summary>
+        </member>
+        <member name="P:Weaver.ProceduralAssetCollection.Path">
+            <summary>The asset or resource path of the directory in which this collection's assets will be saved.</summary>
+        </member>
+        <member name="F:Weaver.ProceduralAssetCollection.Name">
+            <summary>The name for this collection to use in the Asset Linker.</summary>
+        </member>
+        <member name="F:Weaver.ProceduralAssetCollection.BuilderType">
+            <summary>The collection builder type for this collection to use in the Asset Linker.</summary>
+        </member>
+        <member name="M:Weaver.ProceduralAssetCollection.#ctor(System.String)">
+            <summary>
+            Constructs a <see cref="T:Weaver.ProceduralAssetCollection"/> targeting the specified 'directoryPath'.
+            <para></para>
+            The last directory name in the 'directoryPath' is used as the collection name.
+            <para></para>
+            The collection builder type used by the Asset Linker will be the default ArrayBuilder.
+            </summary>
+        </member>
+        <member name="M:Weaver.ProceduralAssetCollection.#ctor(System.String,System.String)">
+            <summary>
+            Constructs a <see cref="T:Weaver.ProceduralAssetCollection"/> with the specified parameters.
+            <para></para>
+            The collection builder type used by the Asset Linker will be the default ArrayBuilder.
+            </summary>
+        </member>
+        <member name="M:Weaver.ProceduralAssetCollection.#ctor(System.String,System.Type)">
+            <summary>
+            Constructs a <see cref="T:Weaver.ProceduralAssetCollection"/> with the specified parameters.
+            <para></para>
+            The last directory name in the 'directoryPath' is used as the collection name.
+            </summary>
+        </member>
+        <member name="M:Weaver.ProceduralAssetCollection.#ctor(System.String,System.String,System.Type)">
+            <summary>
+            Constructs a <see cref="T:Weaver.ProceduralAssetCollection"/> with the specified parameters.
+            </summary>
+        </member>
+        <member name="P:Weaver.ProceduralAssetCollection.Weaver#IAssetInternal#CanAutoGenerateOnBuild">
+            <summary>Collections can never generate on build because scripts can't either (and the assets must be synced to the script).</summary>
+        </member>
+        <member name="E:Weaver.ProceduralAssetCollection.onImportAsset">
+            <summary>
+            [Editor-Only] This callback is cleared before generation begins and triggered after the collection has been
+            generated. It is called once for each asset immediately after that asset is saved.
+            </summary>
+        </member>
+        <member name="T:Weaver.AssetIcon">
+            <summary>
+            [Editor-Only] Attempts to load a preview of the specified asset. If no preview exists yet, it instead loads the
+            default icon for the asset's type.
+            <para></para>
+            To use this class, simply specify the asset path in the constructor or Initialise method, then get the Icon
+            property each frame. This is necessary in order for it to eventually load the preview once Unity actually
+            generates it.
+            </summary>
+        </member>
+        <member name="F:Weaver.AssetIcon.path">
+            <summary>The path of the target asset.</summary>
+        </member>
+        <member name="P:Weaver.AssetIcon.Asset">
+            <summary>The target asset.</summary>
+        </member>
+        <member name="P:Weaver.AssetIcon.IsLoaded">
+            <summary>False while still trying to get a preview texture.</summary>
+        </member>
+        <member name="P:Weaver.AssetIcon.HasPreview">
+            <summary>True if the asset has a preview texture.</summary>
+        </member>
+        <member name="M:Weaver.AssetIcon.#ctor(System.String,UnityEngine.Object)">
+            <summary>Constructs an <see cref="T:Weaver.AssetIcon"/> with the specified 'path' and 'asset'.</summary>
+        </member>
+        <member name="M:Weaver.AssetIcon.#ctor(System.String)">
+            <summary>Constructs an <see cref="T:Weaver.AssetIcon"/> with the specified 'path'.</summary>
+        </member>
+        <member name="M:Weaver.AssetIcon.#ctor">
+            <summary>Constructs an <see cref="T:Weaver.AssetIcon"/> without a target path.</summary>
+        </member>
+        <member name="M:Weaver.AssetIcon.Initialise(System.String,UnityEngine.Object)">
+            <summary>Initialises this <see cref="T:Weaver.AssetIcon"/> with the specified 'path' and 'asset'.</summary>
+        </member>
+        <member name="M:Weaver.AssetIcon.Reset(UnityEngine.Object)">
+            <summary>Clears the current icon so it can be regenerated.</summary>
+        </member>
+        <member name="P:Weaver.AssetIcon.Texture">
+            <summary>The current icon texture.</summary>
+        </member>
+        <member name="M:Weaver.AssetIcon.op_Implicit(Weaver.AssetIcon)~UnityEngine.Texture">
+            <summary>Returns the current icon texture.</summary>
+        </member>
+        <member name="M:Weaver.SelectableButtonGroup.#ctor(System.String)">
+            <summary>Root group constructor.</summary>
+        </member>
+        <member name="M:Weaver.SelectableButtonGroup.#ctor(System.String,System.Collections.Generic.HashSet{System.String},System.Collections.Generic.List{Weaver.SelectableButton},System.Int32@)">
+            <summary>Standard group constructor.</summary>
+        </member>
+        <member name="M:Weaver.SelectableButtonGroup.#ctor(System.String,System.Int32,System.Int32,System.Collections.Generic.HashSet{System.String})">
+            <summary>Standard group constructor.</summary>
+        </member>
+        <member name="T:Weaver.IAsset">
+            <summary>Interface for all procedural assets.</summary>
+        </member>
+        <member name="P:Weaver.IAsset.Path">
+            <summary>The path of this asset.</summary>
+        </member>
+        <member name="P:Weaver.IAsset.Target">
+            <summary>The encapsulated asset.</summary>
+        </member>
+        <member name="M:Weaver.IAsset.AddSubAsset(UnityEngine.Object)">
+            <summary>Adds the specified <see cref="T:UnityEngine.Object"/> to this asset.</summary>
+        </member>
+        <member name="P:Weaver.IAsset.AssetPath">
+            <summary>[Editor-Only] The path of this asset inside the project for <see cref="M:UnityEditor.AssetDatabase.LoadAssetAtPath``1(System.String)"/>.</summary>
+        </member>
+        <member name="P:Weaver.IAssetInternal.AssetType">
+            <summary>[Weaver Internal, Editor-Only] The <see cref="T:System.Type"/> of this asset.</summary>
+        </member>
+        <member name="P:Weaver.IAssetInternal.Icon">
+            <summary>[Weaver Internal, Editor-Only] The icon of this asset.</summary>
+        </member>
+        <member name="P:Weaver.IAssetInternal.HasPreviewIcon">
+            <summary>[Weaver Internal, Editor-Only] True if the <see cref="P:Weaver.IAssetInternal.Icon"/> is a rendered preview rather than a pre-made texture.</summary>
+        </member>
+        <member name="P:Weaver.IAssetInternal.CanAutoGenerateOnBuild">
+            <summary>[Weaver Internal, Editor-Only] True if this asset's type supports Auto-Generate on Build.</summary>
+        </member>
+        <member name="M:Weaver.IAssetInternal.ClearIcon">
+            <summary>[Weaver Internal, Editor Only] Discards the current <see cref="P:Weaver.IAssetInternal.Icon"/> so that a newer one can be retrieved.</summary>
+        </member>
+        <member name="P:Weaver.IAssetInternal.Details">
+            <summary>[Weaver Internal, Editor Only] The serialized details of this asset from the last time it was generated.</summary>
+        </member>
+        <member name="P:Weaver.IAssetInternal.GeneratorMethod">
+            <summary>[Weaver Internal, Editor-Only] The method used to generate this asset.</summary>
+        </member>
+        <member name="M:Weaver.IAssetInternal.Initialise(System.Reflection.FieldInfo)">
+            <summary>
+            [Weaver Internal, Editor Only] Attempts to initialise this <see cref="T:Weaver.IAsset"/> as a procedural asset
+            associated with the specified field. Returns true if successful.
+            </summary>
+        </member>
+        <member name="M:Weaver.IAssetInternal.GenerateAndSave">
+            <summary>[Weaver Internal, Editor Only] Generates this asset and saves it in the project. Called by <see cref="T:Weaver.AssetGeneratorWindow"/>.</summary>
+        </member>
+        <member name="M:Weaver.IAssetInternal.ForceReload">
+            <summary>[Weaver Internal, Editor-Only] Reloads the encapsulated asset, even if it was already loaded.</summary>
+        </member>
+        <member name="M:Weaver.ProceduralAssets.ForEachAsset(System.Action{Weaver.IAssetInternal})">
+            <summary>Calls 'method' once for each procedural <see cref="T:Weaver.Asset`1"/> and each <see cref="T:Weaver.ProceduralAssetCollection"/>.</summary>
+        </member>
+        <member name="M:Weaver.ProceduralAssets.IsWhitelisted(Weaver.IAssetInternal)">
+            <summary>Requires the Path, AssetType, and Details.</summary>
+        </member>
+        <member name="T:Weaver.WeaverUtils">
+            <summary>A variety of miscellaneous utility methods.</summary>
+        </member>
+        <member name="F:Weaver.WeaverUtils.MenuItemGroup">
+            <summary>The base path of all Weaver menu items.</summary>
+        </member>
+        <member name="F:Weaver.WeaverUtils.ProceduralAssetManagerPath">
+            <summary>The base path of all Weaver menu items.</summary>
+        </member>
+        <member name="F:Weaver.WeaverUtils.AssetLinkerPath">
+            <summary>The base path of all Weaver menu items.</summary>
+        </member>
+        <member name="F:Weaver.WeaverUtils.LayerLinkerPath">
+            <summary>The base path of all Weaver menu items.</summary>
+        </member>
+        <member name="F:Weaver.WeaverUtils.WeaverVersion">
+            <summary>The version number of this Weaver distribution.</summary>
+        </member>
+        <member name="F:Weaver.WeaverUtils.IsWeaverPro">
+            <summary>This is Weaver Lite.</summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Instantiate(Weaver.Asset{UnityEngine.GameObject},UnityEngine.Transform,System.Boolean)">
+            <summary>
+            Clones the specified asset and returns the clone.
+            Uses <see cref="M:UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Transform,System.Boolean)"/>.
+            In the Unity Editor, it uses PrefabUtility.InstantiatePrefab instead.
+            </summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Instantiate(Weaver.Asset{UnityEngine.GameObject},UnityEngine.Transform)">
+            <summary>
+            Clones the specified asset and returns the clone.
+            Uses <see cref="M:UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Transform)"/>.
+            In the Unity Editor, it uses PrefabUtility.InstantiatePrefab instead.
+            </summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Instantiate(Weaver.Asset{UnityEngine.GameObject},UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)">
+            <summary>
+            Clones the specified asset and returns the clone.
+            Uses <see cref="M:UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Transform)"/>.
+            In the Unity Editor, it uses PrefabUtility.InstantiatePrefab instead.
+            </summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Instantiate(Weaver.Asset{UnityEngine.GameObject},UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>
+            Clones the specified asset and returns the clone.
+            Uses <see cref="M:UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion)"/>.
+            In the Unity Editor, it uses PrefabUtility.InstantiatePrefab instead.
+            </summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Instantiate(Weaver.Asset{UnityEngine.GameObject},UnityEngine.Vector3)">
+            <summary>
+            Clones the specified asset and returns the clone.
+            Uses <see cref="M:UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion)"/>.
+            In the Unity Editor, it uses PrefabUtility.InstantiatePrefab instead.
+            </summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Instantiate(Weaver.Asset{UnityEngine.GameObject},UnityEngine.Quaternion)">
+            <summary>
+            Clones the specified asset and returns the clone.
+            Uses <see cref="M:UnityEngine.Object.Instantiate(UnityEngine.Object,UnityEngine.Vector3,UnityEngine.Quaternion)"/>.
+            In the Unity Editor, it uses PrefabUtility.InstantiatePrefab instead.
+            </summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.LoadAll``1(System.Collections.Generic.IEnumerable{Weaver.Asset{``0}})">
+            <summary> Calls <see cref="M:Weaver.Asset`1.Load"/> on every asset in the given collection. </summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.UnloadAll``1(System.Collections.Generic.IEnumerable{Weaver.Asset{``0}})">
+            <summary> Calls <see cref="M:Weaver.Asset`1.Unload"/> on every asset in the given collection. </summary>
+        </member>
+        <member name="P:Weaver.WeaverUtils.ForceGenerate">
+            <summary>Some assets (such as scripts) don't always need to regenerate.
+            This property is set to true when the user generates a single asset rather than a group.</summary>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Generate(Weaver.IAssetInternal,System.Boolean,System.Action{System.Boolean})">
+            <summary>[Weaver Internal, Editor Only] Generates a procedural asset and any of its dependencies and saves them in the project.</summary>
+            <param name="asset">The asset to generate.</param>
+            <param name="immediate">If true, this asset will be generated immediately instead of opening the Asset Generator Window.</param>
+            <param name="onGenerated">Called once generation is complete. The parameter indicates whether generation was successful.</param>
+        </member>
+        <member name="M:Weaver.WeaverUtils.Generate(Weaver.IAsset,System.Boolean,System.Action{System.Boolean})">
+            <summary>[Weaver Internal, Editor Only] Generates a procedural asset and any of its dependencies and saves them in the project.</summary>
+            <param name="asset">The asset to generate.</param>
+            <param name="immediate">If true, this asset will be generated immediately instead of opening the Asset Generator Window.</param>
+            <param name="onGenerated">Called once generation is complete. The parameter indicates whether generation was successful.</param>
+        </member>
+        <member name="M:Weaver.WeaverUtils.LoadIcon(System.String)">
+            <summary>[Weaver Internal, Editor Only] Loads an icon from the same directory as this Assembly.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_0(Weaver.ProceduralAssetDetails[])">
+            <summary>OnBeforeSerialize Weaver.ProceduralAssetDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_1(System.Collections.Generic.HashSet{System.String})">
+            <summary>OnBeforeSerialize System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_2(Weaver.ProceduralAssetCollection.CollectionDetails[])">
+            <summary>OnBeforeSerialize Weaver.ProceduralAssetCollection.CollectionDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_0(System.Int32)">
+            <summary>SuperSerial.Codecs.VarIntCodec.ValuePlusSizeOf.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_0(System.Int32)">
+            <summary>Size of variant int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_1(System.String)">
+            <summary>Size of string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_2(Weaver.ProceduralAssetDetails[])">
+            <summary>Size of Weaver.ProceduralAssetDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_3(System.Collections.Generic.HashSet{System.String})">
+            <summary>Size of System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_4(Weaver.ProceduralAssetCollection.CollectionDetails[])">
+            <summary>Size of Weaver.ProceduralAssetCollection.CollectionDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_0(System.IO.BinaryWriter,System.Int32)">
+            <summary>Write variant int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_1(System.IO.BinaryWriter,System.String)">
+            <summary>Write string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_2(System.IO.BinaryWriter,Weaver.ProceduralAssetDetails[])">
+            <summary>Write Weaver.ProceduralAssetDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_3(System.IO.BinaryWriter,System.Collections.Generic.HashSet{System.String})">
+            <summary>Write System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_4(System.IO.BinaryWriter,Weaver.ProceduralAssetCollection.CollectionDetails[])">
+            <summary>Write Weaver.ProceduralAssetCollection.CollectionDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_1(System.IO.BinaryReader)">
+            <summary>SuperSerial.DynamicTypeSet.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_0(System.IO.BinaryReader)">
+            <summary>Read variant int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_2(System.IO.BinaryReader)">
+            <summary>SuperSerial.Codecs.FullyQualifiedAssemblyCodec.SkipTypes.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_3(System.IO.BinaryReader)">
+            <summary>SuperSerial.Codecs.RawStringCodec.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_4(System.IO.BinaryReader,System.Int32)">
+            <summary>SuperSerial.DynamicTypeSet.CompositeType.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_5(System.IO.BinaryReader)">
+            <summary>SuperSerial.DynamicTypeSet.GenericType.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_1(System.IO.BinaryReader)">
+            <summary>Read string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_2(System.IO.BinaryReader)">
+            <summary>Read Weaver.ProceduralAssetDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_3(System.IO.BinaryReader)">
+            <summary>Read System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_4(System.IO.BinaryReader)">
+            <summary>Read Weaver.ProceduralAssetCollection.CollectionDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_3(Weaver.ProceduralAssetDetails[])">
+            <summary>OnAfterDeserialize Weaver.ProceduralAssetDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_4(System.Collections.Generic.HashSet{System.String})">
+            <summary>OnAfterDeserialize System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_5(Weaver.ProceduralAssetCollection.CollectionDetails[])">
+            <summary>OnAfterDeserialize Weaver.ProceduralAssetCollection.CollectionDetails[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_5(System.Int32[])">
+            <summary>Size of int[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_6(System.Int32)">
+            <summary>Size of zig-zag int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_7(System.Reflection.MethodInfo)">
+            <summary>Size of System.Reflection.MethodInfo.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_8(System.Type)">
+            <summary>Size of System.Type.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_9(System.Reflection.Assembly)">
+            <summary>Size of System.Reflection.Assembly.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_10(System.String)">
+            <summary>Size of raw string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_5(System.IO.BinaryWriter,System.Int32[])">
+            <summary>Write int[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_6(System.IO.BinaryWriter,System.Int32)">
+            <summary>Write zig-zag int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_7(System.IO.BinaryWriter,System.Reflection.MethodInfo)">
+            <summary>Write System.Reflection.MethodInfo.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_8(System.IO.BinaryWriter,System.Type)">
+            <summary>Write System.Type.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_9(System.IO.BinaryWriter,System.Reflection.Assembly)">
+            <summary>Write System.Reflection.Assembly.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_5(System.IO.BinaryReader)">
+            <summary>Read int[].</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_6(System.IO.BinaryReader)">
+            <summary>Read zig-zag int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_7(System.IO.BinaryReader)">
+            <summary>Read System.Reflection.MethodInfo.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_8(System.IO.BinaryReader)">
+            <summary>Read System.Type.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_6(System.String,System.Reflection.Assembly@)">
+            <summary>SuperSerial.Codecs.AssemblyCodec.TryParse.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_6(System.Collections.Generic.Dictionary{System.String,System.Boolean})">
+            <summary>OnBeforeSerialize System.Collections.Generic.Dictionary&lt;string, bool&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_11(System.Collections.Generic.Dictionary{System.String,System.Boolean})">
+            <summary>Size of System.Collections.Generic.Dictionary&lt;string, bool&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_10(System.IO.BinaryWriter,System.Collections.Generic.Dictionary{System.String,System.Boolean})">
+            <summary>Write System.Collections.Generic.Dictionary&lt;string, bool&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_9(System.IO.BinaryReader)">
+            <summary>Read System.Collections.Generic.Dictionary&lt;string, bool&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_7(System.Collections.Generic.Dictionary{System.String,System.Boolean})">
+            <summary>OnAfterDeserialize System.Collections.Generic.Dictionary&lt;string, bool&gt;.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weaver.AssetLinker</name>
+    </assembly>
+    <members>
+        <member name="M:Weaver.AssetLinker.AssetsScript.IsResource(System.String,System.Int32@)">
+            <summary>Returns true if the specified path is a resource, along
+            with the index at which the sub path starts.</summary>
+        </member>
+        <member name="M:Weaver.AssetLinker.Settings.AddAssets(System.String[])">
+            <summary>
+            This allows the weaver examples to add themselves to the Asset Linker.
+            </summary>
+        </member>
+        <member name="M:Weaver.AssetLinker.FileTree.IsFileAlreadyChecked(System.String@)">
+            <summary>Returns true if the file has already been added,
+            otherwise adds it and returns false.</summary>
+        </member>
+        <member name="M:Weaver.AssetLinker.FileTree.IsDirectoryAlreadyChecked(System.String@)">
+            <summary>Returns true if the directory has already been added,
+            otherwise adds it and returns false.</summary>
+        </member>
+        <member name="M:Weaver.AssetLinker.LinkerDirectory.FindOrCreateChildRecursive(Kybernetik.Substring)">
+            <param name="path">This parameter gets altered to contain the file name.</param>
+        </member>
+        <member name="M:Weaver.AssetLinker.LinkerReflection.GatherAssetsFromProperties(System.Type)">
+            <summary>
+            Returns false if any property can't load its asset.
+            </summary>
+        </member>
+        <member name="M:Weaver.AssetLinker.LinkerReflection.GatherAssetsFromFields(System.Type)">
+            <summary>
+            Returns false if any field can't load its asset.
+            </summary>
+        </member>
+        <member name="M:Weaver.AssetLinker.LinkerReflection.AssertHasCollection(Weaver.AssetLinker.Collections.AssetCollection)">
+            <summary>
+            Asserts that the specified 'collection' is in the script and contains all the appropriate assets.
+            </summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_0(System.Collections.Generic.HashSet{System.String})">
+            <summary>OnBeforeSerialize System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_1(System.Collections.Generic.List{Weaver.AssetLinker.Collections.AssetCollection})">
+            <summary>OnBeforeSerialize System.Collections.Generic.List&lt;Weaver.AssetLinker.Collections.AssetCollection&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_0(System.Int32)">
+            <summary>SuperSerial.Codecs.VarIntCodec.ValuePlusSizeOf.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_0(System.Int32)">
+            <summary>Size of variant int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_1(System.String)">
+            <summary>Size of string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_2(System.Int32)">
+            <summary>Size of zig-zag int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_3(System.Collections.Generic.HashSet{System.String})">
+            <summary>Size of System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_4(System.Collections.Generic.List{Weaver.AssetLinker.Collections.AssetCollection})">
+            <summary>Size of System.Collections.Generic.List&lt;Weaver.AssetLinker.Collections.AssetCollection&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_0(System.IO.BinaryWriter,System.Int32)">
+            <summary>Write variant int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_1(System.IO.BinaryWriter,System.String)">
+            <summary>Write string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_2(System.IO.BinaryWriter,System.Int32)">
+            <summary>Write zig-zag int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_3(System.IO.BinaryWriter,System.Collections.Generic.HashSet{System.String})">
+            <summary>Write System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_4(System.IO.BinaryWriter,System.Collections.Generic.List{Weaver.AssetLinker.Collections.AssetCollection})">
+            <summary>Write System.Collections.Generic.List&lt;Weaver.AssetLinker.Collections.AssetCollection&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_1(System.IO.BinaryReader)">
+            <summary>SuperSerial.DynamicTypeSet.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_0(System.IO.BinaryReader)">
+            <summary>Read variant int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_2(System.IO.BinaryReader)">
+            <summary>SuperSerial.Codecs.FullyQualifiedAssemblyCodec.SkipTypes.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_3(System.IO.BinaryReader)">
+            <summary>SuperSerial.Codecs.RawStringCodec.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_4(System.IO.BinaryReader,System.Int32)">
+            <summary>SuperSerial.DynamicTypeSet.CompositeType.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_5(System.IO.BinaryReader)">
+            <summary>SuperSerial.DynamicTypeSet.GenericType.Skip.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_1(System.IO.BinaryReader)">
+            <summary>Read string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_2(System.IO.BinaryReader)">
+            <summary>Read zig-zag int.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_3(System.IO.BinaryReader)">
+            <summary>Read System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_4(System.IO.BinaryReader)">
+            <summary>Read System.Collections.Generic.List&lt;Weaver.AssetLinker.Collections.AssetCollection&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_2(System.Collections.Generic.HashSet{System.String})">
+            <summary>OnAfterDeserialize System.Collections.Generic.HashSet&lt;string&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Callback_3(System.Collections.Generic.List{Weaver.AssetLinker.Collections.AssetCollection})">
+            <summary>OnAfterDeserialize System.Collections.Generic.List&lt;Weaver.AssetLinker.Collections.AssetCollection&gt;.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_5(System.Type)">
+            <summary>Size of System.Type.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_6(System.Reflection.Assembly)">
+            <summary>Size of System.Reflection.Assembly.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.SizeOf_7(System.String)">
+            <summary>Size of raw string.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_5(System.IO.BinaryWriter,System.Type)">
+            <summary>Write System.Type.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Write_6(System.IO.BinaryWriter,System.Reflection.Assembly)">
+            <summary>Write System.Reflection.Assembly.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Read_5(System.IO.BinaryReader)">
+            <summary>Read System.Type.</summary>
+        </member>
+        <member name="M:SuperSerial.ProceduralMethods.Method_6(System.String,System.Reflection.Assembly@)">
+            <summary>SuperSerial.Codecs.AssemblyCodec.TryParse.</summary>
+        </member>
+        <member name="T:Kybernetik.Substring">
+            <summary>Encapsulates a string to treat it as a substring without
+            the memory allocation and garbage collection costs of string.Substring().</summary>
+        </member>
+    </members>
+</doc>
